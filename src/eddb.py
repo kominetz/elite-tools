@@ -1,17 +1,23 @@
-import itertools, json, math, os.path, tempfile, urllib.request
+import itertools
+import json
+import math
+import os.path
+import tempfile
+import urllib.request
+
 
 def distance(o_name, d_name):
     o = populated_systems[o_name]
     d = populated_systems[d_name]
-    return math.ceil(((d['x'] - o['x']) ** 2 + (d['y'] - o['y']) ** 2 + (d['z'] - o['z']) ** 2) ** (0.5))
+    return math.ceil(((d['x'] - o['x']) ** 2 + (d['y'] - o['y']) ** 2 + (d['z'] - o['z']) ** 2) ** 0.5)
 
 
 def closest_path(origin, destinations):
     calculated_path = []
-    d_last = o
-    d_remaining = destination_systems.copy()
+    d_last = origin
+    d_remaining = destinations.copy()
     subtotal_distance = 0
-    while (len(d_remaining) > 0):
+    while len(d_remaining) > 0:
         d_next = closest(d_last, d_remaining)
         leg_distance = distance(d_last, d_next)
         calculated_path.append({'name': d_next, 'distance': leg_distance})
@@ -59,6 +65,7 @@ def closest(origin, destinations):
             closest_distance = destination_distance
     return closest_name
 
+
 system_data_path = os.path.join(tempfile.gettempdir(), 'systems_populated.jsonl')
 if os.path.exists(system_data_path):
     print(f'Using existing system data file "{system_data_path}".')
@@ -66,7 +73,7 @@ else:
     urllib.request.urlretrieve('http://eddb.io/archive/v6/systems_populated.jsonl', system_data_path)
     print(f'Downloaded system data as file "{system_data_path}".')
 
-populated_systems = { }
+populated_systems = {}
 populated_systems_f = open(system_data_path)
 for populated_system_r in populated_systems_f:
     pop_sys = json.loads(populated_system_r)

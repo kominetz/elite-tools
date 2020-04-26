@@ -27,6 +27,7 @@ x_pos /= len(engineer_systems)
 y_pos /= len(engineer_systems)
 z_pos /= len(engineer_systems)
 
+# noinspection PyCompatibility,PyCompatibility
 print(f"ENGINEER CENTER OF GRAVITY: ({x_pos}, {y_pos}, {z_pos})")
 eddb.populated_systems["EngrCOG"] = {'name': "EngrCOG", 'x': x_pos, 'y': y_pos, 'z': z_pos}
 name = eddb.closest("EngrCOG", eddb.populated_system_names)
