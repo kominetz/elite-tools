@@ -3,7 +3,18 @@ import json
 import math
 import os.path
 import tempfile
-import urllib.request
+
+from urllib.request import urlretrieve
+from enum import Enum
+from urllib.parse import urlparse
+
+
+class Feeds(Enum):
+    POPULATED_SYSTEMS = 'http://eddb.io/archive/v6/systems_populated.jsonl'
+    STATIONS = 'https://eddb.io/archive/v6/stations.jsonl'
+    FACTIONS = 'https://eddb.io/archive/v6/factions.jsonl'
+    COMMODITIES = 'https://eddb.io/archive/v6/commodities.json'
+    MODULES = 'https://eddb.io/archive/v6/modules.json'
 
 
 def distance(o_name, d_name):
@@ -66,19 +77,25 @@ def closest(origin, destinations):
     return closest_name
 
 
-system_data_path = os.path.join(tempfile.gettempdir(), 'systems_populated.jsonl')
-if os.path.exists(system_data_path):
-    print(f'Using existing system data file "{system_data_path}".')
-else:
-    urllib.request.urlretrieve('http://eddb.io/archive/v6/systems_populated.jsonl', system_data_path)
-    print(f'Downloaded system data as file "{system_data_path}".')
+def load_feed(feed):
+    et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
+    os.makedirs(et_temp_path, exist_ok=True)
+    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
+    system_data_path = os.path.join(et_temp_path, cache_filename)
+    if os.path.exists(system_data_path):
+        print(f'Using existing file "{system_data_path}" for {feed}.')
+    else:
+        urlretrieve(feed.value, system_data_path)
+        print(f'Downloaded {feed} feed as file "{system_data_path}".')
 
-populated_systems = {}
-populated_systems_f = open(system_data_path)
-for populated_system_r in populated_systems_f:
-    pop_sys = json.loads(populated_system_r)
-    populated_systems[pop_sys['name']] = pop_sys
-populated_systems_f.close()
-print("# Populated systems loaded: ", len(populated_systems))
-populated_system_names = list(populated_systems.keys())
-print()
+    feed_data = {}
+    feed_file = open(system_data_path)
+    for system_record in feed_file:
+        pop_sys = json.loads(system_record)
+        feed_data[pop_sys['name']] = pop_sys
+    feed_file.close()
+    print("# Populated systems loaded: ", len(feed_data))
+    return feed_data
+
+
+populated_systems = load_feed(Feeds.POPULATED_SYSTEMS)
