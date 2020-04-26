@@ -1,22 +1,4 @@
-import itertools, json, math, os, tempfile, urllib.request
-
-populated_systems = {}
-origin_systems = ['EngrCOG', 'Beta Comae Berenices', 'Sol', 'Shinrarta Dezhra']
-engineer_systems = {
-    'Sirius',
-    'Wyrd',
-    'Kuk',
-    'Alioth',
-    'Wolf 397',
-    'Leesti',
-    'Khun',
-    'Laksak',
-    'Meene',
-}
-destination_systems = engineer_systems.copy()
-destination_systems.remove('Laksak')
-destination_systems.remove('Meene')
-
+import itertools, json, math, os.path, tempfile, urllib.request
 
 def distance(o_name, d_name):
     o = populated_systems[o_name]
@@ -77,7 +59,6 @@ def closest(origin, destinations):
             closest_distance = destination_distance
     return closest_name
 
-
 system_data_path = os.path.join(tempfile.gettempdir(), 'systems_populated.jsonl')
 if os.path.exists(system_data_path):
     print(f'Using existing system data file "{system_data_path}".')
@@ -85,6 +66,7 @@ else:
     urllib.request.urlretrieve('http://eddb.io/archive/v6/systems_populated.jsonl', system_data_path)
     print(f'Downloaded system data as file "{system_data_path}".')
 
+populated_systems = { }
 populated_systems_f = open(system_data_path)
 for populated_system_r in populated_systems_f:
     pop_sys = json.loads(populated_system_r)
@@ -93,31 +75,3 @@ populated_systems_f.close()
 print("# Populated systems loaded: ", len(populated_systems))
 populated_system_names = list(populated_systems.keys())
 print()
-
-x_pos = 0.0
-y_pos = 0.0
-z_pos = 0.0
-for p in engineer_systems:
-    x_pos += populated_systems[p]['x']
-    y_pos += populated_systems[p]['y']
-    z_pos += populated_systems[p]['z']
-x_pos /= len(engineer_systems)
-y_pos /= len(engineer_systems)
-z_pos /= len(engineer_systems)
-print(f"ENGINEER CENTER OF GRAVITY: ({x_pos}, {y_pos}, {z_pos})")
-populated_systems["EngrCOG"] = {'name': "EngrCOG", 'x': x_pos, 'y': y_pos, 'z': z_pos}
-name = closest("EngrCOG", populated_system_names)
-dist = distance('EngrCOG', name)
-print(f"SYSTEM CLOSEST TO EngrCOG: {name} ({dist} ly)")
-print()
-
-for o in origin_systems:
-    print(f"-- ORIGIN SYSTEM: {o} --")
-    print()
-    print("Distance to Engineers")
-    for d in sorted(engineer_systems):
-        print("%-16s: %4d ly" % (d, distance(o, d)))
-    print()
-    print("Best Path Through Destinations")
-    resolve_path(best_path(o, list(destination_systems)), True)
-    print()
