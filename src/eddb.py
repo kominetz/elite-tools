@@ -50,14 +50,16 @@ def resolve_path(path, print_path=False):
     return length
 
 
-def best_path(origin, destinations):
+def best_path(waypoints, origin, destination):
     shortest_path = []
     shortest_length = -1
-    paths = itertools.permutations(destinations)
+    paths = itertools.permutations(waypoints)
     for path_tuple in paths:
         path = list(path_tuple)
-        path.insert(0, origin)
-        path.append(origin)
+        if origin:
+            path.insert(0, origin)
+        if destination:
+            path.append(destination)
         length = resolve_path(list(path))
         if shortest_length < 0 or length < shortest_length:
             shortest_path = path

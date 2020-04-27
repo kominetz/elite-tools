@@ -42,5 +42,5 @@ for o in origin_systems:
         print("%-16s: %4d ly" % (d, eddb.distance(o, d)))
     print()
     print("Best Path Through Destinations")
-    eddb.resolve_path(eddb.best_path(o, list(destination_systems)), True)
+    eddb.resolve_path(eddb.best_path(list(destination_systems), origin=o, destination=o), True)
     print()
