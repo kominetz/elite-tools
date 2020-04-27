@@ -1,7 +1,7 @@
 import eddb
 
 origin_systems = ['EngrCOG', 'Beta Comae Berenices', 'Sol', 'Shinrarta Dezhra']
-engineer_systems = {e['name'] for e in eddb.engineers}
+engineer_systems = {e['system'] for e in eddb.engineers}
 destination_systems = engineer_systems.copy()
 destination_systems.remove('Laksak')
 destination_systems.remove('Meene')
@@ -24,14 +24,15 @@ dist = eddb.distance('EngrCOG', name)
 print(f"SYSTEM CLOSEST TO EngrCOG: {name} ({dist} ly)")
 print()
 
+origin: str
 for origin in origin_systems:
-    print(f"-- ORIGIN SYSTEM: {o} --")
+    print(f"-- ORIGIN SYSTEM: {origin} --")
     print()
     print("Distance to Engineers")
     for waypoint in sorted(engineer_systems):
-        print("%-16s: %4d ly" % (d, eddb.distance(origin, waypoint)))
+        print("%-16s: %4d ly" % (waypoint, eddb.distance(origin, waypoint)))
     print()
 
     print("Best Route Through Waypoints")
-    eddb.route_len(eddb.best_route(list(destination_systems), origin=origin, destination=origin), True)
+    eddb.route_len(eddb.best_route(list(destination_systems), origin, origin), True)
     print()
