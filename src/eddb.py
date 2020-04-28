@@ -67,6 +67,10 @@ def closest_systems(origin, destinations):
     return closest_name
 
 
+def nearby_systems(origin, distance):
+    return [s for s in populated_systems if distance(origin, s) <= distance]
+
+
 def route_len(route, print_route=False):
     length = 0
     last_system = route[0]
@@ -105,7 +109,9 @@ def best_route(waypoints, origin, destination, print_choices=False):
             shortest_route = route
             shortest_length = length
             if print_choices:
-                print("%5d ly: %s" % (shortest_length, shortest_route))
+                print("Picked:  %5d ly: %s" % (shortest_length, shortest_route))
+        elif print_choices:
+            print("Skipped: %5d ly: %s" % (length, route))
     return shortest_route
 
 
