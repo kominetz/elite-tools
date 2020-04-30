@@ -94,6 +94,7 @@ def route_to_dataframe(route):
         last_system = next_system
     return pd.DataFrame(route_table, columns=['System', 'Leg (ly)', 'Route (ly)'])
 
+
 def best_route(waypoints, origin, destination, print_choices=False):
     shortest_route = []
     shortest_length = -1
@@ -114,5 +115,14 @@ def best_route(waypoints, origin, destination, print_choices=False):
             print("Skipped: %5d ly: %s" % (length, route))
     return shortest_route
 
+
+def summarize_systems(systems, origin='Sol'):
+    system_summaries = []
+    for n in systems:
+        s = populated_systems[n]
+        d = distance(origin, n)
+        system_summaries.append([s['name'], d, s['population'], s['government'], s['allegiance'], s['security'], s['primary_economy'], s['controlling_minor_faction'], s['reserve_type']])
+    return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Controlling Faction', 'Reserve Level']).sort_values(by='Distance')
+        
 
 populated_systems = load_feed(Feeds.POPULATED_SYSTEMS)
