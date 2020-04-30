@@ -50,10 +50,23 @@ def load_feed(feed):
     return feed_data
 
 
-def distance(o_name, d_name):
-    o = populated_systems[o_name]
-    d = populated_systems[d_name]
-    return math.ceil(((d['x'] - o['x']) ** 2 + (d['y'] - o['y']) ** 2 + (d['z'] - o['z']) ** 2) ** 0.5)
+def distance(origin, destination):
+    o = populated_systems[origin] if isinstance(origin, str) else origin
+    d = populated_systems[destination] if isinstance(destination, str) else destination
+    return math.round(((d['x'] - o['x']) ** 2 + (d['y'] - o['y']) ** 2 + (d['z'] - o['z']) ** 2) ** 0.5, 1)
+
+
+def average_position(system_names):
+    if isinstance(system_names, str):
+        system_names = [ sn.strip() for sn in system_names.split(',') ]
+    sum_x, sum_y, sum_z = 0, 0, 0
+    n = len(system_names)
+    for name in system_names:
+        s = populated_systems[name]
+        sum_x += s['x']
+        sum_y += s['y']
+        sum_z += s['z']
+    return {'name': 'Average Position', 'x': sum_x / n, 'y': sum_y / n, 'z': sum_z / n, 'system_names': system_names}
 
 
 def closest_systems(origin, destinations):
@@ -67,7 +80,11 @@ def closest_systems(origin, destinations):
     return closest_name
 
 
-def nearby_systems(origin, distance):
+def query_nearby_systems(origin, distance):
+    return [s for s in populated_systems.keys() if distance(origin, s) <= distance]
+
+
+def nearby_systems(origin, distance):  # Deprecated, assuming that's a thing in python
     return [s for s in populated_systems if distance(origin, s) <= distance]
 
 
