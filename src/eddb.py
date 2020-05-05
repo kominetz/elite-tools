@@ -46,7 +46,7 @@ def load_feed(feed):
         pop_sys = json.loads(system_record)
         feed_data[pop_sys['name']] = pop_sys
     feed_file.close()
-    print("# Populated systems loaded: ", len(feed_data))
+    print(f"# {feed} records loaded: ", len(feed_data))
     return feed_data
 
 
@@ -82,6 +82,23 @@ def closest_systems(origin, destinations):
 
 def query_nearby_systems(origin, radius):
     return [s for s in populated_systems.keys() if distance(origin, s) <= radius]
+
+
+def query_systems_by_faction(faction):
+    faction_id = factions[faction]['id']
+    return [s for s in populated_systems.keys() if system_has_faction(s, faction)]
+
+
+def system_has_faction(system, faction):
+    return populated_systems[system]['controlling_minor_faction'] == faction or factions[faction]['id'] in minor_faction_ids(system)
+
+
+def minor_faction_ids(system):
+     return set(s['minor_faction_id'] for s in populated_systems[system]['minor_faction_presences'])
+
+
+def system_states(system):
+    return ", ".join([s['name'] for s in system['states']])
 
 
 def nearby_systems(origin, radius):  # Deprecated, assuming that's a thing in python
@@ -139,7 +156,17 @@ def summarize_systems(systems, origin='Sol'):
         s = populated_systems[n]
         d = distance(origin, n)
         system_summaries.append([s['name'], d, s['population'], s['government'], s['allegiance'], s['security'], s['primary_economy'], s['controlling_minor_faction'], s['reserve_type']])
-    return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Controlling Faction', 'Reserve Level']).sort_values(by='Distance')
+    return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Controlling Faction', 'Reserve Level'])
         
 
+def summarize_faction_systems(systems, origin='Sol'):
+    system_summaries = []
+    for n in systems:
+        s = populated_systems[n]
+        d = distance(origin, n)
+        system_summaries.append([s['name'], d, s['controlling_minor_faction'], system_states(s), s['population'], s['government'], s['allegiance'], s['security'], s['primary_economy'], s['reserve_type']])
+    return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Controlling Faction', 'States', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Reserve Level'])
+
+
 populated_systems = load_feed(Feeds.POPULATED_SYSTEMS)
+factions = load_feed(Feeds.FACTIONS)
