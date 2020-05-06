@@ -151,7 +151,7 @@ def query_systems_by_faction(faction):
 
 
 def system_has_faction(system, faction):
-    return populated_systems[system]['controlling_minor_faction'] == faction or factions[faction]['id'] in minor_faction_ids(system)
+    return populated_systems[system]['controlling_minor_faction'] == faction or faction_details[faction]['id'] in minor_faction_ids(system)
 
 
 def system_states(system):
@@ -196,18 +196,18 @@ def summarize_faction_systems(systems, origin='Sol'):
 
 
 def controlling_factions(systems):
-    return filter_player_factions(set([eddb.populated_systems[s]['controlling_minor_faction'] for s in systems]))
+    return filter_player_factions(set([populated_systems[s]['controlling_minor_faction'] for s in systems]))
 
 
 def minor_factions(systems):
-    mfp = [mfp for s in systems for mfp in eddb.populated_systems[s]['minor_faction_presences']]
+    mfp = [mfp for s in systems for mfp in populated_systems[s]['minor_faction_presences']]
     minor_faction_ids = set([f['minor_faction_id'] for f in mfp])
-    minor_factions = set([f['name'] for f in eddb.factions.values() if int(f['id']) in minor_faction_ids])
-    return(filter_player_factions(minor_factions))
+    minor_factions = set([f['name'] for f in faction_details.values() if int(f['id']) in minor_faction_ids])
+    return filter_player_factions(minor_factions)
 
 
 def filter_player_factions(factions):
-    return [n for n in factions if eddb.factions[n]['is_player_faction']]
+    return set([n for n in factions if faction_details[n]['is_player_faction']])
 
 
 def minor_faction_ids(system):
@@ -215,16 +215,15 @@ def minor_faction_ids(system):
 
 
 def minor_faction_names(system):
-    ids = minor_faction_ids(system)
-    return [f['name'] for f in factions if f['id'] in factions.keys()]
+    return set([f['name'] for f in faction_details if f['id'] in faction_details.keys()])
 
 
 ### INITIALIZATION ###
 
 
 populated_systems = load_feed(Feeds.POPULATED_SYSTEMS)
-factions = load_feed(Feeds.FACTIONS)
+faction_details = load_feed(Feeds.FACTIONS)
 faction_names = {}
-for f in factions.values():
-    faction_names[f['minor_faction_id']] = factions['name']
+for f in faction_details.values():
+    faction_names[f['id']] = f['name']
 # factions_dataframe = load_feed_dataframe(Feeds.FACTIONS)
