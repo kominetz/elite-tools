@@ -29,6 +29,9 @@ engineers = [
     {'system': 'Meene'},
 ]
 
+### FEEDS
+
+
 def load_feed(feed):
     et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
     os.makedirs(et_temp_path, exist_ok=True)
@@ -50,6 +53,29 @@ def load_feed(feed):
     return feed_data
 
 
+def load_feed_dataframe(feed):
+    et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
+    os.makedirs(et_temp_path, exist_ok=True)
+    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
+    system_data_path = os.path.join(et_temp_path, cache_filename)
+    if os.path.exists(system_data_path):
+        print(f'Using existing file "{system_data_path}" for {feed}.')
+    else:
+        urlretrieve(feed.value, system_data_path)
+        print(f'Downloaded {feed} as file "{system_data_path}".')
+
+    feed_data = []
+    feed_file = open(system_data_path)
+    for system_record in feed_file:
+        pop_sys = json.loads(system_record)
+        feed_data.append(pop_sys)
+    feed_file.close()
+    print(f"# {feed} records df-loaded: ", len(feed_data))
+    return pd.DataFrame.from_dict(feed_data)
+
+
+### UTILITY
+
 def distance(origin, destination):
     o = populated_systems[origin] if isinstance(origin, str) else origin
     d = populated_systems[destination] if isinstance(destination, str) else destination
@@ -67,54 +93,6 @@ def average_position(system_names):
         sum_y += s['y']
         sum_z += s['z']
     return {'name': 'Average Position', 'x': sum_x / n, 'y': sum_y / n, 'z': sum_z / n, 'system_names': system_names}
-
-
-def closest_systems(origin, destinations):
-    closest_name = origin
-    closest_distance = -1
-    for destination in destinations:
-        destination_distance = distance(origin, destination)
-        if closest_distance == -1 or destination_distance < closest_distance:
-            closest_name = destination
-            closest_distance = destination_distance
-    return closest_name
-
-
-def query_nearby_systems(origin, radius):
-    return [s for s in populated_systems.keys() if distance(origin, s) <= radius]
-
-
-def query_systems_by_faction(faction):
-    faction_id = factions[faction]['id']
-    return [s for s in populated_systems.keys() if system_has_faction(s, faction)]
-
-
-def system_has_faction(system, faction):
-    return populated_systems[system]['controlling_minor_faction'] == faction or factions[faction]['id'] in minor_faction_ids(system)
-
-
-def minor_faction_ids(system):
-     return set(s['minor_faction_id'] for s in populated_systems[system]['minor_faction_presences'])
-
-
-def system_states(system):
-    return ", ".join([s['name'] for s in system['states']])
-
-
-def nearby_systems(origin, radius):  # Deprecated, assuming that's a thing in python
-    return [s for s in populated_systems if distance(origin, s) <= radius]
-
-
-def route_len(route, print_route=False):
-    length = 0
-    last_system = route[0]
-    for next_system in route:
-        dist = distance(last_system, next_system)
-        length += dist
-        if print_route:
-            print("%-24s %5d ly  %4d ly" % (next_system, dist, length))
-        last_system = next_system
-    return length
 
 
 def route_to_dataframe(route):
@@ -150,6 +128,52 @@ def best_route(waypoints, origin, destination, print_choices=False):
     return shortest_route
 
 
+### SYSTEMS
+
+
+def closest_systems(origin, destinations):
+    closest_name = origin
+    closest_distance = -1
+    for destination in destinations:
+        destination_distance = distance(origin, destination)
+        if closest_distance == -1 or destination_distance < closest_distance:
+            closest_name = destination
+            closest_distance = destination_distance
+    return closest_name
+
+
+def query_nearby_systems(origin, radius):
+    return [s for s in populated_systems.keys() if distance(origin, s) <= radius]
+
+
+def query_systems_by_faction(faction):
+    return [s for s in populated_systems.keys() if system_has_faction(s, faction)]
+
+
+def system_has_faction(system, faction):
+    return populated_systems[system]['controlling_minor_faction'] == faction or factions[faction]['id'] in minor_faction_ids(system)
+
+
+def system_states(system):
+    return ", ".join([s['name'] for s in system['states']])
+
+
+def nearby_systems(origin, radius):  # Deprecated, assuming that's a thing in python
+    return [s for s in populated_systems if distance(origin, s) <= radius]
+
+
+def route_len(route, print_route=False):
+    length = 0
+    last_system = route[0]
+    for next_system in route:
+        dist = distance(last_system, next_system)
+        length += dist
+        if print_route:
+            print("%-24s %5d ly  %4d ly" % (next_system, dist, length))
+        last_system = next_system
+    return length
+
+
 def summarize_systems(systems, origin='Sol'):
     system_summaries = []
     for n in systems:
@@ -168,5 +192,39 @@ def summarize_faction_systems(systems, origin='Sol'):
     return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Controlling Faction', 'States', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Reserve Level'])
 
 
+### FACTIONS
+
+
+def controlling_factions(systems):
+    return filter_player_factions(set([eddb.populated_systems[s]['controlling_minor_faction'] for s in systems]))
+
+
+def minor_factions(systems):
+    mfp = [mfp for s in systems for mfp in eddb.populated_systems[s]['minor_faction_presences']]
+    minor_faction_ids = set([f['minor_faction_id'] for f in mfp])
+    minor_factions = set([f['name'] for f in eddb.factions.values() if int(f['id']) in minor_faction_ids])
+    return(filter_player_factions(minor_factions))
+
+
+def filter_player_factions(factions):
+    return [n for n in factions if eddb.factions[n]['is_player_faction']]
+
+
+def minor_faction_ids(system):
+     return set(s['minor_faction_id'] for s in populated_systems[system]['minor_faction_presences'])
+
+
+def minor_faction_names(system):
+    ids = minor_faction_ids(system)
+    return [f['name'] for f in factions if f['id'] in factions.keys()]
+
+
+### INITIALIZATION ###
+
+
 populated_systems = load_feed(Feeds.POPULATED_SYSTEMS)
 factions = load_feed(Feeds.FACTIONS)
+faction_names = {}
+for f in factions.values():
+    faction_names[f['minor_faction_id']] = factions['name']
+# factions_dataframe = load_feed_dataframe(Feeds.FACTIONS)
