@@ -29,6 +29,9 @@ engineers = [
     {'system': 'Meene'},
 ]
 
+SYSTEM_INFLUENCE_RANGE = 20
+
+
 ### FEEDS
 
 
@@ -143,8 +146,10 @@ def closest_systems(origin, destinations):
 
 
 def query_nearby_systems(origin, radius):
-    return [s for s in populated_systems.keys() if distance(origin, s) <= radius]
-
+    if type(origin) == list:
+        return[query_nearby_systems(s, radius) for s in origin]
+    else: 
+        return [s for s in populated_systems.keys() if distance(origin, s) <= radius]
 
 def query_systems_by_faction(faction):
     return [s for s in populated_systems.keys() if system_has_faction(s, faction)]
@@ -174,32 +179,76 @@ def route_len(route, print_route=False):
     return length
 
 
+# DEPRECATE
 def summarize_systems(systems, origin='Sol'):
+    return system_survey_summary(systems, origin)
+
+
+def system_survey_summary(systems, origin='Sol'):
     system_summaries = []
     for n in systems:
         s = populated_systems[n]
         d = distance(origin, n)
         system_summaries.append([s['name'], d, s['population'], s['government'], s['allegiance'], s['security'], s['primary_economy'], s['controlling_minor_faction'], s['reserve_type']])
     return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Controlling Faction', 'Reserve Level'])
-        
 
+
+# DEPRECATE
 def summarize_faction_systems(systems, origin='Sol'):
+    return system_faction_summary(systems, origin)
+
+
+def system_faction_summary(systems, origin='Sol'):
     system_summaries = []
+    categories = ['Insurgency', 'Control', 'Presence', 'Player Control', 'Player Presence', 'NPC']
     for n in systems:
         s = populated_systems[n]
         d = distance(origin, n)
-        system_summaries.append([s['name'], d, s['controlling_minor_faction'], system_states(s), s['population'], s['government'], s['allegiance'], s['security'], s['primary_economy'], s['reserve_type']])
-    return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Controlling Faction', 'States', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Reserve Level'])
+        cf_name = s['controlling_minor_faction']
+        pc_fac = [f for f in filter_player_factions(minor_faction_names(s['name']))]
+        states = [x['name'] for x in s['states']]
+        cf_state = get_faction_state(s, cf_name)
+        cf_inf = cf_state['influence']
+        cf_hap = cf_state['happiness_id']
+        if cf_name == "The Order of Mobius":
+            fac_pri = 0 if len(pc_fac) > 1 else 1
+        elif "The Order of Mobius" in pc_fac:
+            fac_pri = 2
+        elif cf_name in pc_fac:
+            fac_pri = 3
+        elif len(pc_fac) > 0:
+            fac_pri = 4
+        else:
+            fac_pri = 5
+        system_summaries.append([fac_pri, categories[fac_pri], s['name'], d, cf_name, cf_hap, cf_inf, ", ".join(pc_fac), ", ".join(states), s['population'], s['government'], s['allegiance'], s['security'], s['primary_economy']])
+    return pd.DataFrame(system_summaries, columns=['Priority', 'Category', 'Name', 'Distance', 'Controlling Faction', 'Happiness', 'Influence', 'Player Factions Present', 'States', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy']).set_index('Priority','Name')
+
+
+def get_faction_state(system, faction_name):
+    for f in system['minor_faction_presences']:
+        if faction_details[faction_name]['id'] == f['minor_faction_id']:
+            return f
+    return None
+
+
+def influenced_systems(system_name):
+    direct_inf_systems = query_nearby_systems(system_name, SYSTEM_INFLUENCE_RANGE)
+    indirect_inf_systems = [query_nearby_systems(s, SYSTEM_INFLUENCE_RANGE) for s in direct_inf_systems]
+    print(len(indirect_inf_systems), len(set([x for x in indirect_inf_systems])))
 
 
 ### FACTIONS
 
 
-def controlling_factions(systems):
+def controlling_player_factions(systems):
     return filter_player_factions(set([populated_systems[s]['controlling_minor_faction'] for s in systems]))
 
 
-def minor_factions(systems):
+def system_player_factions(system):
+    return [faction_names_by_id[f['minor_faction_id']] for f_pres in populated_systems[system]['minor_faction_presences'] for f in f_pres if f['is_player_faction']]
+
+
+def present_player_factions(systems):
     mfp = [mfp for s in systems for mfp in populated_systems[s]['minor_faction_presences']]
     minor_faction_ids = set([f['minor_faction_id'] for f in mfp])
     minor_factions = set([f['name'] for f in faction_details.values() if int(f['id']) in minor_faction_ids])
@@ -215,7 +264,7 @@ def minor_faction_ids(system):
 
 
 def minor_faction_names(system):
-    return set([f['name'] for f in faction_details if f['id'] in faction_details.keys()])
+     return [faction_names_by_id[s['minor_faction_id']] for s in populated_systems[system]['minor_faction_presences']]
 
 
 ### INITIALIZATION ###
@@ -223,7 +272,10 @@ def minor_faction_names(system):
 
 populated_systems = load_feed(Feeds.POPULATED_SYSTEMS)
 faction_details = load_feed(Feeds.FACTIONS)
-faction_names = {}
+faction_names_by_id = {}
+player_faction_names = set()
 for f in faction_details.values():
-    faction_names[f['id']] = f['name']
+    faction_names_by_id[f['id']] = f['name']
+    if f['is_player_faction']:
+        player_faction_names.add(f['name'])
 # factions_dataframe = load_feed_dataframe(Feeds.FACTIONS)
