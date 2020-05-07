@@ -147,9 +147,10 @@ def closest_systems(origin, destinations):
 
 def query_nearby_systems(origin, radius):
     if type(origin) == list:
-        return[query_nearby_systems(s, radius) for s in origin]
+        return set([nearby_system for s in origin for nearby_system in query_nearby_systems(s, radius)])
     else: 
         return [s for s in populated_systems.keys() if distance(origin, s) <= radius]
+
 
 def query_systems_by_faction(faction):
     return [s for s in populated_systems.keys() if system_has_faction(s, faction)]
