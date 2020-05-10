@@ -86,10 +86,10 @@ def load_feed(feed, force_refresh=False, refresh_interval=7):
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
     if os.path.exists(system_data_path) and not force_refresh:
-        print(f'Using existing file "{system_data_path}" for {feed}.')
+        print(f'# Found "{system_data_path}".')
     else:
+        print(f'# Downloading "{system_data_path}".')
         urlretrieve(feed.value, system_data_path)
-        print(f'Downloaded {feed} as file "{system_data_path}".')
 
     feed_data = {}
     feed_file = open(system_data_path)
@@ -99,27 +99,6 @@ def load_feed(feed, force_refresh=False, refresh_interval=7):
     feed_file.close()
     print(f"# {feed} records loaded: ", len(feed_data))
     return feed_data
-
-
-def load_feed_dataframe(feed, force_refresh=False):
-    et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
-    os.makedirs(et_temp_path, exist_ok=True)
-    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
-    system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh:
-        print(f'Using existing file "{system_data_path}" for {feed}.')
-    else:
-        urlretrieve(feed.value, system_data_path)
-        print(f'Downloaded {feed} as file "{system_data_path}".')
-
-    feed_data = []
-    feed_file = open(system_data_path)
-    for system_record in feed_file:
-        pop_sys = json.loads(system_record)
-        feed_data.append(pop_sys)
-    feed_file.close()
-    print(f"# {feed} records df-loaded: ", len(feed_data))
-    return pd.DataFrame.from_dict(feed_data)
 
 
 ### UTILITY
@@ -320,8 +299,6 @@ def minor_faction_names(system):
 #  Originally feeds loaded in main. Moved to function so cache/feed settings could be controlled before the module took any actions.
 def load_feeds(force_refresh=False):
     global populated_systems, station_details, faction_details, faction_names_by_id, player_faction_names
-    print(force_refresh)
-
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
     station_details = load_feed(Feeds.STATIONS, force_refresh)
     faction_details = load_feed(Feeds.FACTIONS, force_refresh)
