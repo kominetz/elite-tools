@@ -1,0 +1,11 @@
+{
+    "id": 18979,
+    "name": "The Order of Mobius",
+    "updated_at": 1546705209,
+    "government_id": 80,
+    "government": "Cooperative",
+    "allegiance_id": 4,
+    "allegiance": "Independent",
+    "home_system_id": 1590,
+    "is_player_faction": true
+}

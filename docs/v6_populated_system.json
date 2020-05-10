@@ -1,0 +1,145 @@
+{
+    "id": 1590,
+    "edsm_id": 11296,
+    "name": "Azrael",
+    "x": 85.71875,
+    "y": -104.5625,
+    "z": 16.25,
+    "population": 4500000,
+    "is_populated": true,
+    "government_id": 80,
+    "government": "Cooperative",
+    "allegiance_id": 4,
+    "allegiance": "Independent",
+    "states": [
+        {
+            "id": 16,
+            "name": "Boom"
+        },
+        {
+            "id": 66,
+            "name": "Civil Liberty"
+        }
+    ],
+    "security_id": 32,
+    "security": "Medium",
+    "primary_economy_id": 2,
+    "primary_economy": "Extraction",
+    "power": "Arissa Lavigny-Duval",
+    "power_state": "Exploited",
+    "power_state_id": 32,
+    "needs_permit": false,
+    "updated_at": 1588724982,
+    "simbad_ref": "HIP 13359",
+    "controlling_minor_faction_id": 18979,
+    "controlling_minor_faction": "The Order of Mobius",
+    "reserve_type_id": 4,
+    "reserve_type": "Low",
+    "minor_faction_presences": [
+        {
+            "happiness_id": 2,
+            "minor_faction_id": 9371,
+            "influence": 10.4895,
+            "active_states": [
+                {
+                    "id": 80,
+                    "name": "None"
+                }
+            ],
+            "pending_states": [],
+            "recovering_states": []
+        },
+        {
+            "happiness_id": 1,
+            "minor_faction_id": 18979,
+            "influence": 52.5475,
+            "active_states": [
+                {
+                    "id": 16,
+                    "name": "Boom"
+                },
+                {
+                    "id": 66,
+                    "name": "Civil Liberty"
+                }
+            ],
+            "pending_states": [],
+            "recovering_states": []
+        },
+        {
+            "happiness_id": 2,
+            "minor_faction_id": 56844,
+            "influence": 4.7952,
+            "active_states": [
+                {
+                    "id": 80,
+                    "name": "None"
+                }
+            ],
+            "pending_states": [],
+            "recovering_states": [
+                {
+                    "id": 72,
+                    "name": "Outbreak"
+                }
+            ]
+        },
+        {
+            "happiness_id": 2,
+            "minor_faction_id": 56845,
+            "influence": 1.1988,
+            "active_states": [
+                {
+                    "id": 80,
+                    "name": "None"
+                }
+            ],
+            "pending_states": [],
+            "recovering_states": []
+        },
+        {
+            "happiness_id": 2,
+            "minor_faction_id": 56846,
+            "influence": 7.2927,
+            "active_states": [
+                {
+                    "id": 80,
+                    "name": "None"
+                }
+            ],
+            "pending_states": [],
+            "recovering_states": []
+        },
+        {
+            "happiness_id": 2,
+            "minor_faction_id": 74829,
+            "influence": 3.4965,
+            "active_states": [
+                {
+                    "id": 80,
+                    "name": "None"
+                }
+            ],
+            "pending_states": [],
+            "recovering_states": []
+        },
+        {
+            "happiness_id": 2,
+            "minor_faction_id": 3993,
+            "influence": 20.1798,
+            "active_states": [
+                {
+                    "id": 80,
+                    "name": "None"
+                }
+            ],
+            "pending_states": [],
+            "recovering_states": [
+                {
+                    "id": 72,
+                    "name": "Outbreak"
+                }
+            ]
+        }
+    ]
+}

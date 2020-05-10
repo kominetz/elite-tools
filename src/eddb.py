@@ -17,7 +17,8 @@ class Feeds(Enum):
     COMMODITIES = 'https://eddb.io/archive/v6/commodities.json'
     MODULES = 'https://eddb.io/archive/v6/modules.json'
 
-engineers = [
+# TODO: Move out of main library.
+my_engineers = [
     {'system': 'Sirius'},
     {'system': 'Wyrd'},
     {'system': 'Kuk'},
@@ -29,18 +30,62 @@ engineers = [
     {'system': 'Meene'},
 ]
 
+homeworld_systems = {
+    'Sol': 'Federation', 
+    'Shinrarta Dezhra': 'Pilots Federation',
+    'Alioth': 'Empire',
+    'Achenar': 'Alliance',
+}
+
+# TODO: Add Engineer names and upgrade skills with each row being a dict/object.
+engineer_systems = sorted([
+    'Leesti',
+    'Wolf 397',
+    'Kuk',
+    'Alioth',
+    'Khun',
+    'Wyrd',
+    'Sirius',
+    'Laksak',
+    'Meene',
+    'Muang',
+    'Eurybia',
+    'Kuwemaki',
+    'Achenar',
+    'Deciat',
+    'Sol',
+    'Giryak',
+    'Beta-3 Tucani',
+    'Arque',
+    'Yoru',
+    'Shinrarta Dezhra',
+    'Los',  # Colonia
+    'Tir',  # Colonia
+    'Luchtaine',  # Colonia
+    'Asura',  # Colonia
+    'Shenve',  # Colonia
+])
+
 SYSTEM_INFLUENCE_RANGE = 20
+
+et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
+os.makedirs(et_temp_path, exist_ok=True)
+
+populated_systems = {}
+station_details = {}
+faction_details = {}
+faction_names_by_id = {}
+player_faction_names = {}
 
 
 ### FEEDS
 
 
-def load_feed(feed):
-    et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
-    os.makedirs(et_temp_path, exist_ok=True)
+def load_feed(feed, force_refresh=False, refresh_interval=7):
+    # TODO: If cache file is older than refresh_interval, refresh the cache.
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path):
+    if os.path.exists(system_data_path) and not force_refresh:
         print(f'Using existing file "{system_data_path}" for {feed}.')
     else:
         urlretrieve(feed.value, system_data_path)
@@ -56,12 +101,12 @@ def load_feed(feed):
     return feed_data
 
 
-def load_feed_dataframe(feed):
+def load_feed_dataframe(feed, force_refresh=False):
     et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
     os.makedirs(et_temp_path, exist_ok=True)
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path):
+    if os.path.exists(system_data_path) and not force_refresh:
         print(f'Using existing file "{system_data_path}" for {feed}.')
     else:
         urlretrieve(feed.value, system_data_path)
@@ -180,7 +225,8 @@ def route_len(route, print_route=False):
     return length
 
 
-# DEPRECATE
+# DEPRECATED
+# TODO: Replace calls with system_survey_data() and remove this wrapper.
 def summarize_systems(systems, origin='Sol'):
     return system_survey_summary(systems, origin)
 
@@ -195,6 +241,7 @@ def system_survey_summary(systems, origin='Sol'):
 
 
 # DEPRECATE
+# TODO: Replace calls with system_faction_data() and remove this wrapper.
 def summarize_faction_systems(systems, origin='Sol'):
     return system_faction_summary(systems, origin)
 
@@ -270,13 +317,21 @@ def minor_faction_names(system):
 
 ### INITIALIZATION ###
 
+#  Originally feeds loaded in main. Moved to function so cache/feed settings could be controlled before the module took any actions.
+def load_feeds(force_refresh=False):
+    global populated_systems, station_details, faction_details, faction_names_by_id, player_faction_names
+    print(force_refresh)
 
-populated_systems = load_feed(Feeds.POPULATED_SYSTEMS)
-faction_details = load_feed(Feeds.FACTIONS)
-faction_names_by_id = {}
-player_faction_names = set()
-for f in faction_details.values():
-    faction_names_by_id[f['id']] = f['name']
-    if f['is_player_faction']:
-        player_faction_names.add(f['name'])
-# factions_dataframe = load_feed_dataframe(Feeds.FACTIONS)
+    populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
+    station_details = load_feed(Feeds.STATIONS, force_refresh)
+    faction_details = load_feed(Feeds.FACTIONS, force_refresh)
+
+    faction_names_by_id = {}
+    player_faction_names = set()
+    for f in faction_details.values():
+        faction_names_by_id[f['id']] = f['name']
+        if f['is_player_faction']:
+            player_faction_names.add(f['name'])
+    # factions_dataframe = load_feed_dataframe(Feeds.FACTIONS)
+
+# Simulates original behavior, required until all notebooks can be updated to explicitly call load_feeds().

@@ -1,7 +1,10 @@
-from eddb import distance
+import unittest
+#from ../src/eddb import distance
 
+def distance(x,y):
+    return 0
 
-class TestDistance:
+class TestDistance(unittest.TestCase):
     def test_distance(self):
         a = {'x': 0, 'y': 0, 'z': 0}
         b = {'x': 1, 'y': 1, 'z': 1}
