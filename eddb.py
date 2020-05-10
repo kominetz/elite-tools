@@ -103,25 +103,41 @@ def load_feed(feed, force_refresh=False, refresh_interval=7):
 
 ### UTILITY
 
+
+# Given either two systems names or two system objects, calcuates the distance (ly) between them.
 def distance(origin, destination):
     o = populated_systems[origin] if isinstance(origin, str) else origin
     d = populated_systems[destination] if isinstance(destination, str) else destination
     return round(((d['x'] - o['x']) ** 2 + (d['y'] - o['y']) ** 2 + (d['z'] - o['z']) ** 2) ** 0.5, 1)
 
 
-def average_position(system_names):
-    if isinstance(system_names, str):
-        system_names = [ sn.strip() for sn in system_names.split(',') ]
+# Given an ordered list of systems (aka route), calculate the cumulative distance following the route.
+def route_len(route, print_route=False):
+    length = 0
+    last_system = route[0]
+    for next_system in route:
+        dist = distance(last_system, next_system)
+        length += dist
+        if print_route:
+            print("%-24s %5d ly  %4d ly" % (next_system, dist, length))
+        last_system = next_system
+    return length
+
+
+# Given one or more systems, finds the average non-weighted central position.
+def center(systems):
+    s_list = [ sn.strip() for sn in systems.split(',') ] if isinstance(systems, str) else systems
     sum_x, sum_y, sum_z = 0, 0, 0
-    n = len(system_names)
-    for name in system_names:
-        s = populated_systems[name]
-        sum_x += s['x']
-        sum_y += s['y']
-        sum_z += s['z']
-    return {'name': 'Average Position', 'x': sum_x / n, 'y': sum_y / n, 'z': sum_z / n, 'system_names': system_names}
+    for s in s_list:
+        s_obj = populated_systems[s] if isinstance(s, str) else s
+        sum_x += s_obj['x']
+        sum_y += s_obj['y']
+        sum_z += s_obj['z']
+    n = len(s_list)
+    return {'name': 'Average Position', 'x': sum_x / n, 'y': sum_y / n, 'z': sum_z / n, 'systems': systems}
 
 
+# Given a route (one or more systems), creates a displayable dataframe with leg and cumulative distances from starting system.
 def route_to_dataframe(route):
     route_table = []
     length = 0
@@ -134,6 +150,7 @@ def route_to_dataframe(route):
     return pd.DataFrame(route_table, columns=['System', 'Leg (ly)', 'Route (ly)'])
 
 
+# Brute-force calculation of shortest route among waypoints with origin prepended and destination appended if either are provided
 def best_route(waypoints, origin, destination, print_choices=False):
     shortest_route = []
     shortest_length = -1
@@ -158,17 +175,7 @@ def best_route(waypoints, origin, destination, print_choices=False):
 ### SYSTEMS
 
 
-def closest_systems(origin, destinations):
-    closest_name = origin
-    closest_distance = -1
-    for destination in destinations:
-        destination_distance = distance(origin, destination)
-        if closest_distance == -1 or destination_distance < closest_distance:
-            closest_name = destination
-            closest_distance = destination_distance
-    return closest_name
-
-
+# Given a system and a radius, find all systems within radius including the origin systems
 def query_nearby_systems(origin, radius):
     if type(origin) == list:
         return set([nearby_system for s in origin for nearby_system in query_nearby_systems(s, radius)])
@@ -176,40 +183,17 @@ def query_nearby_systems(origin, radius):
         return [s for s in populated_systems.keys() if distance(origin, s) <= radius]
 
 
+# Given a faction, find all systems where the faction controls or is present.
 def query_systems_by_faction(faction):
     return [s for s in populated_systems.keys() if system_has_faction(s, faction)]
 
 
+# Tests if a faction controls or is present on a given system.
 def system_has_faction(system, faction):
     return populated_systems[system]['controlling_minor_faction'] == faction or faction_details[faction]['id'] in minor_faction_ids(system)
 
 
-def system_states(system):
-    return ", ".join([s['name'] for s in system['states']])
-
-
-def nearby_systems(origin, radius):  # Deprecated, assuming that's a thing in python
-    return [s for s in populated_systems if distance(origin, s) <= radius]
-
-
-def route_len(route, print_route=False):
-    length = 0
-    last_system = route[0]
-    for next_system in route:
-        dist = distance(last_system, next_system)
-        length += dist
-        if print_route:
-            print("%-24s %5d ly  %4d ly" % (next_system, dist, length))
-        last_system = next_system
-    return length
-
-
-# DEPRECATED
-# TODO: Replace calls with system_survey_data() and remove this wrapper.
-def summarize_systems(systems, origin='Sol'):
-    return system_survey_summary(systems, origin)
-
-
+# Given a list of systems, create a displayble dataframe of general information about each system.
 def system_survey_summary(systems, origin='Sol'):
     system_summaries = []
     for n in systems:
@@ -219,12 +203,7 @@ def system_survey_summary(systems, origin='Sol'):
     return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Controlling Faction', 'Reserve Level'])
 
 
-# DEPRECATE
-# TODO: Replace calls with system_faction_data() and remove this wrapper.
-def summarize_faction_systems(systems, origin='Sol'):
-    return system_faction_summary(systems, origin)
-
-
+# Given a list of systems, create a displayble dataframe of faction-related information about each system.
 def system_faction_summary(systems, origin='Sol'):
     system_summaries = []
     categories = ['Insurgency', 'Control', 'Presence', 'Player Control', 'Player Presence', 'NPC']
@@ -234,7 +213,7 @@ def system_faction_summary(systems, origin='Sol'):
         cf_name = s['controlling_minor_faction']
         pc_fac = [f for f in filter_player_factions(minor_faction_names(s['name']))]
         states = [x['name'] for x in s['states']]
-        cf_state = get_faction_state(s, cf_name)
+        cf_state = present_faction_state(s, cf_name)
         cf_inf = cf_state['influence']
         cf_hap = cf_state['happiness_id']
         if cf_name == "The Order of Mobius":
@@ -251,47 +230,35 @@ def system_faction_summary(systems, origin='Sol'):
     return pd.DataFrame(system_summaries, columns=['Priority', 'Category', 'Name', 'Distance', 'Controlling Faction', 'Happiness', 'Influence', 'Player Factions Present', 'States', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy']).set_index('Priority','Name')
 
 
-def get_faction_state(system, faction_name):
-    for f in system['minor_faction_presences']:
-        if faction_details[faction_name]['id'] == f['minor_faction_id']:
-            return f
-    return None
-
-
-def influenced_systems(system_name):
-    direct_inf_systems = query_nearby_systems(system_name, SYSTEM_INFLUENCE_RANGE)
-    indirect_inf_systems = [query_nearby_systems(s, SYSTEM_INFLUENCE_RANGE) for s in direct_inf_systems]
-    print(len(indirect_inf_systems), len(set([x for x in indirect_inf_systems])))
-
-
 ### FACTIONS
 
 
-def controlling_player_factions(systems):
+# Given a list of systems, returns only those systems that are controlled by a player faction.
+def player_faction_controlled(systems):
     return filter_player_factions(set([populated_systems[s]['controlling_minor_faction'] for s in systems]))
 
 
-def system_player_factions(system):
-    return [faction_names_by_id[f['minor_faction_id']] for f_pres in populated_systems[system]['minor_faction_presences'] for f in f_pres if f['is_player_faction']]
-
-
-def present_player_factions(systems):
-    mfp = [mfp for s in systems for mfp in populated_systems[s]['minor_faction_presences']]
-    minor_faction_ids = set([f['minor_faction_id'] for f in mfp])
-    minor_factions = set([f['name'] for f in faction_details.values() if int(f['id']) in minor_faction_ids])
-    return filter_player_factions(minor_factions)
-
-
+# Given a list of factions, returns only the player factions.
 def filter_player_factions(factions):
     return set([n for n in factions if faction_details[n]['is_player_faction']])
 
 
+# Returns faction ids for all factions present in given system.
 def minor_faction_ids(system):
      return set(s['minor_faction_id'] for s in populated_systems[system]['minor_faction_presences'])
 
 
+# Returns faction names for all factions present in given system.
 def minor_faction_names(system):
      return [faction_names_by_id[s['minor_faction_id']] for s in populated_systems[system]['minor_faction_presences']]
+
+
+# Returns the faction state object for a faction in a system or None if the faction is not present in that system.
+def present_faction_state(system, faction_name):
+    for f in system['minor_faction_presences']:
+        if faction_details[faction_name]['id'] == f['minor_faction_id']:
+            return f
+    return None
 
 
 ### INITIALIZATION ###
@@ -309,6 +276,3 @@ def load_feeds(force_refresh=False):
         faction_names_by_id[f['id']] = f['name']
         if f['is_player_faction']:
             player_faction_names.add(f['name'])
-    # factions_dataframe = load_feed_dataframe(Feeds.FACTIONS)
-
-# Simulates original behavior, required until all notebooks can be updated to explicitly call load_feeds().

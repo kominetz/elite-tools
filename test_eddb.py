@@ -1,9 +1,5 @@
-sys.path.insert(0, '..')
-print(sys.path)
 import unittest
-import os
-import sys
-from eddb import distance
+from eddb import distance, center
 
 class TestDistance(unittest.TestCase):
     def test_distance(self):
@@ -15,8 +11,3 @@ class TestDistance(unittest.TestCase):
         a = {'x': 1, 'y': 10, 'z': 0.1}
         b = a
         assert distance(a, b) == 0, 'Same start and end point generated non-zero distance.'
-
-
-class TestAveragePosition:
-    def test_average_position(self):
-        assert False
