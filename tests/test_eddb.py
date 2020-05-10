@@ -1,8 +1,9 @@
+sys.path.insert(0, '..')
+print(sys.path)
 import unittest
-#from ../src/eddb import distance
-
-def distance(x,y):
-    return 0
+import os
+import sys
+from eddb import distance
 
 class TestDistance(unittest.TestCase):
     def test_distance(self):
