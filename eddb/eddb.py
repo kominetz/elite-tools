@@ -72,8 +72,10 @@ et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
 os.makedirs(et_temp_path, exist_ok=True)
 
 populated_systems = {}
+populated_systems_df: pd.DataFrame
 station_details = {}
 faction_details = {}
+faction_details_df: pd.DataFrame
 faction_names_by_id = {}
 player_faction_names = {}
 
@@ -99,6 +101,28 @@ def load_feed(feed, force_refresh=False, refresh_interval=7):
     feed_file.close()
     print(f"# {feed} records loaded: ", len(feed_data))
     return feed_data
+
+
+def load_feed_df(feed, force_refresh=False, refresh_interval=7):
+    return pd.DataFrame(load_feed(feed, force_refresh).values())
+
+
+def load_feeds(force_refresh=False):
+    global populated_systems, station_details, faction_details, faction_names_by_id, player_faction_names
+    global faction_details_df, populated_systems_df
+
+    populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
+    populated_systems_df = load_feed_df(Feeds.POPULATED_SYSTEMS, force_refresh)
+    station_details = load_feed(Feeds.STATIONS, force_refresh)
+
+    faction_details = load_feed(Feeds.FACTIONS, force_refresh)
+    faction_details_df = load_feed_df(Feeds.FACTIONS, force_refresh)
+    faction_names_by_id = {}
+    player_faction_names = set()
+    for f in faction_details.values():
+        faction_names_by_id[f['id']] = f['name']
+        if f['is_player_faction']:
+            player_faction_names.add(f['name'])
 
 
 ### UTILITY
@@ -193,23 +217,25 @@ def system_has_faction(system, faction):
     return populated_systems[system]['controlling_minor_faction'] == faction or faction_details[faction]['id'] in minor_faction_ids(system)
 
 
+### REPORTS ###
+
 # Given a list of systems, create a displayble dataframe of general information about each system.
-def system_survey_summary(systems, origin='Sol'):
+def system_survey_report(systems, origin='Sol'):
     system_summaries = []
     for n in systems:
         s = populated_systems[n]
         d = distance(origin, n)
-        system_summaries.append([s['name'], d, s['population'], s['government'], s['allegiance'], s['security'], s['primary_economy'], s['controlling_minor_faction'], s['reserve_type']])
-    return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy', 'Controlling Faction', 'Reserve Level'])
+        system_summaries.append([s['name'], d, s['population'], s['primary_economy'], s['reserve_type']])
+    return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Population', 'Primary Economy', 'Reserve Level'])
 
 
 # Given a list of systems, create a displayble dataframe of faction-related information about each system.
-def system_faction_summary(systems, origin='Sol'):
+def system_faction_report(systems, faction="The Order of Mobius", origin='Azrael'):
     system_summaries = []
     categories = ['Insurgency', 'Control', 'Presence', 'Player Control', 'Player Presence', 'NPC']
-    for n in systems:
-        s = populated_systems[n]
-        d = distance(origin, n)
+    for a_system in systems:
+        s = populated_systems[a_system] if isinstance(a_system, str) else a_system
+        d = distance(origin, a_system)
         cf_name = s['controlling_minor_faction']
         pc_fac = [f for f in filter_player_factions(minor_faction_names(s['name']))]
         states = [x['name'] for x in s['states']]
@@ -218,7 +244,7 @@ def system_faction_summary(systems, origin='Sol'):
         cf_hap = cf_state['happiness_id']
         if cf_name == "The Order of Mobius":
             fac_pri = 0 if len(pc_fac) > 1 else 1
-        elif "The Order of Mobius" in pc_fac:
+        elif faction in pc_fac:
             fac_pri = 2
         elif cf_name in pc_fac:
             fac_pri = 3
@@ -226,8 +252,8 @@ def system_faction_summary(systems, origin='Sol'):
             fac_pri = 4
         else:
             fac_pri = 5
-        system_summaries.append([fac_pri, categories[fac_pri], s['name'], d, cf_name, cf_hap, cf_inf, ", ".join(pc_fac), ", ".join(states), s['population'], s['government'], s['allegiance'], s['security'], s['primary_economy']])
-    return pd.DataFrame(system_summaries, columns=['Priority', 'Category', 'Name', 'Distance', 'Controlling Faction', 'Happiness', 'Influence', 'Player Factions Present', 'States', 'Population', 'Government', 'Allegiance', 'Security Level', 'Primary Economy']).set_index('Priority','Name')
+        system_summaries.append(                  [fac_pri,    categories[fac_pri], s['name'], d,          s['population'], s['primary_economy'], ", ".join(states), cf_hap,      s['security'],    cf_name,               cf_inf,      s['government'], s['allegiance'], ", ".join(pc_fac)])
+    return pd.DataFrame(system_summaries, columns=['Priority', 'Category',          'Name',    'Distance', 'Population',    'Primary Economy',    'States',          'Happiness', 'Security Level', 'Controlling Faction', 'Influence', 'Government',    'Allegiance',    'Player Factions Present'])
 
 
 ### FACTIONS
@@ -261,18 +287,7 @@ def present_faction_state(system, faction_name):
     return None
 
 
-### INITIALIZATION ###
-
-#  Originally feeds loaded in main. Moved to function so cache/feed settings could be controlled before the module took any actions.
-def load_feeds(force_refresh=False):
-    global populated_systems, station_details, faction_details, faction_names_by_id, player_faction_names
-    populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
-    station_details = load_feed(Feeds.STATIONS, force_refresh)
-    faction_details = load_feed(Feeds.FACTIONS, force_refresh)
-
-    faction_names_by_id = {}
-    player_faction_names = set()
-    for f in faction_details.values():
-        faction_names_by_id[f['id']] = f['name']
-        if f['is_player_faction']:
-            player_faction_names.add(f['name'])
+# Given a faction name, return the system object of the faction's home system.
+def faction_home_system(faction):
+    system_id = faction_details_df[faction_details_df['name'] == faction]['home_system_id'].iloc[0]
+    return populated_systems_df[populated_systems_df['id'] == system_id].iloc[0].to_dict()
