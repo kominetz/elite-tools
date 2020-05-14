@@ -161,6 +161,20 @@ def center(systems):
     return {'name': 'Average Position', 'x': sum_x / n, 'y': sum_y / n, 'z': sum_z / n, 'systems': systems}
 
 
+# Given one or more systems, finds the average position weighted by log10(population).
+def population_center(systems):
+    s_list = [ sn.strip() for sn in systems.split(',') ] if isinstance(systems, str) else systems
+    sum_x, sum_y, sum_z, sum_p = 0, 0, 0, 0
+    for s in s_list:
+        s_obj = populated_systems[s] if isinstance(s, str) else s
+        log_pop = math.log10(s_obj['population'])
+        sum_x += s_obj['x'] * log_pop
+        sum_y += s_obj['y'] * log_pop
+        sum_z += s_obj['z'] * log_pop
+        sum_p += log_pop
+    return {'name': 'Average Populated-Weighted Position', 'x': sum_x / sum_p, 'y': sum_y / sum_p, 'z': sum_z / sum_p, 'systems': systems}
+
+
 # Given a route (one or more systems), creates a displayable dataframe with leg and cumulative distances from starting system.
 def route_to_dataframe(route):
     route_table = []
