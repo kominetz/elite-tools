@@ -16,7 +16,23 @@ class Feeds(Enum):
     FACTIONS = 'https://eddb.io/archive/v6/factions.jsonl'
     COMMODITIES = 'https://eddb.io/archive/v6/commodities.json'
     MODULES = 'https://eddb.io/archive/v6/modules.json'
+    PRICES = 'https://eddb.io/archive/v6/listings.csv'
 
+
+core_minerals = [
+    'Low Temperature Diamonds',
+    'Alexandrite',
+    'Grandidierite',
+    'Musgravite',
+    'Monazite',
+    'Serendibite',
+    'Rhodplumsite',
+    'Benitoite',
+    'Void Opals',
+    'Painite',
+    'Platinum',
+    'Bromellite',
+]
 # TODO: Move out of main library.
 my_engineers = [
     {'system': 'Sirius'},
@@ -72,15 +88,32 @@ et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
 os.makedirs(et_temp_path, exist_ok=True)
 
 populated_systems = {}
-populated_systems_df: pd.DataFrame
-station_details = {}
 faction_details = {}
-faction_details_df: pd.DataFrame
 faction_names_by_id = {}
 player_faction_names = {}
 
+commodity_details: pd.DataFrame
+faction_details_df: pd.DataFrame
+populated_systems_df: pd.DataFrame
+prices: pd.DataFrame
+station_details: pd.DataFrames
+
 
 ### FEEDS
+
+
+def load_prices(force_refresh=False, refresh_interval=7):
+    # TODO: If cache file is older than refresh_interval, refresh the cache.
+    cache_filename = urlparse(Feeds.PRICES.value).path[1:].replace("/", "-")
+    system_data_path = os.path.join(et_temp_path, cache_filename)
+    if os.path.exists(system_data_path) and not force_refresh:
+        print(f'# Found "{system_data_path}".')
+    else:
+        print(f'# Downloading "{system_data_path}".')
+        urlretrieve(Feeds.PRICES.value, system_data_path)
+    feed_data = pd.read_csv(system_data_path)
+    print(f"# {Feeds.PRICES} records loaded: ", len(feed_data))
+    return feed_data
 
 
 def load_feed(feed, force_refresh=False, refresh_interval=7):
@@ -103,17 +136,35 @@ def load_feed(feed, force_refresh=False, refresh_interval=7):
     return feed_data
 
 
-def load_feed_df(feed, force_refresh=False, refresh_interval=7):
+def load_feed_df_old(feed, force_refresh=False, refresh_interval=7):
     return pd.DataFrame(load_feed(feed, force_refresh).values())
+
+
+def load_feed_df(feed, force_refresh=False, refresh_interval=7):
+    # TODO: If cache file is older than refresh_interval, refresh the cache.
+    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
+    system_data_path = os.path.join(et_temp_path, cache_filename)
+    if os.path.exists(system_data_path) and not force_refresh:
+        print(f'# Found "{system_data_path}".')
+    else:
+        print(f'# Downloading "{system_data_path}".')
+        urlretrieve(feed.value, system_data_path)
+
+    feed_data = pd.read_json(system_data_path, lines=(feed != Feeds.COMMODITIES))
+    print(f"# {feed} records loaded: ", len(feed_data))
+    return feed_data
 
 
 def load_feeds(force_refresh=False):
     global populated_systems, station_details, faction_details, faction_names_by_id, player_faction_names
     global faction_details_df, populated_systems_df
+    global prices, commodity_details
 
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
     populated_systems_df = load_feed_df(Feeds.POPULATED_SYSTEMS, force_refresh)
     station_details = load_feed(Feeds.STATIONS, force_refresh)
+    commodity_details = load_feed_df(Feeds.COMMODITIES, force_refresh)
+    prices = load_prices()
 
     faction_details = load_feed(Feeds.FACTIONS, force_refresh)
     faction_details_df = load_feed_df(Feeds.FACTIONS, force_refresh)
