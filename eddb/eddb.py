@@ -96,7 +96,7 @@ commodity_details: pd.DataFrame
 faction_details_df: pd.DataFrame
 populated_systems_df: pd.DataFrame
 prices: pd.DataFrame
-station_details: pd.DataFrames
+station_details: pd.DataFrame
 
 
 ### FEEDS
