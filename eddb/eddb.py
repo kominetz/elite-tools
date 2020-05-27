@@ -87,6 +87,9 @@ SYSTEM_INFLUENCE_RANGE = 20
 et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
 os.makedirs(et_temp_path, exist_ok=True)
 
+
+### FEEDS
+
 populated_systems = {}
 faction_details = {}
 faction_names_by_id = {}
@@ -95,15 +98,14 @@ player_faction_names = {}
 commodity_details: pd.DataFrame
 faction_details_df: pd.DataFrame
 populated_systems_df: pd.DataFrame
-prices: pd.DataFrame
+commodity_listings: pd.DataFrame
 station_details: pd.DataFrame
 
 
-### FEEDS
-
-
-def load_prices(force_refresh=False, refresh_interval=7):
-    # TODO: If cache file is older than refresh_interval, refresh the cache.
+def load_commodity_listings(force_refresh=False, refresh_interval=7):
+    ''' specialized feed loader for listings which is the only CSV feed to process
+        TODO: If cache file is older than refresh_interval, refresh the cache.
+    '''
     cache_filename = urlparse(Feeds.PRICES.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
     if os.path.exists(system_data_path) and not force_refresh:
@@ -136,10 +138,6 @@ def load_feed(feed, force_refresh=False, refresh_interval=7):
     return feed_data
 
 
-def load_feed_df_old(feed, force_refresh=False, refresh_interval=7):
-    return pd.DataFrame(load_feed(feed, force_refresh).values())
-
-
 def load_feed_df(feed, force_refresh=False, refresh_interval=7):
     # TODO: If cache file is older than refresh_interval, refresh the cache.
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
@@ -158,13 +156,13 @@ def load_feed_df(feed, force_refresh=False, refresh_interval=7):
 def load_feeds(force_refresh=False):
     global populated_systems, station_details, faction_details, faction_names_by_id, player_faction_names
     global faction_details_df, populated_systems_df
-    global prices, commodity_details
+    global commodity_details, commodity_listings
 
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
     populated_systems_df = load_feed_df(Feeds.POPULATED_SYSTEMS, force_refresh)
-    station_details = load_feed(Feeds.STATIONS, force_refresh)
+    station_details = load_feed_df(Feeds.STATIONS, force_refresh)
     commodity_details = load_feed_df(Feeds.COMMODITIES, force_refresh)
-    prices = load_prices()
+    commodity_listings = load_commodity_listings()
 
     faction_details = load_feed(Feeds.FACTIONS, force_refresh)
     faction_details_df = load_feed_df(Feeds.FACTIONS, force_refresh)
