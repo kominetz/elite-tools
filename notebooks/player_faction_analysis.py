@@ -10,7 +10,7 @@ except:
 	pass
 # %%
 import pandas as pd
-import eddb
+from elitetools import eddb
 eddb.load_feeds()
 
 

@@ -1,5 +1,5 @@
 import pytest
-from eddb import distance, center, population_center
+from elitetools.eddb import distance, center, population_center
 
 
 class TestCenter:

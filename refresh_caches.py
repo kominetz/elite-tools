@@ -1,3 +1,3 @@
-import eddb
+from elitetools import eddb
 
 eddb.load_feeds(force_refresh=True)

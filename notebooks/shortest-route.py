@@ -9,7 +9,7 @@ try:
 except:
 	pass
 # %%
-import eddb
+from elitetools import eddb
 eddb.load_feeds()
 
 
