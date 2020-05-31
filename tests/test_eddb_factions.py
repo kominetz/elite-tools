@@ -1,5 +1,5 @@
 import pytest
-from eddb import faction_home_system, load_feeds
+from elitetools.eddb import faction_home_system, load_feeds
 
 class TestFactionHomeSystem:
     def test(self):

@@ -14,3 +14,4 @@ Tools and Utilities about Elite Dangerous
   * shortest_route -- Given a list of systems, and optionally starting and end points, calculate the shortest route among those systems. *WARNING!* Brute force approach takes N! where N = # of systems.
   * system_summaries -- Given a list of systems, create a summary table of those systems and copy it to the clipboard.
   * expansion_analysis *(PLANNED)* -- Given a list of systems, find the nearest three targets for expansion for each system. Copies results to clipboard.
+  * best_core_prices -- Given an origin and a radius, find the best five sell prices for each core mineral within the sphere. Includes the distance from origin.

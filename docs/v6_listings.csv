@@ -1,0 +1,14 @@
+id,station_id,commodity_id,supply,supply_bracket,buy_price,sell_price,demand,demand_bracket,collected_at
+1,1,5,0,0,0,694,1489,2,1589322934
+
+
+id                   9480536
+station_id               209
+commodity_id              46
+supply                     0
+supply_bracket             0
+buy_price                  0
+sell_price             50964
+demand                  3396
+demand_bracket             3
+collected_at      1589837218
