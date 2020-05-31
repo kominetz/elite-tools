@@ -1,0 +1,39 @@
+extraction:
+  imports: [ consumer items, food, explosives, mineral extractors, h.e. suits, basic medicines ]
+  exports: [ minerals group, some metals group, hydrogen fuels ]
+refinery:
+  imports: [ consumer items, food, minerals, hel-static furnances, h.e. suits, scrap ]
+  exports: [ metals, industrial materials, hydrogen fuels ]
+industrial:
+  imports: [ food, metals, auto fabricators, robotics ]
+  exports: [ machinery, consumer items, food cartridges, computer components, scrap ]
+high tech:
+  imports: [ food, machinery, metals, superconductors ]
+  exports: [ technology, consumer tech ]
+agriculture:
+  imports: [ consumer items, crop harvesters, agri medicines, pesticides, biowaste ]
+  exports: [ food, textiles ]
+terraforming:
+  imports: [ varies ]
+  exports: [ hydrogen fuel, biowaste ]
+tourism:
+  imports: [ varies ]
+  exports: [ hydrogen fuel, biowaste ]
+service:
+  imports: [ varies ]
+  exports: [ none ]
+military:
+  imports: [ aluminum, h.e. suits, polymers, thorium, titanium ]
+  exports: [ hydrogen fuel, scrap, robotics, advanced catalysers, non-lethal weapons ]
+colony:
+  imports: [ cobalt, rutile, pyrophyllite, clothing, grain, surface stabilisers, water purifiers, thermal cooling units, power generators ]
+  exports: [ hydrogen fuel, biowaste, limpet ]
+rescue:
+  imports: [ liquid oxygen, water, evacuation shelter, basic medicines, h.e. suits, natural fabrics ]
+  exports: [ none ]
+damaged:
+  imports: [ liquid oxygen, water, evacuation shelter, basic medicines, h.e. suits, natural fabrics ]
+  exports: [ none ]
+repair:
+  imports: [ auto-fabricators, robotics, polymers, palladium, lithium, rutile, conductive fabrics ]
+  exports: [ hydrogen fuel ]

@@ -1,0 +1,263 @@
+chemicals:
+- agronomic treatment
+- explosives
+- hydrogen fuel
+- hydrogen peroxide
+- liquid oxygen
+- mineral oil
+- nerve agents
+- pesticides
+- rockforth fertiliser
+- surface stabilisers
+- synthetic reagents
+- tritium
+- water
+
+consumer items:
+- clothing
+- consumer technology
+- domestic appliances
+- evacuation shelter
+- survival equipment
+foods:
+- algae
+- animal meat
+- coffee
+- fish
+- food cartridges
+- fruit and vegetables
+- grain
+- synthetic meat
+- tea
+
+industrial materials:
+- ceramic composites
+- cmm composite
+- insulating membrane
+- meta-alloys
+- micro-weave cooling hoses
+- neofabric insulation
+- polymers
+- semiconductors
+- superconductors
+
+legal drugs:
+- beer
+- bootleg liquor
+- liquor
+- narcotics
+- tobacco
+- wine
+
+machinery:
+- articulation motors
+- atmospheric processors
+- building fabricators
+- crop harvesters
+- emergency power cells
+- energy grid assembly
+- exhaust manifold
+- geological equipment
+- heatsink interlink
+- hn shock mount
+- magnetic emitter coil
+- marine equipment
+- microbial furnaces
+- mineral extractors
+- modular terminals
+- power converter
+- power generators
+- power transfer bus
+- radiation baffle
+- reinforced mounting plate
+- skimmer components
+- thermal cooling units
+- water purifiers
+
+medicines:
+- advanced medicines
+- agri-medicines
+- basic medicines
+- combat stabilisers
+- performance enhancers
+- progenitor cells
+
+metals:
+- aluminium
+- beryllium
+- bismuth
+- cobalt
+- copper
+- gallium
+- gold
+- hafnium 178
+- indium
+- lanthanum
+- lithium
+- osmium
+- palladium
+- platinum
+- platinum alloy
+- praseodymium
+- samarium
+- silver
+- tantalum
+- thallium
+- thorium
+- titanium
+- uranium
+
+minerals:
+- alexandrite
+- bauxite
+- benitoite
+- bertrandite
+- bromellite
+- coltan
+- cryolite
+- gallite
+- goslarite
+- grandidierite
+- indite
+- jadeite
+- lepidolite
+- lithium hydroxide
+- low temperature diamonds
+- methane clathrate
+- methanol monohydrate crystals
+- moissanite
+- monazite
+- musgravite
+- painite
+- pyrophyllite
+- rhodplumsite
+- rutile
+- serendibite
+- taaffeite
+- uraninite
+- void opals
+
+salvage:
+- ai relics
+- ancient artefact
+- ancient casket
+- ancient key
+- ancient orb
+- ancient tablet
+- ancient totem
+- ancient urn
+- antimatter containment unit
+- antique jewellery
+- antiquities
+- assault plans
+- black box
+- commercial samples
+- damaged escape pod
+- data core
+- diplomatic bag
+- earth relics
+- encrypted correspondence
+- encrypted data storage
+- experimental chemicals
+- fossil remnants
+- gene bank
+- geological samples
+- guardian relic
+- hostage
+- large survey data cache
+- military intelligence
+- military plans
+- mollusc brain tissue
+- mollusc fluid
+- mollusc membrane
+- mollusc mycelium
+- mollusc soft tissue
+- mollusc spores
+- mysterious idol
+- occupied escape pod
+- personal effects
+- pod core tissue
+- pod dead tissue
+- pod mesoglea
+- pod outer tissue
+- pod shell tissue
+- pod surface tissue
+- pod tissue
+- political prisoner
+- precious gems
+- prohibited research materials
+- prototype tech
+- rare artwork
+- rebel transmissions
+- sap 8 core container
+- scientific research
+- scientific samples
+- small survey data cache
+- space pioneer relics
+- tactical data
+- technical blueprints
+- thargoid basilisk tissue sample
+- thargoid biological matter
+- thargoid cyclops tissue sample
+- thargoid heart
+- thargoid hydra tissue sample
+- thargoid link
+- thargoid probe
+- thargoid resin
+- thargoid sensor
+- thargoid medusa tissue sample
+- thargoid scout tissue sample
+- thargoid technology samples
+- time capsule
+- trade data
+- trinkets of hidden fortune
+- unstable data core
+- wreckage components
+
+slavery:
+- imperial slaves
+- slaves
+
+technology:
+- advanced catalysers
+- animal monitors
+- aquaponic systems
+- auto fabricators
+- bioreducing lichen
+- computer components
+- h.e. suits
+- hardware diagnostic sensor
+- ion distributor
+- land enrichment systems
+- medical diagnostic equipment
+- micro controllers
+- muon imager
+- nanobreakers
+- resonating separators
+- robotics
+- structural regulators
+- telemetry suite
+
+textiles:
+- conductive fabrics
+- leather
+- military grade fabrics
+- natural fabrics
+- synthetic fabrics
+
+waste:
+- biowaste
+- chemical waste
+- scrap
+- toxic waste
+
+weapons:
+- battle weapons
+- landmines
+- non lethal weapons
+- personal weapons
+- reactive armour
+
+other:
+- none
+- varies
