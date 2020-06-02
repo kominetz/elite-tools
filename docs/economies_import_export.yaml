@@ -1,3 +1,4 @@
+--- # not complete, some values are categories rather than commodities, known values are missing
 extraction:
   imports: [ consumer items, food, explosives, mineral extractors, h.e. suits, basic medicines ]
   exports: [ minerals group, some metals group, hydrogen fuels ]
