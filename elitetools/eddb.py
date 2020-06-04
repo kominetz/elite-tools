@@ -20,6 +20,10 @@ class Feeds(Enum):
     MODULES = 'https://eddb.io/archive/v6/modules.json'
     PRICES = 'https://eddb.io/archive/v6/listings.csv'
 
+class Demand(Enum):
+    LOW = 1
+    MEDIUM = 2
+    HIGH = 3
 
 core_minerals = [
     'Low Temperature Diamonds',
@@ -366,3 +370,50 @@ def present_faction_state(system, faction_name):
 def faction_home_system(faction):
     system_id = faction_details_df[faction_details_df['name'] == faction]['home_system_id'].iloc[0]
     return populated_systems_df[populated_systems_df['id'] == system_id].iloc[0].to_dict()
+
+
+##
+#
+# COMMODITIES AND LISTINGS
+#
+##
+
+def best_core_prices(origin='Sol', radius=0, by_faction='', top_count=5, by_core_mineral='', min_demand=1000, min_demand_level=Demand.MEDIUM):
+    if radius > 0:
+        nearby_system_names = query_nearby_systems(origin, radius)
+    else:
+        # radius = max(eddb.distance(origin, s.strip()) for s in systems.split(","))
+        nearby_system_names = populated_systems_df['name'].to_list()
+
+    nearby_systems = pd.DataFrame({
+            'id': [populated_systems[system_name]['id'] for system_name in nearby_system_names],
+            'System': nearby_system_names,
+            'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
+            })
+
+    nearby_stations = station_details[['id', 'name', 'system_id', 'controlling_minor_faction_id']] \
+        .rename(columns={'name': 'Station'}) \
+        .merge(nearby_systems, how='inner', left_on='system_id', right_on='id') \
+        .merge(faction_details_df[['id', 'name']], how='left', left_on='controlling_minor_faction_id', right_on='id') \
+        .rename(columns={'name': 'Minor Faction'})
+    if by_faction:
+        nearby_stations = nearby_stations[nearby_stations['Minor Faction'] == by_faction]
+
+    core_commodities = commodity_details[commodity_details['name'] \
+        .isin([cm.strip() for cm in by_core_mineral.split(',')] if by_core_mineral else core_minerals)] \
+        [['id', 'name', 'sell_price_upper_average']] \
+        .rename(columns={'name': 'Commodity'})
+
+    nearby_core_listings = commodity_listings.merge(core_commodities, how='inner', left_on='commodity_id', right_on='id') \
+        .merge(nearby_stations, how='inner', left_on='station_id', right_on='id_x') \
+        .rename(columns = {'sell_price': 'Sell Price', 'demand': 'Demand', 'demand_bracket': 'Level'})
+    nearby_core_listings = nearby_core_listings[nearby_core_listings['Sell Price'] > nearby_core_listings['sell_price_upper_average']] \
+        .query(f'Level >= {min_demand_level.value} and Demand >= {min_demand}') \
+        .assign(rnk = nearby_core_listings.groupby('Commodity')['Sell Price'] \
+        .rank(method='first', ascending=False)) \
+        .query(f'rnk <= {top_count}') \
+        .sort_values('Sell Price', ascending=False) \
+        .reset_index() \
+        [['Commodity', 'Sell Price', 'Demand', 'Level', 'System', 'Station', 'Minor Faction', 'Distance']]
+    nearby_core_listings['Level'].replace({1: 'Low', 2: 'Medium', 3: "High"}, inplace=True)
+    return nearby_core_listings
