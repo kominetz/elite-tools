@@ -2,8 +2,10 @@ import itertools
 import json
 import math
 import os.path
+import os
 import tempfile
 import pandas as pd
+from datetime import datetime, timezone, timedelta
 
 from urllib.request import urlretrieve
 from enum import Enum
@@ -113,7 +115,7 @@ def load_commodity_listings(force_refresh=False):
     '''
     cache_filename = urlparse(Feeds.PRICES.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh:
+    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
         print(f'# Found "{system_data_path}".')
     else:
         print(f'# Downloading "{system_data_path}".')
@@ -127,7 +129,7 @@ def load_feed_deprecated(feed, force_refresh=False, refresh_interval=7):
     # TODO: If cache file is older than refresh_interval, refresh the cache.
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh:
+    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
         print(f'# Found "{system_data_path}".')
     else:
         print(f'# Downloading "{system_data_path}".')
@@ -150,7 +152,7 @@ def load_feed(feed, force_refresh=False):
     '''
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh:
+    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
         print(f'# Found "{system_data_path}".')
     else:
         print(f'# Downloading "{system_data_path}".')
@@ -180,6 +182,16 @@ def load_feeds(force_refresh=False):
         faction_names_by_id_deprecated[f['id']] = f['name']
         if f['is_player_faction']:
             player_faction_names_deprecated.add(f['name'])
+
+
+def fresh_feed(filepath):
+    ''' Given a filepath, report true if the file is newer than the estimated last tick.
+    ''' 
+    ft = datetime.fromtimestamp(os.stat(filepath).st_mtime).astimezone(timezone.utc)
+    tt = datetime.now(timezone.utc).replace(hour=15, minute=0, second=0, microsecond=0)
+    if tt > datetime.now(timezone.utc):
+        tt -= timedelta(days=1)
+    return ft > tt
 
 
 ### UTILITY
