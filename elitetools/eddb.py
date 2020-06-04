@@ -2,10 +2,8 @@ import itertools
 import json
 import math
 import os.path
-import os
 import tempfile
 import pandas as pd
-from datetime import datetime, timezone, timedelta
 
 from urllib.request import urlretrieve
 from enum import Enum
@@ -20,6 +18,10 @@ class Feeds(Enum):
     MODULES = 'https://eddb.io/archive/v6/modules.json'
     PRICES = 'https://eddb.io/archive/v6/listings.csv'
 
+class Demand(Enum):
+    LOW = 1
+    MEDIUM = 2
+    HIGH = 3
 
 core_minerals = [
     'Low Temperature Diamonds',
@@ -110,7 +112,7 @@ def load_commodity_listings(force_refresh=False, refresh_interval=7):
     '''
     cache_filename = urlparse(Feeds.PRICES.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
+    if os.path.exists(system_data_path) and not force_refresh:
         print(f'# Found "{system_data_path}".')
     else:
         print(f'# Downloading "{system_data_path}".')
@@ -124,7 +126,7 @@ def load_feed(feed, force_refresh=False, refresh_interval=7):
     # TODO: If cache file is older than refresh_interval, refresh the cache.
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
+    if os.path.exists(system_data_path) and not force_refresh:
         print(f'# Found "{system_data_path}".')
     else:
         print(f'# Downloading "{system_data_path}".')
@@ -144,7 +146,7 @@ def load_feed_df(feed, force_refresh=False, refresh_interval=7):
     # TODO: If cache file is older than refresh_interval, refresh the cache.
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
+    if os.path.exists(system_data_path) and not force_refresh:
         print(f'# Found "{system_data_path}".')
     else:
         print(f'# Downloading "{system_data_path}".')
@@ -174,16 +176,6 @@ def load_feeds(force_refresh=False):
         faction_names_by_id[f['id']] = f['name']
         if f['is_player_faction']:
             player_faction_names.add(f['name'])
-
-
-def fresh_feed(filepath):
-    ''' Given a filepath, report true if the file is newer than the estimated last tick.
-    ''' 
-    ft = datetime.fromtimestamp(os.stat(filepath).st_mtime).astimezone(timezone.utc)
-    tt = datetime.now(timezone.utc).replace(hour=15, minute=0, second=0, microsecond=0)
-    if tt > datetime.now(timezone.utc):
-        tt -= timedelta(days=1)
-    return ft > tt
 
 
 ### UTILITY
@@ -374,7 +366,7 @@ def faction_home_system(faction):
 #
 ##
 
-def best_core_prices(origin='Sol', radius=0, by_faction='', top_count=5, by_core_mineral=''):
+def best_core_prices(origin='Sol', radius=0, by_faction='', top_count=5, by_core_mineral='', min_demand=1000, min_demand_level=Demand.MEDIUM):
     if radius > 0:
         nearby_system_names = query_nearby_systems(origin, radius)
     else:
@@ -402,12 +394,14 @@ def best_core_prices(origin='Sol', radius=0, by_faction='', top_count=5, by_core
 
     nearby_core_listings = commodity_listings.merge(core_commodities, how='inner', left_on='commodity_id', right_on='id') \
         .merge(nearby_stations, how='inner', left_on='station_id', right_on='id_x') \
-        .rename(columns = {'sell_price': 'Sell Price', 'demand': 'Demand', 'demand_bracket': 'Bracket'})
+        .rename(columns = {'sell_price': 'Sell Price', 'demand': 'Demand', 'demand_bracket': 'Level'})
     nearby_core_listings = nearby_core_listings[nearby_core_listings['Sell Price'] > nearby_core_listings['sell_price_upper_average']] \
-        .query('Bracket == 3 and Demand >= 1000') \
+        .query(f'Level >= {min_demand_level.value} and Demand >= {min_demand}') \
         .assign(rnk = nearby_core_listings.groupby('Commodity')['Sell Price'] \
         .rank(method='first', ascending=False)) \
         .query(f'rnk <= {top_count}') \
         .sort_values('Sell Price', ascending=False) \
-        [['Commodity', 'Sell Price', 'Demand', 'System', 'Station', 'Minor Faction', 'Distance']]
+        .reset_index() \
+        [['Commodity', 'Sell Price', 'Demand', 'Level', 'System', 'Station', 'Minor Faction', 'Distance']]
+    nearby_core_listings['Level'].replace({1: 'Low', 2: 'Medium', 3: "High"}, inplace=True)
     return nearby_core_listings
