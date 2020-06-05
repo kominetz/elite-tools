@@ -172,6 +172,7 @@ def load_feeds(force_refresh=False):
     commodity_listings = load_commodity_listings()
     faction_details = load_feed(Feeds.FACTIONS, force_refresh)
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
+    populated_systems = populated_systems.assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
     station_details = load_feed(Feeds.STATIONS, force_refresh)
 
     populated_systems_deprecated = load_feed_deprecated(Feeds.POPULATED_SYSTEMS, force_refresh)
@@ -282,17 +283,17 @@ def best_route(waypoints, origin, destination, print_choices=False):
 ### SYSTEMS
 
 
-def find_system_by_name(system_name):
+def find_system_by_name(system_name = ""):
     ''' Given a valid system name, returns the system as dict.
     '''
-    return populated_systems.query('name == @system_name').iloc[0]
+    return populated_systems.loc[system_name.lower()]
 
 
 def query_systems_by_name(system_names):
     ''' Given zero or more valid system names, returns the systems as dicts in a dict keyed by name.
     ''' 
-    names = [n.strip() for n in system_names.split(',')] if isinstance(system_names, str) else system_names
-    return populated_systems.query('name in @names').set_index('name', drop=False).T.to_dict()
+    names = [n.lower() for n in ([s.strip() for s in system_names.split(',')] if isinstance(system_names, str) else system_names)]
+    return populated_systems.loc[names].set_index('name', drop=False).T.to_dict()
 
 
 # Given a system and a radius, find all systems within radius including the origin systems

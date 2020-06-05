@@ -14,8 +14,11 @@ class TestFindByName:
         assert sol_system['needs_permit'] == True
 
     def test_system_not_found(self):
-        with pytest.raises(IndexError):
+        with pytest.raises(KeyError):
             find_system_by_name('NOT_A_REAL_SYSTEM')
+
+    def test_case_insensitive(self):
+        assert (find_system_by_name('sOL')) is not None
 
 
 class TestQueryByNames:
@@ -39,5 +42,11 @@ class TestQueryByNames:
         assert len(cs_empty) == 0
 
     def test_systems_not_found(self):
-        assert len(query_systems_by_name('NOT_A_SYSTEM')) == 0
-        assert len(query_systems_by_name(['Sol', 'NOT_A_SYSTEM', 'Shinrarta Dezhra'])) == 2
+        with pytest.raises(KeyError):
+            query_systems_by_name('NOT_A_SYSTEM')
+        with pytest.raises(KeyError):
+            query_systems_by_name(['Sol', 'NOT_A_SYSTEM', 'Shinrarta Dezhra'])
+
+    def test_case_insensitive(self):
+        cs = query_systems_by_name('AcHeNar, aLIOTH, SOL')
+        assert len(cs) == 3
