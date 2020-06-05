@@ -102,7 +102,6 @@ faction_details: pd.DataFrame = None
 populated_systems: pd.DataFrame = None
 station_details: pd.DataFrame = None
 
-populated_systems_deprecated = {}
 faction_details_deprecated = {}
 faction_names_by_id_deprecated = {}
 player_faction_names_deprecated = {}
@@ -164,7 +163,7 @@ def load_feed(feed, force_refresh=False):
 
 
 def load_feeds(force_refresh=False):
-    global populated_systems_deprecated, station_details, faction_details_deprecated, faction_names_by_id_deprecated, player_faction_names_deprecated
+    global station_details, faction_details_deprecated, faction_names_by_id_deprecated, player_faction_names_deprecated
     global faction_details, populated_systems
     global commodity_details, commodity_listings
 
@@ -175,7 +174,6 @@ def load_feeds(force_refresh=False):
     populated_systems = populated_systems.assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
     station_details = load_feed(Feeds.STATIONS, force_refresh)
 
-    populated_systems_deprecated = load_feed_deprecated(Feeds.POPULATED_SYSTEMS, force_refresh)
     faction_details_deprecated = load_feed_deprecated(Feeds.FACTIONS, force_refresh)
     faction_names_by_id_deprecated = {}
     player_faction_names_deprecated = set()
@@ -200,8 +198,8 @@ def fresh_feed(filepath):
 
 # Given either two systems names or two system objects, calcuates the distance (ly) between them.
 def distance(origin, destination):
-    o = populated_systems_deprecated[origin] if isinstance(origin, str) else origin
-    d = populated_systems_deprecated[destination] if isinstance(destination, str) else destination
+    o = find_system_by_name(origin) if isinstance(origin, str) else origin
+    d = find_system_by_name(destination) if isinstance(destination, str) else destination
     return round(((d['x'] - o['x']) ** 2 + (d['y'] - o['y']) ** 2 + (d['z'] - o['z']) ** 2) ** 0.5, 1)
 
 
@@ -223,7 +221,7 @@ def center(systems):
     s_list = [ sn.strip() for sn in systems.split(',') ] if isinstance(systems, str) else systems
     sum_x, sum_y, sum_z = 0, 0, 0
     for s in s_list:
-        s_obj = populated_systems_deprecated[s] if isinstance(s, str) else s
+        s_obj = find_system_by_name(s) if isinstance(s, str) else s
         sum_x += s_obj['x']
         sum_y += s_obj['y']
         sum_z += s_obj['z']
@@ -236,7 +234,7 @@ def population_center(systems):
     s_list = [ sn.strip() for sn in systems.split(',') ] if isinstance(systems, str) else systems
     sum_x, sum_y, sum_z, sum_p = 0, 0, 0, 0
     for s in s_list:
-        s_obj = populated_systems_deprecated[s] if isinstance(s, str) else s
+        s_obj = find_system_by_name(s) if isinstance(s, str) else s
         log_pop = math.log10(s_obj['population'])
         sum_x += s_obj['x'] * log_pop
         sum_y += s_obj['y'] * log_pop
@@ -296,22 +294,24 @@ def query_systems_by_name(system_names):
     return populated_systems.loc[names].set_index('name', drop=False).T.to_dict()
 
 
-# Given a system and a radius, find all systems within radius including the origin systems
 def query_nearby_systems(origin, radius):
+    ''' Given a system and a radius, find all systems within radius including the origin systems
+    '''
     if type(origin) == list:
         return set([nearby_system for s in origin for nearby_system in query_nearby_systems(s, radius)])
     else: 
-        return [s for s in populated_systems_deprecated.keys() if distance(origin, s) <= radius]
+        return [s for s in populated_systems['name'].values if distance(origin, s) <= radius]
 
 
 # Given a faction, find all systems where the faction controls or is present.
 def query_systems_by_faction(faction):
-    return [s for s in populated_systems_deprecated.keys() if system_has_faction(s, faction)]
+    return [s for s in populated_systems['name'].values if system_has_faction(s, faction)]
 
 
-# Tests if a faction controls or is present on a given system.
 def system_has_faction(system, faction):
-    return populated_systems_deprecated[system]['controlling_minor_faction'] == faction or faction_details_deprecated[faction]['id'] in minor_faction_ids(system)
+    ''' Tests if a faction controls or is present on a given system.
+    '''
+    return find_system_by_name(system)['controlling_minor_faction'] == faction or faction_details_deprecated[faction]['id'] in minor_faction_ids(system)
 
 
 ### REPORTS ###
@@ -320,7 +320,7 @@ def system_has_faction(system, faction):
 def system_survey_report(systems, origin='Sol'):
     system_summaries = []
     for n in systems:
-        s = populated_systems_deprecated[n]
+        s = find_system_by_name(n)
         d = distance(origin, n)
         system_summaries.append([s['name'], d, s['population'], s['primary_economy'], s['reserve_type']])
     return pd.DataFrame(system_summaries, columns=['Name', 'Distance', 'Population', 'Primary Economy', 'Reserve Level'])
@@ -331,7 +331,7 @@ def system_faction_report(systems, faction="The Order of Mobius", origin='Azrael
     system_summaries = []
     categories = ['Insurgency', 'Control', 'Presence', 'Player Control', 'Player Presence', 'NPC']
     for a_system in systems:
-        s = populated_systems_deprecated[a_system] if isinstance(a_system, str) else a_system
+        s = find_system_by_name(a_system) if isinstance(a_system, str) else a_system
         d = distance(origin, a_system)
         cf_name = s['controlling_minor_faction']
         pc_fac = [f for f in filter_player_factions(minor_faction_names(s['name']))]
@@ -356,36 +356,42 @@ def system_faction_report(systems, faction="The Order of Mobius", origin='Azrael
 ### FACTIONS
 
 
-# Given a list of systems, returns only those systems that are controlled by a player faction.
 def player_faction_controlled(systems):
-    return filter_player_factions(set([populated_systems_deprecated[s]['controlling_minor_faction'] for s in systems]))
+    ''' Given a list of systems, returns only any controlling player factions of those systems.
+    '''
+    return filter_player_factions(set([find_system_by_name(s)['controlling_minor_faction'] for s in systems]))
 
 
-# Given a list of factions, returns only the player factions.
 def filter_player_factions(factions):
+    ''' Given a list of factions, returns only the player factions.
+    '''
     return set([n for n in factions if faction_details_deprecated[n]['is_player_faction']])
 
 
-# Returns faction ids for all factions present in given system.
 def minor_faction_ids(system):
-     return set(s['minor_faction_id'] for s in populated_systems_deprecated[system]['minor_faction_presences'])
+    ''' Returns faction ids for all factions present in given system.
+    '''
+    return set(s['minor_faction_id'] for s in find_system_by_name(system)['minor_faction_presences'])
 
 
-# Returns faction names for all factions present in given system.
 def minor_faction_names(system):
-     return [faction_names_by_id_deprecated[s['minor_faction_id']] for s in populated_systems_deprecated[system]['minor_faction_presences']]
+    ''' Returns faction names for all factions present in given system.
+    '''
+    return [faction_names_by_id_deprecated[s['minor_faction_id']] for s in find_system_by_name(system)['minor_faction_presences']]
 
 
-# Returns the faction state object for a faction in a system or None if the faction is not present in that system.
 def present_faction_state(system, faction_name):
+    ''' Returns the faction state object for a faction in a system or None if the faction is not present in that system.
+    '''
     for f in system['minor_faction_presences']:
         if faction_details_deprecated[faction_name]['id'] == f['minor_faction_id']:
             return f
     return None
 
 
-# Given a faction name, return the system object of the faction's home system.
 def faction_home_system(faction):
+    ''' Given a faction name, return the system object of the faction's home system.
+    '''
     system_id = faction_details[faction_details['name'] == faction]['home_system_id'].iloc[0]
     return populated_systems[populated_systems['id'] == system_id].iloc[0].to_dict()
 
@@ -404,7 +410,7 @@ def best_core_prices(origin='Sol', radius=0, by_faction='', top_count=5, by_core
         nearby_system_names = populated_systems['name'].to_list()
 
     nearby_systems = pd.DataFrame({
-            'id': [populated_systems_deprecated[system_name]['id'] for system_name in nearby_system_names],
+            'id': [find_system_by_name(system_name)['id'] for system_name in nearby_system_names],
             'System': nearby_system_names,
             'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
             })

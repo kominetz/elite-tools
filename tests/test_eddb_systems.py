@@ -1,12 +1,12 @@
 import pytest
 import pandas as pd
-from elitetools.eddb import find_system_by_name, query_systems_by_name, load_feeds
+from elitetools.eddb import find_system_by_name, query_systems_by_name, query_nearby_systems, query_systems_by_faction, load_feeds
 
 def setup_module():
         load_feeds()
 
 
-class TestFindByName:
+class TestFindSystemByName:
     def test(self):
         sol_system = find_system_by_name('Shinrarta Dezhra')
         assert sol_system is not None
@@ -21,7 +21,7 @@ class TestFindByName:
         assert (find_system_by_name('sOL')) is not None
 
 
-class TestQueryByNames:
+class TestQuerySystemsByNames:
     def test(self):
         cs_from_list = query_systems_by_name(['Achenar', 'Alioth', 'Sol'])
         assert len(cs_from_list) == 3
@@ -50,3 +50,20 @@ class TestQueryByNames:
     def test_case_insensitive(self):
         cs = query_systems_by_name('AcHeNar, aLIOTH, SOL')
         assert len(cs) == 3
+
+
+class TestQueryNearbySystems:
+    def test(self):
+        nearby_systems = query_nearby_systems('Azrael', 20)
+        # Nearby systems should not change due to BGS activity, but a major update? Unknown.
+        assert len(nearby_systems) == 28
+        assert "Dvorsi" in nearby_systems
+
+
+class TestQuerySystemsByFaction:
+    def test(self):
+        faction_systems = query_systems_by_faction("The Order of Mobius")
+        # A faction is always in at least one system.
+        assert len(faction_systems) > 0
+        # A faction is always in its home system.
+        assert "Azrael" in faction_systems
