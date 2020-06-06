@@ -102,10 +102,6 @@ faction_details: pd.DataFrame = None
 populated_systems: pd.DataFrame = None
 station_details: pd.DataFrame = None
 
-faction_details_deprecated = {}
-faction_names_by_id_deprecated = {}
-player_faction_names_deprecated = {}
-
 
 def load_commodity_listings(force_refresh=False):
     ''' specialized feed loader for listings which is the only CSV feed to process
@@ -121,26 +117,6 @@ def load_commodity_listings(force_refresh=False):
         urlretrieve(Feeds.PRICES.value, system_data_path)
     feed_data = pd.read_csv(system_data_path)
     print(f"# {Feeds.PRICES} records loaded: ", len(feed_data))
-    return feed_data
-
-
-def load_feed_deprecated(feed, force_refresh=False, refresh_interval=7):
-    # TODO: If cache file is older than refresh_interval, refresh the cache.
-    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
-    system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
-        print(f'# Found "{system_data_path}".')
-    else:
-        print(f'# Downloading "{system_data_path}".')
-        urlretrieve(feed.value, system_data_path)
-
-    feed_data = {}
-    feed_file = open(system_data_path)
-    for system_record in feed_file:
-        pop_sys = json.loads(system_record)
-        feed_data[pop_sys['name']] = pop_sys
-    feed_file.close()
-    print(f"# {feed} records loaded: ", len(feed_data))
     return feed_data
 
 
@@ -163,24 +139,15 @@ def load_feed(feed, force_refresh=False):
 
 
 def load_feeds(force_refresh=False):
-    global station_details, faction_details_deprecated, faction_names_by_id_deprecated, player_faction_names_deprecated
-    global faction_details, populated_systems
-    global commodity_details, commodity_listings
+    global commodity_details, commodity_listings, faction_details, populated_systems, station_details
 
     commodity_details = load_feed(Feeds.COMMODITIES, force_refresh)
     commodity_listings = load_commodity_listings()
     faction_details = load_feed(Feeds.FACTIONS, force_refresh)
+    faction_details = faction_details.assign(name_index = faction_details['name'].str.lower()).set_index('name_index')
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
     populated_systems = populated_systems.assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
     station_details = load_feed(Feeds.STATIONS, force_refresh)
-
-    faction_details_deprecated = load_feed_deprecated(Feeds.FACTIONS, force_refresh)
-    faction_names_by_id_deprecated = {}
-    player_faction_names_deprecated = set()
-    for f in faction_details_deprecated.values():
-        faction_names_by_id_deprecated[f['id']] = f['name']
-        if f['is_player_faction']:
-            player_faction_names_deprecated.add(f['name'])
 
 
 def fresh_feed(filepath):
@@ -303,7 +270,6 @@ def query_nearby_systems(origin, radius):
         return [s for s in populated_systems['name'].values if distance(origin, s) <= radius]
 
 
-# Given a faction, find all systems where the faction controls or is present.
 def query_systems_by_faction(faction):
     return [s for s in populated_systems['name'].values if system_has_faction(s, faction)]
 
@@ -311,7 +277,9 @@ def query_systems_by_faction(faction):
 def system_has_faction(system, faction):
     ''' Tests if a faction controls or is present on a given system.
     '''
-    return find_system_by_name(system)['controlling_minor_faction'] == faction or faction_details_deprecated[faction]['id'] in minor_faction_ids(system)
+    s = find_system_by_name(system) if isinstance(system, str) else system
+    f = find_faction_by_name(faction) if isinstance(faction, str) else faction
+    return f['id'] in [mpf['minor_faction_id'] for mpf in s['minor_faction_presences']]
 
 
 ### REPORTS ###
@@ -356,6 +324,10 @@ def system_faction_report(systems, faction="The Order of Mobius", origin='Azrael
 ### FACTIONS
 
 
+def find_faction_by_name(faction_name):
+    return faction_details.loc[faction_name.lower()]
+
+
 def player_faction_controlled(systems):
     ''' Given a list of systems, returns only any controlling player factions of those systems.
     '''
@@ -365,26 +337,35 @@ def player_faction_controlled(systems):
 def filter_player_factions(factions):
     ''' Given a list of factions, returns only the player factions.
     '''
-    return set([n for n in factions if faction_details_deprecated[n]['is_player_faction']])
+    return set([n for n in factions if find_faction_by_name(n)['is_player_faction']])
+
+
+def faction_presences(system):
+    ''' Given a system name or object, returns the faction presence information (merged with faction_details)
+    '''
+    s = find_system_by_name(system) if isinstance(system, str) else system
+    return pd.DataFrame(s['minor_faction_presences']).merge(faction_details, how='left', left_on='minor_faction_id', right_on='id')
 
 
 def minor_faction_ids(system):
     ''' Returns faction ids for all factions present in given system.
     '''
-    return set(s['minor_faction_id'] for s in find_system_by_name(system)['minor_faction_presences'])
+    return set(faction_presences(system)['id'].values)
 
 
 def minor_faction_names(system):
     ''' Returns faction names for all factions present in given system.
     '''
-    return [faction_names_by_id_deprecated[s['minor_faction_id']] for s in find_system_by_name(system)['minor_faction_presences']]
+    return set(faction_presences(system)['name'].values)
 
 
-def present_faction_state(system, faction_name):
+def present_faction_state(system, faction):
     ''' Returns the faction state object for a faction in a system or None if the faction is not present in that system.
     '''
-    for f in system['minor_faction_presences']:
-        if faction_details_deprecated[faction_name]['id'] == f['minor_faction_id']:
+    s = find_system_by_name(system) if isinstance(system, str) else system
+    f_id = (find_faction_by_name(faction) if isinstance(faction, str) else faction)['id']
+    for f in s['minor_faction_presences']:
+        if f_id == f['minor_faction_id']:
             return f
     return None
 
