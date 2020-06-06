@@ -35,15 +35,15 @@ faction_report
 faction_stats = {}
 #cpf = eddb.player_faction_controlled(extended_systems, faction, origin)
 for s_name in extended_systems:
-    s = eddb.populated_systems[s_name]
+    s = eddb.populated_systems_deprecated[s_name]
     cf_name = s['controlling_minor_faction']
-    if cf_name in eddb.player_faction_names:
+    if cf_name in eddb.player_faction_names_deprecated:
         if cf_name not in faction_stats.keys():
             faction_stats[cf_name] = {'name': cf_name, 'control': 0, 'presence': 0}
         faction_stats[cf_name]['control'] += 1
     for f in s['minor_faction_presences']:
-        f_name = eddb.faction_names_by_id[f['minor_faction_id']]
-        if f_name in eddb.player_faction_names:
+        f_name = eddb.faction_names_by_id_deprecated[f['minor_faction_id']]
+        if f_name in eddb.player_faction_names_deprecated:
             if f_name not in faction_stats.keys():
                 faction_stats[f_name] = {'name': f_name, 'control': 0, 'presence': 0}
             if f_name != cf_name:
