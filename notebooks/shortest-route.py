@@ -15,14 +15,17 @@ eddb.load_feeds()
 
 # %%
 origin = input("Origin: ")
+origin
 
 
 # %%
 destination = input("Destination: ")
+destination
 
 
 # %%
 waypoints = [wp.strip() for wp in input("Waypoints: ").split(',')]
+waypoints
 
 
 # %%

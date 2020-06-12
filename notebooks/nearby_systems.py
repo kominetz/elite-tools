@@ -16,6 +16,7 @@ eddb.load_feeds()
 # %%
 systems = input("Systems: ")
 origin = eddb.center(systems)
+origin
 
 
 # %%

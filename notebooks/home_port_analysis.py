@@ -15,6 +15,7 @@ eddb.load_feeds()
 
 # %%
 origin = input("Home System: ")
+origin
 
 
 # %%
