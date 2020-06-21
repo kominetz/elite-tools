@@ -6,10 +6,12 @@ import os
 import tempfile
 import pandas as pd
 from datetime import datetime, timezone, timedelta
-
-from urllib.request import urlretrieve
 from enum import Enum
+
+from bs4 import BeautifulSoup
+from urllib.request import urlretrieve
 from urllib.parse import urlparse
+from urllib.request import urlopen
 
 
 class Feeds(Enum):
@@ -88,6 +90,21 @@ engineer_systems = sorted([
     'Shenve',  # Colonia
 ])
 
+realtime_commodities = [
+    {'name': 'Alexandrite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/349'},
+    {'name': 'Benitoite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/347'},
+    {'name': 'Grandidierite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/348'},
+    {'name': 'Low Temperature Diamonds', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/276'},
+    {'name': 'Monazite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/345'},
+    {'name': 'Musgravite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/346'},
+    {'name': 'Painite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/83'},
+    {'name': 'Platinum', 'type': 'Metal', 'url': 'https://eddb.io/commodity/46'},
+    {'name': 'Rhodplumsite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/343'},
+    {'name': 'Serendibite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/344'},
+    {'name': 'Tritium', 'type': 'Chemical', 'url': 'https://eddb.io/commodity/362'},
+    {'name': 'Void Opals', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/350'},
+]
+
 SYSTEM_INFLUENCE_RANGE = 20
 
 et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
@@ -97,10 +114,45 @@ os.makedirs(et_temp_path, exist_ok=True)
 ### FEEDS
 
 commodity_details: pd.DataFrame = None
-commodity_listings: pd.DataFrame = None
+commodity_listings_eod: pd.DataFrame = None
+commodity_listings_rt: pd.DataFrame = None
 faction_details: pd.DataFrame = None
 populated_systems: pd.DataFrame = None
 station_details: pd.DataFrame = None
+
+
+def scrape_commodity(commodity):
+    ''' Given a commodity's name and EDDB URL, extract best sell price listings and return as a list of dicts.
+    '''
+    listings = []
+    with urlopen(commodity['url']) as p:
+        page = BeautifulSoup(p, 'html.parser')
+    max_sell = page.find(id='table-stations-max-sell')
+    for row in max_sell.find_all('tr'):
+        fields = row.find_all('td')
+        if len(fields) != 7:
+            continue  # discard header and malformed rows
+        time_fields = fields[6].find_all('span')
+        listings.append({
+            'commodity_name': commodity['name'],
+            'commodity_type': commodity['type'],
+            'station_name': fields[0].find('a').get_text(),
+            'system_name': fields[1].find('a').get_text(),
+            'sell_price': int(fields[2].find('span').get_text().replace(',', '')),
+            'demand': int(fields[4].find('span').get_text().replace(',', '')),
+            'landing_pad': fields[5].find('span').get_text(),
+            'freshness': time_fields[1].get_text(),
+        })
+    print("%s: %d listings scraped." % (commodity['name'], len(listings)))
+    return listings
+
+
+def load_rt_listings():
+
+    listings = []
+    for commodity in realtime_commodities:
+        listings.extend(scrape_commodity(commodity))
+    return listings
 
 
 def load_commodity_listings(force_refresh=False):
@@ -139,15 +191,19 @@ def load_feed(feed, force_refresh=False):
 
 
 def load_feeds(force_refresh=False):
-    global commodity_details, commodity_listings, faction_details, populated_systems, station_details
+    ''' Load all feeds from EDDB. Refresh standard feeds and scrapes if stored files
+        are older than the refresh policies or if force refresh is specified.
+    '''
+    global commodity_details, commodity_listings_eod, commodity_listings_rt, faction_details, populated_systems, station_details
 
     commodity_details = load_feed(Feeds.COMMODITIES, force_refresh)
-    commodity_listings = load_commodity_listings()
+    commodity_listings_eod = load_commodity_listings()
     faction_details = load_feed(Feeds.FACTIONS, force_refresh)
     faction_details = faction_details.assign(name_index = faction_details['name'].str.lower()).set_index('name_index')
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
     populated_systems = populated_systems.assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
     station_details = load_feed(Feeds.STATIONS, force_refresh)
+    commodity_listings_rt = load_rt_listings()
 
 
 def fresh_feed(filepath):
@@ -409,7 +465,7 @@ def best_core_prices(origin='Sol', radius=0, by_faction='', top_count=5, by_core
         [['id', 'name', 'sell_price_upper_average']] \
         .rename(columns={'name': 'Commodity'})
 
-    nearby_core_listings = commodity_listings.merge(core_commodities, how='inner', left_on='commodity_id', right_on='id') \
+    nearby_core_listings = commodity_listings_eod.merge(core_commodities, how='inner', left_on='commodity_id', right_on='id') \
         .merge(nearby_stations, how='inner', left_on='station_id', right_on='id_x') \
         .rename(columns = {'sell_price': 'Sell Price', 'demand': 'Demand', 'demand_bracket': 'Level'})
     nearby_core_listings = nearby_core_listings[nearby_core_listings['Sell Price'] > nearby_core_listings['sell_price_upper_average']] \
