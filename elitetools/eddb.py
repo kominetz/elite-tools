@@ -1,17 +1,16 @@
 import itertools
 import json
 import math
-import os.path
 import os
+import os.path
 import tempfile
-import pandas as pd
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
-
-from bs4 import BeautifulSoup
-from urllib.request import urlretrieve
 from urllib.parse import urlparse
-from urllib.request import urlopen
+from urllib.request import urlopen, urlretrieve
+
+import pandas as pd
+from bs4 import BeautifulSoup
 
 
 class Feeds(Enum):
@@ -27,20 +26,56 @@ class Demand(Enum):
     MEDIUM = 2
     HIGH = 3
 
+commodity_pages = [
+    {'name': 'Alexandrite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/349'},
+    {'name': 'Benitoite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/347'},
+    {'name': 'Bromellite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/274'},
+    {'name': 'Grandidierite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/348'},
+    {'name': 'Low Temperature Diamonds', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/276'},
+    {'name': 'Monazite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/345'},
+    {'name': 'Musgravite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/346'},
+    {'name': 'Painite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/83'},
+    {'name': 'Platinum', 'type': 'Metal', 'url': 'https://eddb.io/commodity/46'},
+    {'name': 'Rhodplumsite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/343'},
+    {'name': 'Serendibite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/344'},
+    {'name': 'Tritium', 'type': 'Chemical', 'url': 'https://eddb.io/commodity/362'},
+    {'name': 'Void Opals', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/350'},
+]
+
 core_minerals = [
+    'Alexandrite',
+    'Benitoite',
+    'Bromellite',
+    'Grandidierite',
     'Low Temperature Diamonds',
+    'Monazite',
+    'Musgravite',
+    'Painite',
+    'Platinum'
+    'Rhodplumsite',
+    'Serendibite',
+    'Void Opals',
+]
+
+icy_core_minerals = [
     'Alexandrite',
     'Grandidierite',
-    'Musgravite',
-    'Monazite',
-    'Serendibite',
-    'Rhodplumsite',
-    'Benitoite',
+    'Low Temperature Diamonds',
     'Void Opals',
-    'Painite',
-    'Platinum',
-    'Bromellite',
 ]
+
+core_only_minerals = [
+    'Alexandrite',
+    'Benitoite',
+    'Bromellite',
+    'Grandidierite',
+    'Monazite',
+    'Musgravite',
+    'Rhodplumsite',
+    'Serendibite',
+    'Void Opals',
+]
+
 # TODO: Move out of main library.
 my_engineers = [
     {'system': 'Sirius'},
@@ -90,21 +125,6 @@ engineer_systems = sorted([
     'Shenve',  # Colonia
 ])
 
-realtime_commodities = [
-    {'name': 'Alexandrite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/349'},
-    {'name': 'Benitoite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/347'},
-    {'name': 'Grandidierite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/348'},
-    {'name': 'Low Temperature Diamonds', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/276'},
-    {'name': 'Monazite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/345'},
-    {'name': 'Musgravite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/346'},
-    {'name': 'Painite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/83'},
-    {'name': 'Platinum', 'type': 'Metal', 'url': 'https://eddb.io/commodity/46'},
-    {'name': 'Rhodplumsite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/343'},
-    {'name': 'Serendibite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/344'},
-    {'name': 'Tritium', 'type': 'Chemical', 'url': 'https://eddb.io/commodity/362'},
-    {'name': 'Void Opals', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/350'},
-]
-
 SYSTEM_INFLUENCE_RANGE = 20
 
 et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
@@ -148,13 +168,10 @@ def fresh_feed(filepath):
 
 
 def fresh_scrape(filepath):
-    ''' Given a filepath, report true if the file is newer than the estimated last tick.
+    ''' Given a filepath, report true if the file is no more than 1 hour old.
     ''' 
-    ft = datetime.fromtimestamp(os.stat(filepath).st_mtime).astimezone(timezone.utc)
-    tt = datetime.now(timezone.utc).replace(hour=1, minute=0, second=0, microsecond=0)
-    if tt > datetime.now(timezone.utc):
-        tt -= timedelta(days=1)
-    return ft > tt
+    refresh_after = datetime.fromtimestamp(os.stat(filepath).st_mtime) + timedelta(hours=1)
+    return refresh_after > datetime.now()
 
 
 def load_rt_listings(force_refresh=False):
@@ -169,7 +186,7 @@ def load_rt_listings(force_refresh=False):
     else:
         print(f'# Scraping "{system_data_path}".')
         listings = []
-        for commodity in realtime_commodities:
+        for commodity in commodity_pages:
             listings.extend(scrape_commodity(commodity))
         with open(system_data_path, 'w') as rtl_file:
             for l in listings:
@@ -465,42 +482,26 @@ def faction_home_system(faction):
 #
 ##
 
-def best_core_prices(origin='Sol', radius=0, by_faction='', top_count=5, by_core_mineral='', min_demand=1000, min_demand_level=Demand.MEDIUM):
-    if radius > 0:
-        nearby_system_names = query_nearby_systems(origin, radius)
-    else:
-        # radius = max(eddb.distance(origin, s.strip()) for s in systems.split(","))
-        nearby_system_names = populated_systems['name'].to_list()
-
+def best_rt_listings(origin='Sol', radius=1000, top_count=5, by_commodity=[], min_demand=500):
+    ''' Find best real-time commodity listings.
+    '''
+    nearby_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(by_commodity)]
+    nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else nearby_rt_listings['system_name'].values
     nearby_systems = pd.DataFrame({
-            'id': [find_system_by_name(system_name)['id'] for system_name in nearby_system_names],
-            'System': nearby_system_names,
-            'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
-            })
+        'system_name': nearby_system_names,
+        'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
+    })
+    nearby_rt_listings = nearby_rt_listings.merge(nearby_systems, on="system_name")
 
-    nearby_stations = station_details[['id', 'name', 'system_id', 'controlling_minor_faction_id']] \
-        .rename(columns={'name': 'Station'}) \
-        .merge(nearby_systems, how='inner', left_on='system_id', right_on='id') \
-        .merge(faction_details[['id', 'name']], how='left', left_on='controlling_minor_faction_id', right_on='id') \
-        .rename(columns={'name': 'Minor Faction'})
-    if by_faction:
-        nearby_stations = nearby_stations[nearby_stations['Minor Faction'] == by_faction]
-
-    core_commodities = commodity_details[commodity_details['name'] \
-        .isin([cm.strip() for cm in by_core_mineral.split(',')] if by_core_mineral else core_minerals)] \
-        [['id', 'name', 'sell_price_upper_average']] \
-        .rename(columns={'name': 'Commodity'})
-
-    nearby_core_listings = commodity_listings_eod.merge(core_commodities, how='inner', left_on='commodity_id', right_on='id') \
-        .merge(nearby_stations, how='inner', left_on='station_id', right_on='id_x') \
-        .rename(columns = {'sell_price': 'Sell Price', 'demand': 'Demand', 'demand_bracket': 'Level'})
-    nearby_core_listings = nearby_core_listings[nearby_core_listings['Sell Price'] > nearby_core_listings['sell_price_upper_average']] \
-        .query(f'Level >= {min_demand_level.value} and Demand >= {min_demand}') \
-        .assign(rnk = nearby_core_listings.groupby('Commodity')['Sell Price'] \
+    nearby_rt_listings = nearby_rt_listings \
+        .query(f'demand > {min_demand}') \
+        .assign(rnk = nearby_rt_listings.groupby('commodity_name')['sell_price'] \
         .rank(method='first', ascending=False)) \
         .query(f'rnk <= {top_count}') \
-        .sort_values('Sell Price', ascending=False) \
+        .sort_values('sell_price', ascending=False) \
+        .drop_duplicates() \
         .reset_index() \
-        [['Commodity', 'Sell Price', 'Demand', 'Level', 'System', 'Station', 'Minor Faction', 'Distance']]
-    nearby_core_listings['Level'].replace({1: 'Low', 2: 'Medium', 3: "High"}, inplace=True)
-    return nearby_core_listings
+        [['commodity_name', 'sell_price', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
+        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
+
+    return nearby_rt_listings
