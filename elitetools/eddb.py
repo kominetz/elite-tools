@@ -1,15 +1,16 @@
 import itertools
 import json
 import math
-import os.path
 import os
+import os.path
 import tempfile
-import pandas as pd
-from datetime import datetime, timezone, timedelta
-
-from urllib.request import urlretrieve
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from urllib.parse import urlparse
+from urllib.request import urlopen, urlretrieve
+
+import pandas as pd
+from bs4 import BeautifulSoup
 
 
 class Feeds(Enum):
@@ -25,20 +26,56 @@ class Demand(Enum):
     MEDIUM = 2
     HIGH = 3
 
+commodity_pages = [
+    {'name': 'Alexandrite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/349'},
+    {'name': 'Benitoite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/347'},
+    {'name': 'Bromellite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/274'},
+    {'name': 'Grandidierite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/348'},
+    {'name': 'Low Temperature Diamonds', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/276'},
+    {'name': 'Monazite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/345'},
+    {'name': 'Musgravite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/346'},
+    {'name': 'Painite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/83'},
+    {'name': 'Platinum', 'type': 'Metal', 'url': 'https://eddb.io/commodity/46'},
+    {'name': 'Rhodplumsite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/343'},
+    {'name': 'Serendibite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/344'},
+    {'name': 'Tritium', 'type': 'Chemical', 'url': 'https://eddb.io/commodity/362'},
+    {'name': 'Void Opals', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/350'},
+]
+
 core_minerals = [
+    'Alexandrite',
+    'Benitoite',
+    'Bromellite',
+    'Grandidierite',
     'Low Temperature Diamonds',
+    'Monazite',
+    'Musgravite',
+    'Painite',
+    'Platinum'
+    'Rhodplumsite',
+    'Serendibite',
+    'Void Opals',
+]
+
+icy_core_minerals = [
     'Alexandrite',
     'Grandidierite',
-    'Musgravite',
-    'Monazite',
-    'Serendibite',
-    'Rhodplumsite',
-    'Benitoite',
+    'Low Temperature Diamonds',
     'Void Opals',
-    'Painite',
-    'Platinum',
-    'Bromellite',
 ]
+
+core_only_minerals = [
+    'Alexandrite',
+    'Benitoite',
+    'Bromellite',
+    'Grandidierite',
+    'Monazite',
+    'Musgravite',
+    'Rhodplumsite',
+    'Serendibite',
+    'Void Opals',
+]
+
 # TODO: Move out of main library.
 my_engineers = [
     {'system': 'Sirius'},
@@ -97,10 +134,68 @@ os.makedirs(et_temp_path, exist_ok=True)
 ### FEEDS
 
 commodity_details: pd.DataFrame = None
-commodity_listings: pd.DataFrame = None
+commodity_listings_eod: pd.DataFrame = None
+commodity_listings_rt: pd.DataFrame = None
 faction_details: pd.DataFrame = None
 populated_systems: pd.DataFrame = None
 station_details: pd.DataFrame = None
+
+
+def load_feeds(force_refresh=False):
+    ''' Load all feeds from EDDB. Refresh standard feeds and scrapes if stored files
+        are older than the refresh policies or if force refresh is specified.
+    '''
+    global commodity_details, commodity_listings_eod, commodity_listings_rt, faction_details, populated_systems, station_details
+
+    commodity_details = load_feed(Feeds.COMMODITIES, force_refresh)
+    commodity_listings_eod = load_commodity_listings()
+    faction_details = load_feed(Feeds.FACTIONS, force_refresh)
+    faction_details = faction_details.assign(name_index = faction_details['name'].str.lower()).set_index('name_index')
+    populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
+    populated_systems = populated_systems.assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
+    station_details = load_feed(Feeds.STATIONS, force_refresh)
+    commodity_listings_rt = load_rt_listings()
+
+
+def fresh_feed(filepath):
+    ''' Given a filepath, report true if the file is newer than the estimated last tick.
+    ''' 
+    ft = datetime.fromtimestamp(os.stat(filepath).st_mtime).astimezone(timezone.utc)
+    tt = datetime.now(timezone.utc).replace(hour=15, minute=0, second=0, microsecond=0)
+    if tt > datetime.now(timezone.utc):
+        tt -= timedelta(days=1)
+    return ft > tt
+
+
+def fresh_scrape(filepath):
+    ''' Given a filepath, report true if the file is no more than 1 hour old.
+    ''' 
+    refresh_after = datetime.fromtimestamp(os.stat(filepath).st_mtime) + timedelta(hours=1)
+    return refresh_after > datetime.now()
+
+
+def load_rt_listings(force_refresh=False):
+    ''' Specialized loader for real-time listings scraped from individual EDDB commodity
+        pages. If there is a saved file no older than one hour and force_refresh is false,
+        loads listings from file. Otherwise scrapes a list of commodity pages, saves
+        them to a cache file, and returns a data frame of the listings.
+    '''
+    system_data_path = os.path.join(et_temp_path, 'scraped_listings.jsonl')
+    if os.path.exists(system_data_path) and not force_refresh and fresh_scrape(system_data_path):
+        print(f'# Found "{system_data_path}".')
+    else:
+        print(f'# Scraping "{system_data_path}".')
+        listings = []
+        for commodity in commodity_pages:
+            listings.extend(scrape_commodity(commodity))
+        with open(system_data_path, 'w') as rtl_file:
+            for l in listings:
+                json.dump(l, rtl_file)
+                rtl_file.write('\n')
+    
+    scrape_data = pd.read_json(system_data_path, lines=True)
+    print(f"# Real-time listing records loaded: ", len(scrape_data))
+    return pd.DataFrame(scrape_data)
 
 
 def load_commodity_listings(force_refresh=False):
@@ -120,6 +215,32 @@ def load_commodity_listings(force_refresh=False):
     return feed_data
 
 
+def scrape_commodity(commodity):
+    ''' Given a commodity's name and EDDB URL, extract best sell price listings and return as a list of dicts.
+    '''
+    listings = []
+    with urlopen(commodity['url']) as p:
+        page = BeautifulSoup(p, 'html.parser')
+    max_sell = page.find(id='table-stations-max-sell')
+    for row in max_sell.find_all('tr'):
+        fields = row.find_all('td')
+        if len(fields) != 7:
+            continue  # discard header and malformed rows
+        time_fields = fields[6].find_all('span')
+        listings.append({
+            'commodity_name': commodity['name'],
+            'commodity_type': commodity['type'],
+            'station_name': fields[0].find('a').get_text(),
+            'system_name': fields[1].find('a').get_text(),
+            'sell_price': int(fields[2].find('span').get_text().replace(',', '')),
+            'demand': int(fields[4].find('span').get_text().replace(',', '')),
+            'landing_pad': fields[5].find('span').get_text(),
+            'freshness': time_fields[1].get_text(),
+        })
+    print("# %s: %d listings scraped." % (commodity['name'], len(listings)))
+    return listings
+
+
 def load_feed(feed, force_refresh=False):
     ''' Given an EDDB JSON data feed, download it and return it as a DataFrame.
         Looks for a previously-downloaded file and uses it if it's newer than the 
@@ -136,28 +257,6 @@ def load_feed(feed, force_refresh=False):
     feed_data = pd.read_json(system_data_path, lines=(feed != Feeds.COMMODITIES))
     print(f"# {feed} records loaded: ", len(feed_data))
     return feed_data
-
-
-def load_feeds(force_refresh=False):
-    global commodity_details, commodity_listings, faction_details, populated_systems, station_details
-
-    commodity_details = load_feed(Feeds.COMMODITIES, force_refresh)
-    commodity_listings = load_commodity_listings()
-    faction_details = load_feed(Feeds.FACTIONS, force_refresh)
-    faction_details = faction_details.assign(name_index = faction_details['name'].str.lower()).set_index('name_index')
-    populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
-    populated_systems = populated_systems.assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
-    station_details = load_feed(Feeds.STATIONS, force_refresh)
-
-
-def fresh_feed(filepath):
-    ''' Given a filepath, report true if the file is newer than the estimated last tick.
-    ''' 
-    ft = datetime.fromtimestamp(os.stat(filepath).st_mtime).astimezone(timezone.utc)
-    tt = datetime.now(timezone.utc).replace(hour=15, minute=0, second=0, microsecond=0)
-    if tt > datetime.now(timezone.utc):
-        tt -= timedelta(days=1)
-    return ft > tt
 
 
 ### UTILITY
@@ -383,42 +482,26 @@ def faction_home_system(faction):
 #
 ##
 
-def best_core_prices(origin='Sol', radius=0, by_faction='', top_count=5, by_core_mineral='', min_demand=1000, min_demand_level=Demand.MEDIUM):
-    if radius > 0:
-        nearby_system_names = query_nearby_systems(origin, radius)
-    else:
-        # radius = max(eddb.distance(origin, s.strip()) for s in systems.split(","))
-        nearby_system_names = populated_systems['name'].to_list()
-
+def best_rt_listings(origin='Sol', radius=1000, top_count=5, by_commodity=[], min_demand=500):
+    ''' Find best real-time commodity listings.
+    '''
+    nearby_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(by_commodity)]
+    nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else nearby_rt_listings['system_name'].values
     nearby_systems = pd.DataFrame({
-            'id': [find_system_by_name(system_name)['id'] for system_name in nearby_system_names],
-            'System': nearby_system_names,
-            'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
-            })
+        'system_name': nearby_system_names,
+        'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
+    })
+    nearby_rt_listings = nearby_rt_listings.merge(nearby_systems, on="system_name")
 
-    nearby_stations = station_details[['id', 'name', 'system_id', 'controlling_minor_faction_id']] \
-        .rename(columns={'name': 'Station'}) \
-        .merge(nearby_systems, how='inner', left_on='system_id', right_on='id') \
-        .merge(faction_details[['id', 'name']], how='left', left_on='controlling_minor_faction_id', right_on='id') \
-        .rename(columns={'name': 'Minor Faction'})
-    if by_faction:
-        nearby_stations = nearby_stations[nearby_stations['Minor Faction'] == by_faction]
-
-    core_commodities = commodity_details[commodity_details['name'] \
-        .isin([cm.strip() for cm in by_core_mineral.split(',')] if by_core_mineral else core_minerals)] \
-        [['id', 'name', 'sell_price_upper_average']] \
-        .rename(columns={'name': 'Commodity'})
-
-    nearby_core_listings = commodity_listings.merge(core_commodities, how='inner', left_on='commodity_id', right_on='id') \
-        .merge(nearby_stations, how='inner', left_on='station_id', right_on='id_x') \
-        .rename(columns = {'sell_price': 'Sell Price', 'demand': 'Demand', 'demand_bracket': 'Level'})
-    nearby_core_listings = nearby_core_listings[nearby_core_listings['Sell Price'] > nearby_core_listings['sell_price_upper_average']] \
-        .query(f'Level >= {min_demand_level.value} and Demand >= {min_demand}') \
-        .assign(rnk = nearby_core_listings.groupby('Commodity')['Sell Price'] \
+    nearby_rt_listings = nearby_rt_listings \
+        .query(f'demand > {min_demand}') \
+        .assign(rnk = nearby_rt_listings.groupby('commodity_name')['sell_price'] \
         .rank(method='first', ascending=False)) \
         .query(f'rnk <= {top_count}') \
-        .sort_values('Sell Price', ascending=False) \
+        .sort_values('sell_price', ascending=False) \
+        .drop_duplicates() \
         .reset_index() \
-        [['Commodity', 'Sell Price', 'Demand', 'Level', 'System', 'Station', 'Minor Faction', 'Distance']]
-    nearby_core_listings['Level'].replace({1: 'Low', 2: 'Medium', 3: "High"}, inplace=True)
-    return nearby_core_listings
+        [['commodity_name', 'sell_price', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
+        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
+
+    return nearby_rt_listings
