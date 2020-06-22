@@ -121,75 +121,6 @@ populated_systems: pd.DataFrame = None
 station_details: pd.DataFrame = None
 
 
-def scrape_commodity(commodity):
-    ''' Given a commodity's name and EDDB URL, extract best sell price listings and return as a list of dicts.
-    '''
-    listings = []
-    with urlopen(commodity['url']) as p:
-        page = BeautifulSoup(p, 'html.parser')
-    max_sell = page.find(id='table-stations-max-sell')
-    for row in max_sell.find_all('tr'):
-        fields = row.find_all('td')
-        if len(fields) != 7:
-            continue  # discard header and malformed rows
-        time_fields = fields[6].find_all('span')
-        listings.append({
-            'commodity_name': commodity['name'],
-            'commodity_type': commodity['type'],
-            'station_name': fields[0].find('a').get_text(),
-            'system_name': fields[1].find('a').get_text(),
-            'sell_price': int(fields[2].find('span').get_text().replace(',', '')),
-            'demand': int(fields[4].find('span').get_text().replace(',', '')),
-            'landing_pad': fields[5].find('span').get_text(),
-            'freshness': time_fields[1].get_text(),
-        })
-    print("%s: %d listings scraped." % (commodity['name'], len(listings)))
-    return listings
-
-
-def load_rt_listings():
-
-    listings = []
-    for commodity in realtime_commodities:
-        listings.extend(scrape_commodity(commodity))
-    return listings
-
-
-def load_commodity_listings(force_refresh=False):
-    ''' specialized feed loader for listings which is the only CSV feed to process
-        Looks for a previously-downloaded file and uses it if it's newer than the 
-        last tick or downloads regardless if force_refresh is True.
-    '''
-    cache_filename = urlparse(Feeds.PRICES.value).path[1:].replace("/", "-")
-    system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
-        print(f'# Found "{system_data_path}".')
-    else:
-        print(f'# Downloading "{system_data_path}".')
-        urlretrieve(Feeds.PRICES.value, system_data_path)
-    feed_data = pd.read_csv(system_data_path)
-    print(f"# {Feeds.PRICES} records loaded: ", len(feed_data))
-    return feed_data
-
-
-def load_feed(feed, force_refresh=False):
-    ''' Given an EDDB JSON data feed, download it and return it as a DataFrame.
-        Looks for a previously-downloaded file and uses it if it's newer than the 
-        last tick or downloads regardless if force_refresh is True.
-    '''
-    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
-    system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
-        print(f'# Found "{system_data_path}".')
-    else:
-        print(f'# Downloading "{system_data_path}".')
-        urlretrieve(feed.value, system_data_path)
-
-    feed_data = pd.read_json(system_data_path, lines=(feed != Feeds.COMMODITIES))
-    print(f"# {feed} records loaded: ", len(feed_data))
-    return feed_data
-
-
 def load_feeds(force_refresh=False):
     ''' Load all feeds from EDDB. Refresh standard feeds and scrapes if stored files
         are older than the refresh policies or if force refresh is specified.
@@ -214,6 +145,101 @@ def fresh_feed(filepath):
     if tt > datetime.now(timezone.utc):
         tt -= timedelta(days=1)
     return ft > tt
+
+
+def fresh_scrape(filepath):
+    ''' Given a filepath, report true if the file is newer than the estimated last tick.
+    ''' 
+    ft = datetime.fromtimestamp(os.stat(filepath).st_mtime).astimezone(timezone.utc)
+    tt = datetime.now(timezone.utc).replace(hour=1, minute=0, second=0, microsecond=0)
+    if tt > datetime.now(timezone.utc):
+        tt -= timedelta(days=1)
+    return ft > tt
+
+
+def load_rt_listings(force_refresh=False):
+    ''' Specialized loader for real-time listings scraped from individual EDDB commodity
+        pages. If there is a saved file no older than one hour and force_refresh is false,
+        loads listings from file. Otherwise scrapes a list of commodity pages, saves
+        them to a cache file, and returns a data frame of the listings.
+    '''
+    system_data_path = os.path.join(et_temp_path, 'scraped_listings.jsonl')
+    if os.path.exists(system_data_path) and not force_refresh and fresh_scrape(system_data_path):
+        print(f'# Found "{system_data_path}".')
+    else:
+        print(f'# Scraping "{system_data_path}".')
+        listings = []
+        for commodity in realtime_commodities:
+            listings.extend(scrape_commodity(commodity))
+        with open(system_data_path, 'w') as rtl_file:
+            for l in listings:
+                json.dump(l, rtl_file)
+                rtl_file.write('\n')
+    
+    scrape_data = pd.read_json(system_data_path, lines=True)
+    print(f"# Real-time listing records loaded: ", len(scrape_data))
+    return pd.DataFrame(scrape_data)
+
+
+def load_commodity_listings(force_refresh=False):
+    ''' specialized feed loader for listings which is the only CSV feed to process
+        Looks for a previously-downloaded file and uses it if it's newer than the 
+        last tick or downloads regardless if force_refresh is True.
+    '''
+    cache_filename = urlparse(Feeds.PRICES.value).path[1:].replace("/", "-")
+    system_data_path = os.path.join(et_temp_path, cache_filename)
+    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
+        print(f'# Found "{system_data_path}".')
+    else:
+        print(f'# Downloading "{system_data_path}".')
+        urlretrieve(Feeds.PRICES.value, system_data_path)
+    feed_data = pd.read_csv(system_data_path)
+    print(f"# {Feeds.PRICES} records loaded: ", len(feed_data))
+    return feed_data
+
+
+def scrape_commodity(commodity):
+    ''' Given a commodity's name and EDDB URL, extract best sell price listings and return as a list of dicts.
+    '''
+    listings = []
+    with urlopen(commodity['url']) as p:
+        page = BeautifulSoup(p, 'html.parser')
+    max_sell = page.find(id='table-stations-max-sell')
+    for row in max_sell.find_all('tr'):
+        fields = row.find_all('td')
+        if len(fields) != 7:
+            continue  # discard header and malformed rows
+        time_fields = fields[6].find_all('span')
+        listings.append({
+            'commodity_name': commodity['name'],
+            'commodity_type': commodity['type'],
+            'station_name': fields[0].find('a').get_text(),
+            'system_name': fields[1].find('a').get_text(),
+            'sell_price': int(fields[2].find('span').get_text().replace(',', '')),
+            'demand': int(fields[4].find('span').get_text().replace(',', '')),
+            'landing_pad': fields[5].find('span').get_text(),
+            'freshness': time_fields[1].get_text(),
+        })
+    print("# %s: %d listings scraped." % (commodity['name'], len(listings)))
+    return listings
+
+
+def load_feed(feed, force_refresh=False):
+    ''' Given an EDDB JSON data feed, download it and return it as a DataFrame.
+        Looks for a previously-downloaded file and uses it if it's newer than the 
+        last tick or downloads regardless if force_refresh is True.
+    '''
+    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
+    system_data_path = os.path.join(et_temp_path, cache_filename)
+    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
+        print(f'# Found "{system_data_path}".')
+    else:
+        print(f'# Downloading "{system_data_path}".')
+        urlretrieve(feed.value, system_data_path)
+
+    feed_data = pd.read_json(system_data_path, lines=(feed != Feeds.COMMODITIES))
+    print(f"# {feed} records loaded: ", len(feed_data))
+    return feed_data
 
 
 ### UTILITY
