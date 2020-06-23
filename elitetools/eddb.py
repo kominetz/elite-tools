@@ -152,7 +152,7 @@ def load_feeds(force_refresh=False):
     faction_details = load_feed(Feeds.FACTIONS, force_refresh)
     faction_details = faction_details.assign(name_index = faction_details['name'].str.lower()).set_index('name_index')
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
-    populated_systems = populated_systems.assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
+    populated_systems = populated_systems[populated_systems['population'] > 0].assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
     station_details = load_feed(Feeds.STATIONS, force_refresh)
     commodity_listings_rt = load_rt_listings()
 
@@ -366,7 +366,7 @@ def query_nearby_systems(origin, radius):
     if type(origin) == list:
         return set([nearby_system for s in origin for nearby_system in query_nearby_systems(s, radius)])
     else: 
-        return [s for s in populated_systems['name'].values if distance(origin, s) <= radius]
+        return [s['name'] for s in populated_systems[['name', 'x', 'y', 'z']].to_dict(orient='record') if distance(origin, s) <= radius]
 
 
 def query_systems_by_faction(faction):
