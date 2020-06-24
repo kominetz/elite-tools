@@ -29,3 +29,4 @@ def mock_feeds():
     ''' Return contrived data files for testing feeds.
     '''
     eddb.feed_cache = mock_feed_cache
+    eddb.rtl_cache = mock_rtl_cache
