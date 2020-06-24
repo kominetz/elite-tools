@@ -1,6 +1,8 @@
 import pytest
 import pandas as pd
+from elitetools import eddb
 from elitetools.eddb import find_system_by_name, query_systems_by_name, query_nearby_systems, query_systems_by_faction, load_feeds
+
 
 def setup_module():
         load_feeds()
@@ -8,14 +10,21 @@ def setup_module():
 
 class TestFindSystemByName:
     def test(self):
-        sol_system = find_system_by_name('Shinrarta Dezhra')
+        sol_system = find_system_by_name('Sol')
         assert sol_system is not None
-        assert sol_system['name'] == 'Shinrarta Dezhra'
+        assert sol_system['name'] == 'Sol'
         assert sol_system['needs_permit'] == True
+
+        sd_system = find_system_by_name('Shinrarta Dezhra')
+        assert sd_system is not None
+        assert sd_system['name'] == 'Shinrarta Dezhra'
+        assert sd_system['needs_permit'] == True
+
 
     def test_system_not_found(self):
         with pytest.raises(KeyError):
             find_system_by_name('NOT_A_REAL_SYSTEM')
+
 
     def test_case_insensitive(self):
         assert (find_system_by_name('sOL')) is not None
@@ -56,7 +65,7 @@ class TestQueryNearbySystems:
     def test(self):
         nearby_systems = query_nearby_systems('Azrael', 20)
         # Nearby systems should not change due to BGS activity, but a major update? Unknown.
-        assert len(nearby_systems) == 28
+        assert len(nearby_systems) == 3
         assert "Dvorsi" in nearby_systems
 
 

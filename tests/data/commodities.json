@@ -1,0 +1,7089 @@
+[
+    {
+        "id": 1,
+        "name": "Explosives",
+        "category_id": 1,
+        "average_price": 294,
+        "is_rare": 0,
+        "max_buy_price": 2940,
+        "max_sell_price": 2101,
+        "min_buy_price": 15,
+        "min_sell_price": 15,
+        "buy_price_lower_average": 177,
+        "sell_price_upper_average": 1268,
+        "is_non_marketable": 0,
+        "ed_id": 128049204,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Hydrogen Fuel",
+        "category_id": 1,
+        "average_price": 122,
+        "is_rare": 0,
+        "max_buy_price": 1220,
+        "max_sell_price": 1220,
+        "min_buy_price": 7,
+        "min_sell_price": 7,
+        "buy_price_lower_average": 83,
+        "sell_price_upper_average": 125,
+        "is_non_marketable": 0,
+        "ed_id": 128049202,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 3,
+        "name": "Mineral Oil",
+        "category_id": 1,
+        "average_price": 228,
+        "is_rare": 0,
+        "max_buy_price": 600,
+        "max_sell_price": 1483,
+        "min_buy_price": 74,
+        "min_sell_price": 63,
+        "buy_price_lower_average": 103,
+        "sell_price_upper_average": 1390,
+        "is_non_marketable": 0,
+        "ed_id": 128049203,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 4,
+        "name": "Pesticides",
+        "category_id": 1,
+        "average_price": 248,
+        "is_rare": 0,
+        "max_buy_price": 2480,
+        "max_sell_price": 1595,
+        "min_buy_price": 57,
+        "min_sell_price": 25,
+        "buy_price_lower_average": 122,
+        "sell_price_upper_average": 830,
+        "is_non_marketable": 0,
+        "ed_id": 128049205,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 5,
+        "name": "Clothing",
+        "category_id": 2,
+        "average_price": 324,
+        "is_rare": 0,
+        "max_buy_price": 3240,
+        "max_sell_price": 1783,
+        "min_buy_price": 140,
+        "min_sell_price": 17,
+        "buy_price_lower_average": 199,
+        "sell_price_upper_average": 929,
+        "is_non_marketable": 0,
+        "ed_id": 128049241,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 6,
+        "name": "Consumer Technology",
+        "category_id": 2,
+        "average_price": 6700,
+        "is_rare": 0,
+        "max_buy_price": 67000,
+        "max_sell_price": 18320,
+        "min_buy_price": 335,
+        "min_sell_price": 335,
+        "buy_price_lower_average": 5684,
+        "sell_price_upper_average": 7823,
+        "is_non_marketable": 0,
+        "ed_id": 128049240,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 7,
+        "name": "Domestic Appliances",
+        "category_id": 2,
+        "average_price": 530,
+        "is_rare": 0,
+        "max_buy_price": 5300,
+        "max_sell_price": 1216,
+        "min_buy_price": 310,
+        "min_sell_price": 289,
+        "buy_price_lower_average": 372,
+        "sell_price_upper_average": 1169,
+        "is_non_marketable": 0,
+        "ed_id": 128049238,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 8,
+        "name": "Beer",
+        "category_id": 3,
+        "average_price": 215,
+        "is_rare": 0,
+        "max_buy_price": 2150,
+        "max_sell_price": 5293,
+        "min_buy_price": 11,
+        "min_sell_price": 11,
+        "buy_price_lower_average": 96,
+        "sell_price_upper_average": 890,
+        "is_non_marketable": 0,
+        "ed_id": 128049214,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 9,
+        "name": "Liquor",
+        "category_id": 3,
+        "average_price": 632,
+        "is_rare": 0,
+        "max_buy_price": 6320,
+        "max_sell_price": 6320,
+        "min_buy_price": 32,
+        "min_sell_price": 32,
+        "buy_price_lower_average": 458,
+        "sell_price_upper_average": 1369,
+        "is_non_marketable": 0,
+        "ed_id": 128049216,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 10,
+        "name": "Narcotics",
+        "category_id": 3,
+        "average_price": 10016,
+        "is_rare": 0,
+        "max_buy_price": 100160,
+        "max_sell_price": 100160,
+        "min_buy_price": 501,
+        "min_sell_price": 501,
+        "buy_price_lower_average": 7711,
+        "sell_price_upper_average": 10735,
+        "is_non_marketable": 0,
+        "ed_id": 128049212,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 11,
+        "name": "Tobacco",
+        "category_id": 3,
+        "average_price": 5056,
+        "is_rare": 0,
+        "max_buy_price": 50560,
+        "max_sell_price": 50560,
+        "min_buy_price": 253,
+        "min_sell_price": 253,
+        "buy_price_lower_average": 4104,
+        "sell_price_upper_average": 5896,
+        "is_non_marketable": 0,
+        "ed_id": 128049213,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 12,
+        "name": "Wine",
+        "category_id": 3,
+        "average_price": 286,
+        "is_rare": 0,
+        "max_buy_price": 2860,
+        "max_sell_price": 7239,
+        "min_buy_price": 87,
+        "min_sell_price": 15,
+        "buy_price_lower_average": 166,
+        "sell_price_upper_average": 1020,
+        "is_non_marketable": 0,
+        "ed_id": 128049215,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 13,
+        "name": "Algae",
+        "category_id": 4,
+        "average_price": 172,
+        "is_rare": 0,
+        "max_buy_price": 344,
+        "max_sell_price": 4840,
+        "min_buy_price": 26,
+        "min_sell_price": 9,
+        "buy_price_lower_average": 40,
+        "sell_price_upper_average": 755,
+        "is_non_marketable": 0,
+        "ed_id": 128049177,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 14,
+        "name": "Animal Meat",
+        "category_id": 4,
+        "average_price": 1336,
+        "is_rare": 0,
+        "max_buy_price": 13360,
+        "max_sell_price": 4767,
+        "min_buy_price": 67,
+        "min_sell_price": 67,
+        "buy_price_lower_average": 1042,
+        "sell_price_upper_average": 2193,
+        "is_non_marketable": 0,
+        "ed_id": 128049182,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 15,
+        "name": "Coffee",
+        "category_id": 4,
+        "average_price": 1327,
+        "is_rare": 0,
+        "max_buy_price": 13270,
+        "max_sell_price": 13270,
+        "min_buy_price": 67,
+        "min_sell_price": 67,
+        "buy_price_lower_average": 1035,
+        "sell_price_upper_average": 2133,
+        "is_non_marketable": 0,
+        "ed_id": 128049189,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 16,
+        "name": "Fish",
+        "category_id": 4,
+        "average_price": 437,
+        "is_rare": 0,
+        "max_buy_price": 4370,
+        "max_sell_price": 6677,
+        "min_buy_price": 219,
+        "min_sell_price": 22,
+        "buy_price_lower_average": 296,
+        "sell_price_upper_average": 1168,
+        "is_non_marketable": 0,
+        "ed_id": 128049183,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 17,
+        "name": "Food Cartridges",
+        "category_id": 4,
+        "average_price": 154,
+        "is_rare": 0,
+        "max_buy_price": 1540,
+        "max_sell_price": 4197,
+        "min_buy_price": 30,
+        "min_sell_price": 8,
+        "buy_price_lower_average": 42,
+        "sell_price_upper_average": 740,
+        "is_non_marketable": 0,
+        "ed_id": 128049184,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 18,
+        "name": "Fruit and Vegetables",
+        "category_id": 4,
+        "average_price": 348,
+        "is_rare": 0,
+        "max_buy_price": 3480,
+        "max_sell_price": 12161,
+        "min_buy_price": 147,
+        "min_sell_price": 18,
+        "buy_price_lower_average": 212,
+        "sell_price_upper_average": 1081,
+        "is_non_marketable": 0,
+        "ed_id": 128049178,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 19,
+        "name": "Grain",
+        "category_id": 4,
+        "average_price": 244,
+        "is_rare": 0,
+        "max_buy_price": 2440,
+        "max_sell_price": 13525,
+        "min_buy_price": 69,
+        "min_sell_price": 13,
+        "buy_price_lower_average": 120,
+        "sell_price_upper_average": 902,
+        "is_non_marketable": 0,
+        "ed_id": 128049180,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 20,
+        "name": "Synthetic Meat",
+        "category_id": 4,
+        "average_price": 285,
+        "is_rare": 0,
+        "max_buy_price": 2850,
+        "max_sell_price": 4856,
+        "min_buy_price": 15,
+        "min_sell_price": 15,
+        "buy_price_lower_average": 151,
+        "sell_price_upper_average": 885,
+        "is_non_marketable": 0,
+        "ed_id": 128049185,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 21,
+        "name": "Tea",
+        "category_id": 4,
+        "average_price": 1515,
+        "is_rare": 0,
+        "max_buy_price": 15150,
+        "max_sell_price": 15150,
+        "min_buy_price": 76,
+        "min_sell_price": 76,
+        "buy_price_lower_average": 1183,
+        "sell_price_upper_average": 2343,
+        "is_non_marketable": 0,
+        "ed_id": 128049188,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 22,
+        "name": "Polymers",
+        "category_id": 5,
+        "average_price": 181,
+        "is_rare": 0,
+        "max_buy_price": 2616,
+        "max_sell_price": 9332,
+        "min_buy_price": 38,
+        "min_sell_price": 28,
+        "buy_price_lower_average": 52,
+        "sell_price_upper_average": 1418,
+        "is_non_marketable": 0,
+        "ed_id": 128049197,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 23,
+        "name": "Semiconductors",
+        "category_id": 5,
+        "average_price": 936,
+        "is_rare": 0,
+        "max_buy_price": 1873,
+        "max_sell_price": 2134,
+        "min_buy_price": 360,
+        "min_sell_price": 344,
+        "buy_price_lower_average": 649,
+        "sell_price_upper_average": 1669,
+        "is_non_marketable": 0,
+        "ed_id": 128049199,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 24,
+        "name": "Superconductors",
+        "category_id": 5,
+        "average_price": 6662,
+        "is_rare": 0,
+        "max_buy_price": 19422,
+        "max_sell_price": 14622,
+        "min_buy_price": 5526,
+        "min_sell_price": 334,
+        "buy_price_lower_average": 5646,
+        "sell_price_upper_average": 7751,
+        "is_non_marketable": 0,
+        "ed_id": 128049200,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 25,
+        "name": "Atmospheric Processors",
+        "category_id": 6,
+        "average_price": 403,
+        "is_rare": 0,
+        "max_buy_price": 1098,
+        "max_sell_price": 1851,
+        "min_buy_price": 183,
+        "min_sell_price": 170,
+        "buy_price_lower_average": 266,
+        "sell_price_upper_average": 958,
+        "is_non_marketable": 0,
+        "ed_id": 128064028,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 26,
+        "name": "Crop Harvesters",
+        "category_id": 6,
+        "average_price": 2152,
+        "is_rare": 0,
+        "max_buy_price": 4312,
+        "max_sell_price": 3804,
+        "min_buy_price": 1570,
+        "min_sell_price": 1529,
+        "buy_price_lower_average": 1740,
+        "sell_price_upper_average": 2764,
+        "is_non_marketable": 0,
+        "ed_id": 128049222,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 27,
+        "name": "Marine Equipment",
+        "category_id": 6,
+        "average_price": 4147,
+        "is_rare": 0,
+        "max_buy_price": 8330,
+        "max_sell_price": 5591,
+        "min_buy_price": 3283,
+        "min_sell_price": 287,
+        "buy_price_lower_average": 3494,
+        "sell_price_upper_average": 4663,
+        "is_non_marketable": 0,
+        "ed_id": 128049223,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 28,
+        "name": "Microbial Furnaces",
+        "category_id": 6,
+        "average_price": 242,
+        "is_rare": 0,
+        "max_buy_price": 826,
+        "max_sell_price": 2010,
+        "min_buy_price": 28,
+        "min_sell_price": 24,
+        "buy_price_lower_average": 98,
+        "sell_price_upper_average": 845,
+        "is_non_marketable": 0,
+        "ed_id": 128049220,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 29,
+        "name": "Mineral Extractors",
+        "category_id": 6,
+        "average_price": 595,
+        "is_rare": 0,
+        "max_buy_price": 1727,
+        "max_sell_price": 2647,
+        "min_buy_price": 360,
+        "min_sell_price": 342,
+        "buy_price_lower_average": 442,
+        "sell_price_upper_average": 1663,
+        "is_non_marketable": 0,
+        "ed_id": 128049221,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 30,
+        "name": "Power Generators",
+        "category_id": 6,
+        "average_price": 536,
+        "is_rare": 0,
+        "max_buy_price": 1110,
+        "max_sell_price": 4300,
+        "min_buy_price": 309,
+        "min_sell_price": 289,
+        "buy_price_lower_average": 367,
+        "sell_price_upper_average": 1400,
+        "is_non_marketable": 0,
+        "ed_id": 128049217,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 31,
+        "name": "Water Purifiers",
+        "category_id": 6,
+        "average_price": 310,
+        "is_rare": 0,
+        "max_buy_price": 3100,
+        "max_sell_price": 4666,
+        "min_buy_price": 88,
+        "min_sell_price": 79,
+        "buy_price_lower_average": 185,
+        "sell_price_upper_average": 1377,
+        "is_non_marketable": 0,
+        "ed_id": 128049218,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 32,
+        "name": "Agri-Medicines",
+        "category_id": 7,
+        "average_price": 1034,
+        "is_rare": 0,
+        "max_buy_price": 2074,
+        "max_sell_price": 1801,
+        "min_buy_price": 553,
+        "min_sell_price": 112,
+        "buy_price_lower_average": 766,
+        "sell_price_upper_average": 1680,
+        "is_non_marketable": 0,
+        "ed_id": 128049208,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 33,
+        "name": "Basic Medicines",
+        "category_id": 7,
+        "average_price": 323,
+        "is_rare": 0,
+        "max_buy_price": 3230,
+        "max_sell_price": 5258,
+        "min_buy_price": 111,
+        "min_sell_price": 17,
+        "buy_price_lower_average": 206,
+        "sell_price_upper_average": 1024,
+        "is_non_marketable": 0,
+        "ed_id": 128049210,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 34,
+        "name": "Combat Stabilisers",
+        "category_id": 7,
+        "average_price": 3482,
+        "is_rare": 0,
+        "max_buy_price": 6982,
+        "max_sell_price": 3933,
+        "min_buy_price": 175,
+        "min_sell_price": 365,
+        "buy_price_lower_average": 2060,
+        "sell_price_upper_average": 3659,
+        "is_non_marketable": 0,
+        "ed_id": 128049670,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 35,
+        "name": "Performance Enhancers",
+        "category_id": 7,
+        "average_price": 6745,
+        "is_rare": 0,
+        "max_buy_price": 67450,
+        "max_sell_price": 23405,
+        "min_buy_price": 338,
+        "min_sell_price": 338,
+        "buy_price_lower_average": 5710,
+        "sell_price_upper_average": 7799,
+        "is_non_marketable": 0,
+        "ed_id": 128049209,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 36,
+        "name": "Progenitor Cells",
+        "category_id": 7,
+        "average_price": 6711,
+        "is_rare": 0,
+        "max_buy_price": 67110,
+        "max_sell_price": 67110,
+        "min_buy_price": 5597,
+        "min_sell_price": 336,
+        "buy_price_lower_average": 5748,
+        "sell_price_upper_average": 7822,
+        "is_non_marketable": 0,
+        "ed_id": 128049669,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 37,
+        "name": "Aluminium",
+        "category_id": 8,
+        "average_price": 348,
+        "is_rare": 0,
+        "max_buy_price": 3480,
+        "max_sell_price": 2183,
+        "min_buy_price": 113,
+        "min_sell_price": 105,
+        "buy_price_lower_average": 200,
+        "sell_price_upper_average": 1000,
+        "is_non_marketable": 0,
+        "ed_id": 128049176,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 38,
+        "name": "Beryllium",
+        "category_id": 8,
+        "average_price": 8229,
+        "is_rare": 0,
+        "max_buy_price": 18529,
+        "max_sell_price": 10739,
+        "min_buy_price": 6956,
+        "min_sell_price": 412,
+        "buy_price_lower_average": 7070,
+        "sell_price_upper_average": 9216,
+        "is_non_marketable": 0,
+        "ed_id": 128049168,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 39,
+        "name": "Cobalt",
+        "category_id": 8,
+        "average_price": 695,
+        "is_rare": 0,
+        "max_buy_price": 2497,
+        "max_sell_price": 1776,
+        "min_buy_price": 201,
+        "min_sell_price": 178,
+        "buy_price_lower_average": 477,
+        "sell_price_upper_average": 1276,
+        "is_non_marketable": 0,
+        "ed_id": 128049162,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 40,
+        "name": "Copper",
+        "category_id": 8,
+        "average_price": 489,
+        "is_rare": 0,
+        "max_buy_price": 4890,
+        "max_sell_price": 1931,
+        "min_buy_price": 232,
+        "min_sell_price": 25,
+        "buy_price_lower_average": 309,
+        "sell_price_upper_average": 1122,
+        "is_non_marketable": 0,
+        "ed_id": 128049175,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 41,
+        "name": "Gallium",
+        "category_id": 8,
+        "average_price": 5107,
+        "is_rare": 0,
+        "max_buy_price": 51070,
+        "max_sell_price": 11597,
+        "min_buy_price": 3577,
+        "min_sell_price": 256,
+        "buy_price_lower_average": 4287,
+        "sell_price_upper_average": 6041,
+        "is_non_marketable": 0,
+        "ed_id": 128049170,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 42,
+        "name": "Gold",
+        "category_id": 8,
+        "average_price": 9373,
+        "is_rare": 0,
+        "max_buy_price": 93730,
+        "max_sell_price": 50013,
+        "min_buy_price": 7013,
+        "min_sell_price": 469,
+        "buy_price_lower_average": 8717,
+        "sell_price_upper_average": 11081,
+        "is_non_marketable": 0,
+        "ed_id": 128049154,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 43,
+        "name": "Indium",
+        "category_id": 8,
+        "average_price": 5774,
+        "is_rare": 0,
+        "max_buy_price": 11564,
+        "max_sell_price": 7252,
+        "min_buy_price": 4837,
+        "min_sell_price": 289,
+        "buy_price_lower_average": 4941,
+        "sell_price_upper_average": 6766,
+        "is_non_marketable": 0,
+        "ed_id": 128049169,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 44,
+        "name": "Lithium",
+        "category_id": 8,
+        "average_price": 1582,
+        "is_rare": 0,
+        "max_buy_price": 3172,
+        "max_sell_price": 3602,
+        "min_buy_price": 1005,
+        "min_sell_price": 978,
+        "buy_price_lower_average": 1200,
+        "sell_price_upper_average": 2316,
+        "is_non_marketable": 0,
+        "ed_id": 128049173,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 45,
+        "name": "Palladium",
+        "category_id": 8,
+        "average_price": 13244,
+        "is_rare": 0,
+        "max_buy_price": 39834,
+        "max_sell_price": 92744,
+        "min_buy_price": 11160,
+        "min_sell_price": 663,
+        "buy_price_lower_average": 11794,
+        "sell_price_upper_average": 14361,
+        "is_non_marketable": 0,
+        "ed_id": 128049153,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 46,
+        "name": "Platinum",
+        "category_id": 8,
+        "average_price": 19756,
+        "is_rare": 0,
+        "max_buy_price": 50006,
+        "max_sell_price": 197560,
+        "min_buy_price": 19056,
+        "min_sell_price": 988,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 56247,
+        "is_non_marketable": 0,
+        "ed_id": 128049152,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 47,
+        "name": "Silver",
+        "category_id": 8,
+        "average_price": 4759,
+        "is_rare": 0,
+        "max_buy_price": 47590,
+        "max_sell_price": 10709,
+        "min_buy_price": 3009,
+        "min_sell_price": 238,
+        "buy_price_lower_average": 4018,
+        "sell_price_upper_average": 5668,
+        "is_non_marketable": 0,
+        "ed_id": 128049155,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 48,
+        "name": "Tantalum",
+        "category_id": 8,
+        "average_price": 3929,
+        "is_rare": 0,
+        "max_buy_price": 7879,
+        "max_sell_price": 8919,
+        "min_buy_price": 2867,
+        "min_sell_price": 2948,
+        "buy_price_lower_average": 3219,
+        "sell_price_upper_average": 4826,
+        "is_non_marketable": 0,
+        "ed_id": 128049171,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 49,
+        "name": "Titanium",
+        "category_id": 8,
+        "average_price": 1016,
+        "is_rare": 0,
+        "max_buy_price": 4576,
+        "max_sell_price": 2223,
+        "min_buy_price": 513,
+        "min_sell_price": 51,
+        "buy_price_lower_average": 739,
+        "sell_price_upper_average": 1699,
+        "is_non_marketable": 0,
+        "ed_id": 128049174,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 50,
+        "name": "Uranium",
+        "category_id": 8,
+        "average_price": 2660,
+        "is_rare": 0,
+        "max_buy_price": 5330,
+        "max_sell_price": 6060,
+        "min_buy_price": 1975,
+        "min_sell_price": 1925,
+        "buy_price_lower_average": 2129,
+        "sell_price_upper_average": 3470,
+        "is_non_marketable": 0,
+        "ed_id": 128049172,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 51,
+        "name": "Bauxite",
+        "category_id": 9,
+        "average_price": 172,
+        "is_rare": 0,
+        "max_buy_price": 430,
+        "max_sell_price": 776,
+        "min_buy_price": 23,
+        "min_sell_price": 18,
+        "buy_price_lower_average": 46,
+        "sell_price_upper_average": 706,
+        "is_non_marketable": 0,
+        "ed_id": 128049165,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 52,
+        "name": "Bertrandite",
+        "category_id": 9,
+        "average_price": 2486,
+        "is_rare": 0,
+        "max_buy_price": 24860,
+        "max_sell_price": 5646,
+        "min_buy_price": 125,
+        "min_sell_price": 125,
+        "buy_price_lower_average": 1958,
+        "sell_price_upper_average": 3256,
+        "is_non_marketable": 0,
+        "ed_id": 128049156,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 53,
+        "name": "Coltan",
+        "category_id": 9,
+        "average_price": 1391,
+        "is_rare": 0,
+        "max_buy_price": 13910,
+        "max_sell_price": 3161,
+        "min_buy_price": 754,
+        "min_sell_price": 70,
+        "buy_price_lower_average": 1043,
+        "sell_price_upper_average": 2091,
+        "is_non_marketable": 0,
+        "ed_id": 128049159,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 54,
+        "name": "Gallite",
+        "category_id": 9,
+        "average_price": 1914,
+        "is_rare": 0,
+        "max_buy_price": 19140,
+        "max_sell_price": 4354,
+        "min_buy_price": 566,
+        "min_sell_price": 96,
+        "buy_price_lower_average": 1465,
+        "sell_price_upper_average": 2645,
+        "is_non_marketable": 0,
+        "ed_id": 128049158,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 55,
+        "name": "Indite",
+        "category_id": 9,
+        "average_price": 2179,
+        "is_rare": 0,
+        "max_buy_price": 21790,
+        "max_sell_price": 4959,
+        "min_buy_price": 1423,
+        "min_sell_price": 109,
+        "buy_price_lower_average": 1711,
+        "sell_price_upper_average": 2942,
+        "is_non_marketable": 0,
+        "ed_id": 128049157,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 56,
+        "name": "Lepidolite",
+        "category_id": 9,
+        "average_price": 605,
+        "is_rare": 0,
+        "max_buy_price": 6050,
+        "max_sell_price": 1786,
+        "min_buy_price": 288,
+        "min_sell_price": 275,
+        "buy_price_lower_average": 396,
+        "sell_price_upper_average": 1209,
+        "is_non_marketable": 0,
+        "ed_id": 128049161,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 57,
+        "name": "Rutile",
+        "category_id": 9,
+        "average_price": 343,
+        "is_rare": 0,
+        "max_buy_price": 689,
+        "max_sell_price": 2029,
+        "min_buy_price": 146,
+        "min_sell_price": 135,
+        "buy_price_lower_average": 189,
+        "sell_price_upper_average": 898,
+        "is_non_marketable": 0,
+        "ed_id": 128049163,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 58,
+        "name": "Uraninite",
+        "category_id": 9,
+        "average_price": 902,
+        "is_rare": 0,
+        "max_buy_price": 9020,
+        "max_sell_price": 2048,
+        "min_buy_price": 382,
+        "min_sell_price": 46,
+        "buy_price_lower_average": 632,
+        "sell_price_upper_average": 1545,
+        "is_non_marketable": 0,
+        "ed_id": 128049160,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 59,
+        "name": "Imperial Slaves",
+        "category_id": 10,
+        "average_price": 16142,
+        "is_rare": 0,
+        "max_buy_price": 161420,
+        "max_sell_price": 161420,
+        "min_buy_price": 12954,
+        "min_sell_price": 808,
+        "buy_price_lower_average": 15352,
+        "sell_price_upper_average": 18465,
+        "is_non_marketable": 0,
+        "ed_id": 128667728,
+        "category": {
+            "id": 10,
+            "name": "Slavery"
+        }
+    },
+    {
+        "id": 60,
+        "name": "Slaves",
+        "category_id": 10,
+        "average_price": 9940,
+        "is_rare": 0,
+        "max_buy_price": 40000,
+        "max_sell_price": 99400,
+        "min_buy_price": 9742,
+        "min_sell_price": 497,
+        "buy_price_lower_average": 10036,
+        "sell_price_upper_average": 15306,
+        "is_non_marketable": 0,
+        "ed_id": 128049243,
+        "category": {
+            "id": 10,
+            "name": "Slavery"
+        }
+    },
+    {
+        "id": 61,
+        "name": "Advanced Catalysers",
+        "category_id": 11,
+        "average_price": 2911,
+        "is_rare": 0,
+        "max_buy_price": 3641,
+        "max_sell_price": 5001,
+        "min_buy_price": 2051,
+        "min_sell_price": 146,
+        "buy_price_lower_average": 2304,
+        "sell_price_upper_average": 3730,
+        "is_non_marketable": 0,
+        "ed_id": 128049231,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 62,
+        "name": "Animal Monitors",
+        "category_id": 11,
+        "average_price": 324,
+        "is_rare": 0,
+        "max_buy_price": 2477,
+        "max_sell_price": 4673,
+        "min_buy_price": 113,
+        "min_sell_price": 102,
+        "buy_price_lower_average": 204,
+        "sell_price_upper_average": 2224,
+        "is_non_marketable": 0,
+        "ed_id": 128049229,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 63,
+        "name": "Aquaponic Systems",
+        "category_id": 11,
+        "average_price": 306,
+        "is_rare": 0,
+        "max_buy_price": 613,
+        "max_sell_price": 915,
+        "min_buy_price": 96,
+        "min_sell_price": 87,
+        "buy_price_lower_average": 169,
+        "sell_price_upper_average": 875,
+        "is_non_marketable": 0,
+        "ed_id": 128049230,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 64,
+        "name": "Auto-Fabricators",
+        "category_id": 11,
+        "average_price": 3719,
+        "is_rare": 0,
+        "max_buy_price": 4649,
+        "max_sell_price": 5551,
+        "min_buy_price": 2957,
+        "min_sell_price": 2885,
+        "buy_price_lower_average": 3123,
+        "sell_price_upper_average": 4878,
+        "is_non_marketable": 0,
+        "ed_id": 128049228,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 65,
+        "name": "Bioreducing Lichen",
+        "category_id": 11,
+        "average_price": 1009,
+        "is_rare": 0,
+        "max_buy_price": 1269,
+        "max_sell_price": 1767,
+        "min_buy_price": 51,
+        "min_sell_price": 479,
+        "buy_price_lower_average": 712,
+        "sell_price_upper_average": 1681,
+        "is_non_marketable": 0,
+        "ed_id": 128049672,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 66,
+        "name": "Computer Components",
+        "category_id": 11,
+        "average_price": 540,
+        "is_rare": 0,
+        "max_buy_price": 2021,
+        "max_sell_price": 1781,
+        "min_buy_price": 310,
+        "min_sell_price": 289,
+        "buy_price_lower_average": 374,
+        "sell_price_upper_average": 1119,
+        "is_non_marketable": 0,
+        "ed_id": 128049225,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 67,
+        "name": "H.E. Suits",
+        "category_id": 11,
+        "average_price": 324,
+        "is_rare": 0,
+        "max_buy_price": 950,
+        "max_sell_price": 2270,
+        "min_buy_price": 111,
+        "min_sell_price": 100,
+        "buy_price_lower_average": 168,
+        "sell_price_upper_average": 961,
+        "is_non_marketable": 0,
+        "ed_id": 128049226,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 68,
+        "name": "Land Enrichment Systems",
+        "category_id": 11,
+        "average_price": 4840,
+        "is_rare": 0,
+        "max_buy_price": 48400,
+        "max_sell_price": 8918,
+        "min_buy_price": 3668,
+        "min_sell_price": 492,
+        "buy_price_lower_average": 4009,
+        "sell_price_upper_average": 5833,
+        "is_non_marketable": 0,
+        "ed_id": 128049232,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 69,
+        "name": "Resonating Separators",
+        "category_id": 11,
+        "average_price": 5914,
+        "is_rare": 0,
+        "max_buy_price": 59140,
+        "max_sell_price": 10054,
+        "min_buy_price": 4494,
+        "min_sell_price": 596,
+        "buy_price_lower_average": 5095,
+        "sell_price_upper_average": 7184,
+        "is_non_marketable": 0,
+        "ed_id": 128049671,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 70,
+        "name": "Robotics",
+        "category_id": 11,
+        "average_price": 1830,
+        "is_rare": 0,
+        "max_buy_price": 3670,
+        "max_sell_price": 3744,
+        "min_buy_price": 1308,
+        "min_sell_price": 192,
+        "buy_price_lower_average": 1466,
+        "sell_price_upper_average": 3036,
+        "is_non_marketable": 0,
+        "ed_id": 128049227,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 72,
+        "name": "Leather",
+        "category_id": 12,
+        "average_price": 210,
+        "is_rare": 0,
+        "max_buy_price": 420,
+        "max_sell_price": 879,
+        "min_buy_price": 62,
+        "min_sell_price": 11,
+        "buy_price_lower_average": 89,
+        "sell_price_upper_average": 775,
+        "is_non_marketable": 0,
+        "ed_id": 128049190,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 73,
+        "name": "Natural Fabrics",
+        "category_id": 12,
+        "average_price": 440,
+        "is_rare": 0,
+        "max_buy_price": 4385,
+        "max_sell_price": 1956,
+        "min_buy_price": 219,
+        "min_sell_price": 22,
+        "buy_price_lower_average": 288,
+        "sell_price_upper_average": 1302,
+        "is_non_marketable": 0,
+        "ed_id": 128049191,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 74,
+        "name": "Synthetic Fabrics",
+        "category_id": 12,
+        "average_price": 214,
+        "is_rare": 0,
+        "max_buy_price": 1706,
+        "max_sell_price": 4484,
+        "min_buy_price": 56,
+        "min_sell_price": 11,
+        "buy_price_lower_average": 82,
+        "sell_price_upper_average": 1318,
+        "is_non_marketable": 0,
+        "ed_id": 128049193,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 75,
+        "name": "Biowaste",
+        "category_id": 13,
+        "average_price": 63,
+        "is_rare": 0,
+        "max_buy_price": 630,
+        "max_sell_price": 1022,
+        "min_buy_price": 15,
+        "min_sell_price": 4,
+        "buy_price_lower_average": 34,
+        "sell_price_upper_average": 296,
+        "is_non_marketable": 0,
+        "ed_id": 128049244,
+        "category": {
+            "id": 13,
+            "name": "Waste"
+        }
+    },
+    {
+        "id": 76,
+        "name": "Chemical Waste",
+        "category_id": 13,
+        "average_price": 130,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 757,
+        "min_buy_price": null,
+        "min_sell_price": 56,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 729,
+        "is_non_marketable": 0,
+        "ed_id": 128049246,
+        "category": {
+            "id": 13,
+            "name": "Waste"
+        }
+    },
+    {
+        "id": 77,
+        "name": "Scrap",
+        "category_id": 13,
+        "average_price": 78,
+        "is_rare": 0,
+        "max_buy_price": 780,
+        "max_sell_price": 799,
+        "min_buy_price": 46,
+        "min_sell_price": 39,
+        "buy_price_lower_average": 75,
+        "sell_price_upper_average": 697,
+        "is_non_marketable": 0,
+        "ed_id": 128049248,
+        "category": {
+            "id": 13,
+            "name": "Waste"
+        }
+    },
+    {
+        "id": 78,
+        "name": "Non-Lethal Weapons",
+        "category_id": 14,
+        "average_price": 1826,
+        "is_rare": 0,
+        "max_buy_price": 9022,
+        "max_sell_price": 18260,
+        "min_buy_price": 766,
+        "min_sell_price": 92,
+        "buy_price_lower_average": 1408,
+        "sell_price_upper_average": 2563,
+        "is_non_marketable": 0,
+        "ed_id": 128049236,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 79,
+        "name": "Personal Weapons",
+        "category_id": 14,
+        "average_price": 4684,
+        "is_rare": 0,
+        "max_buy_price": 9384,
+        "max_sell_price": 35554,
+        "min_buy_price": 235,
+        "min_sell_price": 2384,
+        "buy_price_lower_average": 3524,
+        "sell_price_upper_average": 5094,
+        "is_non_marketable": 0,
+        "ed_id": 128049233,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 80,
+        "name": "Reactive Armour",
+        "category_id": 14,
+        "average_price": 2090,
+        "is_rare": 0,
+        "max_buy_price": 4180,
+        "max_sell_price": 18950,
+        "min_buy_price": 385,
+        "min_sell_price": 105,
+        "buy_price_lower_average": 1658,
+        "sell_price_upper_average": 2811,
+        "is_non_marketable": 0,
+        "ed_id": 128049235,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 81,
+        "name": "Battle Weapons",
+        "category_id": 14,
+        "average_price": 7257,
+        "is_rare": 0,
+        "max_buy_price": 14527,
+        "max_sell_price": 72570,
+        "min_buy_price": 5027,
+        "min_sell_price": 503,
+        "buy_price_lower_average": 5750,
+        "sell_price_upper_average": 7705,
+        "is_non_marketable": 0,
+        "ed_id": 128049234,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 82,
+        "name": "Toxic Waste",
+        "category_id": 13,
+        "average_price": 887,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 282,
+        "min_buy_price": null,
+        "min_sell_price": 282,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128049245,
+        "category": {
+            "id": 13,
+            "name": "Waste"
+        }
+    },
+    {
+        "id": 83,
+        "name": "Painite",
+        "category_id": 9,
+        "average_price": 40504,
+        "is_rare": 0,
+        "max_buy_price": 405040,
+        "max_sell_price": 792088,
+        "min_buy_price": 2026,
+        "min_sell_price": 2026,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 214989,
+        "is_non_marketable": 0,
+        "ed_id": 128668550,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 84,
+        "name": "Limpets",
+        "category_id": 15,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 1,
+        "ed_id": 128066403,
+        "category": {
+            "id": 15,
+            "name": "Unknown"
+        }
+    },
+    {
+        "id": 85,
+        "name": "Eranin Pearl Whisky",
+        "category_id": 3,
+        "average_price": 9040,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128666746,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 86,
+        "name": "Kamorin Historic Weapons",
+        "category_id": 14,
+        "average_price": 9766,
+        "is_rare": 1,
+        "max_buy_price": 3398,
+        "max_sell_price": 3398,
+        "min_buy_price": 3398,
+        "min_sell_price": 3398,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667071,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 87,
+        "name": "Lucan Onionhead",
+        "category_id": 3,
+        "average_price": 8472,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667760,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 88,
+        "name": "Motrona Experience Jelly",
+        "category_id": 3,
+        "average_price": 13129,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667676,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 89,
+        "name": "Onionhead",
+        "category_id": 3,
+        "average_price": 8437,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667029,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 90,
+        "name": "Rusani Old Smokey",
+        "category_id": 3,
+        "average_price": 11994,
+        "is_rare": 1,
+        "max_buy_price": 5810,
+        "max_sell_price": 5810,
+        "min_buy_price": 5810,
+        "min_sell_price": 5810,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667082,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 91,
+        "name": "Tarach Spice",
+        "category_id": 3,
+        "average_price": 8642,
+        "is_rare": 1,
+        "max_buy_price": 1148,
+        "max_sell_price": 1148,
+        "min_buy_price": 1148,
+        "min_sell_price": 1148,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667030,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 92,
+        "name": "Terra Mater Blood Bores",
+        "category_id": 7,
+        "average_price": 13414,
+        "is_rare": 1,
+        "max_buy_price": 8277,
+        "max_sell_price": 8277,
+        "min_buy_price": 8277,
+        "min_sell_price": 8277,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667069,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 93,
+        "name": "Wolf Fesh",
+        "category_id": 3,
+        "average_price": 8399,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667031,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 94,
+        "name": "Wuthielo Ku Froth",
+        "category_id": 3,
+        "average_price": 8194,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667035,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 95,
+        "name": "AI Relics",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 1000670,
+        "min_buy_price": null,
+        "min_sell_price": 6901,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 845580,
+        "is_non_marketable": 0,
+        "ed_id": 128668548,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 96,
+        "name": "Antiquities",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 1150170,
+        "min_buy_price": null,
+        "min_sell_price": 57967,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 1150170,
+        "is_non_marketable": 0,
+        "ed_id": 128668551,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 97,
+        "name": "Osmium",
+        "category_id": 8,
+        "average_price": 9136,
+        "is_rare": 0,
+        "max_buy_price": 91360,
+        "max_sell_price": 91360,
+        "min_buy_price": 9136,
+        "min_sell_price": 457,
+        "buy_price_lower_average": 9136,
+        "sell_price_upper_average": 26834,
+        "is_non_marketable": 0,
+        "ed_id": 128671118,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 98,
+        "name": "SAP 8 Core Container",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 591960,
+        "min_buy_price": null,
+        "min_sell_price": 2960,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 591960,
+        "is_non_marketable": 0,
+        "ed_id": 128671443,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 99,
+        "name": "Trinkets of Hidden Fortune",
+        "category_id": 2,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 14130,
+        "min_buy_price": null,
+        "min_sell_price": 71,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 14130,
+        "is_non_marketable": 0,
+        "ed_id": 128671444,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 100,
+        "name": "Trade Data",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 1398,
+        "max_sell_price": 2928,
+        "min_buy_price": 1398,
+        "min_sell_price": 2608,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 2928,
+        "is_non_marketable": 0,
+        "ed_id": 128666754,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 101,
+        "name": "Thermal Cooling Units",
+        "category_id": 6,
+        "average_price": 281,
+        "is_rare": 0,
+        "max_buy_price": 2810,
+        "max_sell_price": 2101,
+        "min_buy_price": 94,
+        "min_sell_price": 30,
+        "buy_price_lower_average": 186,
+        "sell_price_upper_average": 1131,
+        "is_non_marketable": 0,
+        "ed_id": 128672308,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 102,
+        "name": "Skimmer Components",
+        "category_id": 6,
+        "average_price": 906,
+        "is_rare": 0,
+        "max_buy_price": 9060,
+        "max_sell_price": 2274,
+        "min_buy_price": 414,
+        "min_sell_price": 91,
+        "buy_price_lower_average": 708,
+        "sell_price_upper_average": 1551,
+        "is_non_marketable": 0,
+        "ed_id": 128672313,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 103,
+        "name": "Geological Equipment",
+        "category_id": 6,
+        "average_price": 1700,
+        "is_rare": 0,
+        "max_buy_price": 6800,
+        "max_sell_price": 2895,
+        "min_buy_price": 1181,
+        "min_sell_price": 1121,
+        "buy_price_lower_average": 1396,
+        "sell_price_upper_average": 2576,
+        "is_non_marketable": 0,
+        "ed_id": 128672307,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 104,
+        "name": "Structural Regulators",
+        "category_id": 11,
+        "average_price": 1796,
+        "is_rare": 0,
+        "max_buy_price": 2212,
+        "max_sell_price": 3112,
+        "min_buy_price": 1253,
+        "min_sell_price": 180,
+        "buy_price_lower_average": 1423,
+        "sell_price_upper_average": 2595,
+        "is_non_marketable": 0,
+        "ed_id": 128672311,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 105,
+        "name": "Pyrophyllite",
+        "category_id": 9,
+        "average_price": 1555,
+        "is_rare": 0,
+        "max_buy_price": 1717,
+        "max_sell_price": 3535,
+        "min_buy_price": 1061,
+        "min_sell_price": 1033,
+        "buy_price_lower_average": 1130,
+        "sell_price_upper_average": 2237,
+        "is_non_marketable": 0,
+        "ed_id": 128672297,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 106,
+        "name": "Moissanite",
+        "category_id": 9,
+        "average_price": 8258,
+        "is_rare": 0,
+        "max_buy_price": 8258,
+        "max_sell_price": 82580,
+        "min_buy_price": 5798,
+        "min_sell_price": 413,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 11125,
+        "is_non_marketable": 0,
+        "ed_id": 128672296,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 107,
+        "name": "Goslarite",
+        "category_id": 9,
+        "average_price": 908,
+        "is_rare": 0,
+        "max_buy_price": 1090,
+        "max_sell_price": 2070,
+        "min_buy_price": 414,
+        "min_sell_price": 396,
+        "buy_price_lower_average": 603,
+        "sell_price_upper_average": 1534,
+        "is_non_marketable": 0,
+        "ed_id": 128672295,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 108,
+        "name": "Cryolite",
+        "category_id": 9,
+        "average_price": 2252,
+        "is_rare": 0,
+        "max_buy_price": 2382,
+        "max_sell_price": 5122,
+        "min_buy_price": 1679,
+        "min_sell_price": 113,
+        "buy_price_lower_average": 1717,
+        "sell_price_upper_average": 2995,
+        "is_non_marketable": 0,
+        "ed_id": 128672294,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 109,
+        "name": "Thorium",
+        "category_id": 8,
+        "average_price": 11499,
+        "is_rare": 0,
+        "max_buy_price": 23039,
+        "max_sell_price": 26185,
+        "min_buy_price": 9874,
+        "min_sell_price": 4649,
+        "buy_price_lower_average": 9984,
+        "sell_price_upper_average": 12666,
+        "is_non_marketable": 0,
+        "ed_id": 128672301,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 110,
+        "name": "Thallium",
+        "category_id": 8,
+        "average_price": 3613,
+        "is_rare": 0,
+        "max_buy_price": 7233,
+        "max_sell_price": 8203,
+        "min_buy_price": 2903,
+        "min_sell_price": 2832,
+        "buy_price_lower_average": 3001,
+        "sell_price_upper_average": 4548,
+        "is_non_marketable": 0,
+        "ed_id": 128672299,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 111,
+        "name": "Lanthanum",
+        "category_id": 8,
+        "average_price": 8758,
+        "is_rare": 0,
+        "max_buy_price": 17518,
+        "max_sell_price": 19968,
+        "min_buy_price": 7469,
+        "min_sell_price": 458,
+        "buy_price_lower_average": 7540,
+        "sell_price_upper_average": 9799,
+        "is_non_marketable": 0,
+        "ed_id": 128672298,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 112,
+        "name": "Bismuth",
+        "category_id": 8,
+        "average_price": 2280,
+        "is_rare": 0,
+        "max_buy_price": 2850,
+        "max_sell_price": 5180,
+        "min_buy_price": 1697,
+        "min_sell_price": 1654,
+        "buy_price_lower_average": 1835,
+        "sell_price_upper_average": 3102,
+        "is_non_marketable": 0,
+        "ed_id": 128672300,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 113,
+        "name": "Bootleg Liquor",
+        "category_id": 3,
+        "average_price": 852,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 8520,
+        "min_buy_price": null,
+        "min_sell_price": 43,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 858,
+        "is_non_marketable": 0,
+        "ed_id": 128672306,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 114,
+        "name": "Meta-Alloys",
+        "category_id": 5,
+        "average_price": 88152,
+        "is_rare": 0,
+        "max_buy_price": 881520,
+        "max_sell_price": 881520,
+        "min_buy_price": 88152,
+        "min_sell_price": 4408,
+        "buy_price_lower_average": 88152,
+        "sell_price_upper_average": 244247,
+        "is_non_marketable": 0,
+        "ed_id": 128672701,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 115,
+        "name": "Ceramic Composites",
+        "category_id": 5,
+        "average_price": 227,
+        "is_rare": 0,
+        "max_buy_price": 2270,
+        "max_sell_price": 27615,
+        "min_buy_price": 77,
+        "min_sell_price": 66,
+        "buy_price_lower_average": 90,
+        "sell_price_upper_average": 2170,
+        "is_non_marketable": 0,
+        "ed_id": 128672302,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 116,
+        "name": "Evacuation Shelter",
+        "category_id": 2,
+        "average_price": 346,
+        "is_rare": 0,
+        "max_buy_price": 3460,
+        "max_sell_price": 4088,
+        "min_buy_price": 147,
+        "min_sell_price": 18,
+        "buy_price_lower_average": 208,
+        "sell_price_upper_average": 1003,
+        "is_non_marketable": 0,
+        "ed_id": 128672314,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 117,
+        "name": "Synthetic Reagents",
+        "category_id": 1,
+        "average_price": 6669,
+        "is_rare": 0,
+        "max_buy_price": 13339,
+        "max_sell_price": 15139,
+        "min_buy_price": 5039,
+        "min_sell_price": 5521,
+        "buy_price_lower_average": 5660,
+        "sell_price_upper_average": 7718,
+        "is_non_marketable": 0,
+        "ed_id": 128672303,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 118,
+        "name": "Surface Stabilisers",
+        "category_id": 1,
+        "average_price": 498,
+        "is_rare": 0,
+        "max_buy_price": 1657,
+        "max_sell_price": 2625,
+        "min_buy_price": 302,
+        "min_sell_price": 25,
+        "buy_price_lower_average": 359,
+        "sell_price_upper_average": 1266,
+        "is_non_marketable": 0,
+        "ed_id": 128672305,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 119,
+        "name": "Building Fabricators",
+        "category_id": 6,
+        "average_price": 1022,
+        "is_rare": 0,
+        "max_buy_price": 2052,
+        "max_sell_price": 3736,
+        "min_buy_price": 528,
+        "min_sell_price": 501,
+        "buy_price_lower_average": 811,
+        "sell_price_upper_average": 1846,
+        "is_non_marketable": 0,
+        "ed_id": 128672309,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 121,
+        "name": "Landmines",
+        "category_id": 14,
+        "average_price": 4594,
+        "is_rare": 0,
+        "max_buy_price": 20000,
+        "max_sell_price": 45940,
+        "min_buy_price": 3460,
+        "min_sell_price": 230,
+        "buy_price_lower_average": 3485,
+        "sell_price_upper_average": 5242,
+        "is_non_marketable": 0,
+        "ed_id": 128672312,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 122,
+        "name": "Nerve Agents",
+        "category_id": 1,
+        "average_price": 13484,
+        "is_rare": 0,
+        "max_buy_price": 27084,
+        "max_sell_price": 16654,
+        "min_buy_price": 10184,
+        "min_sell_price": 675,
+        "buy_price_lower_average": 11629,
+        "sell_price_upper_average": 14329,
+        "is_non_marketable": 0,
+        "ed_id": 128672304,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 123,
+        "name": "Occupied Escape Pod",
+        "category_id": 16,
+        "average_price": 23218,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 232180,
+        "min_buy_price": null,
+        "min_sell_price": 1161,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 31008,
+        "is_non_marketable": 0,
+        "ed_id": 128672125,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 124,
+        "name": "Muon Imager",
+        "category_id": 11,
+        "average_price": 6345,
+        "is_rare": 0,
+        "max_buy_price": 6352,
+        "max_sell_price": 14405,
+        "min_buy_price": 5308,
+        "min_sell_price": 638,
+        "buy_price_lower_average": 5463,
+        "sell_price_upper_average": 7320,
+        "is_non_marketable": 0,
+        "ed_id": 128672310,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 125,
+        "name": "Lavian Brandy",
+        "category_id": 3,
+        "average_price": 10365,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128666747,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 126,
+        "name": "Black Box",
+        "category_id": 16,
+        "average_price": 7007,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 70070,
+        "min_buy_price": null,
+        "min_sell_price": 701,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 20795,
+        "is_non_marketable": 0,
+        "ed_id": 128666752,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 127,
+        "name": "Military Plans",
+        "category_id": 16,
+        "average_price": 9254,
+        "is_rare": 0,
+        "max_buy_price": 92540,
+        "max_sell_price": 11414,
+        "min_buy_price": 92540,
+        "min_sell_price": 9254,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 11414,
+        "is_non_marketable": 0,
+        "ed_id": 128666755,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 128,
+        "name": "Ancient Artefact",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 80640,
+        "min_buy_price": null,
+        "min_sell_price": 3844,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 80640,
+        "is_non_marketable": 0,
+        "ed_id": 128666756,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 129,
+        "name": "Rare Artwork",
+        "category_id": 16,
+        "average_price": 7774,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 77740,
+        "min_buy_price": null,
+        "min_sell_price": 794,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 30913,
+        "is_non_marketable": 0,
+        "ed_id": 128666757,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 130,
+        "name": "Experimental Chemicals",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 8731,
+        "max_sell_price": 24141,
+        "min_buy_price": 8731,
+        "min_sell_price": 3481,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128666758,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 131,
+        "name": "Rebel Transmissions",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 4001,
+        "min_buy_price": null,
+        "min_sell_price": 1341,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 4001,
+        "is_non_marketable": 0,
+        "ed_id": 128666759,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 132,
+        "name": "Prototype Tech",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 20016,
+        "max_sell_price": 10516,
+        "min_buy_price": 10516,
+        "min_sell_price": 10116,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 10516,
+        "is_non_marketable": 0,
+        "ed_id": 128666760,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 133,
+        "name": "Technical Blueprints",
+        "category_id": 16,
+        "average_price": 6238,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 62380,
+        "min_buy_price": null,
+        "min_sell_price": 6078,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 62380,
+        "is_non_marketable": 0,
+        "ed_id": 128666761,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 134,
+        "name": "HIP 10175 Bush Meat",
+        "category_id": 4,
+        "average_price": 9382,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667019,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 135,
+        "name": "Albino Quechua Mammoth Meat",
+        "category_id": 4,
+        "average_price": 9687,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667020,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 136,
+        "name": "Utgaroar Millennial Eggs",
+        "category_id": 4,
+        "average_price": 9163,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667021,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 137,
+        "name": "Witchhaul Kobe Beef",
+        "category_id": 4,
+        "average_price": 11085,
+        "is_rare": 1,
+        "max_buy_price": 4899,
+        "max_sell_price": 4899,
+        "min_buy_price": 4899,
+        "min_sell_price": 4899,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667022,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 138,
+        "name": "Karsuki Locusts",
+        "category_id": 4,
+        "average_price": 8543,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667023,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 139,
+        "name": "Giant Irukama Snails",
+        "category_id": 4,
+        "average_price": 9174,
+        "is_rare": 1,
+        "max_buy_price": 181,
+        "max_sell_price": 181,
+        "min_buy_price": 181,
+        "min_sell_price": 181,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667024,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 140,
+        "name": "Baltah'sine Vacuum Krill",
+        "category_id": 4,
+        "average_price": 8479,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667025,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 141,
+        "name": "Ceti Rabbits",
+        "category_id": 4,
+        "average_price": 9079,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667026,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 142,
+        "name": "Kachirigin Filter Leeches",
+        "category_id": 7,
+        "average_price": 8227,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667027,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 143,
+        "name": "Lyrae Weed",
+        "category_id": 3,
+        "average_price": 8937,
+        "is_rare": 1,
+        "max_buy_price": 1653,
+        "max_sell_price": 1653,
+        "min_buy_price": 1653,
+        "min_sell_price": 1653,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667028,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 144,
+        "name": "Borasetani Pathogenetics",
+        "category_id": 14,
+        "average_price": 13679,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667032,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 145,
+        "name": "HIP 118311 Swarm",
+        "category_id": 14,
+        "average_price": 13448,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667033,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 146,
+        "name": "Kongga Ale",
+        "category_id": 3,
+        "average_price": 8310,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667034,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 147,
+        "name": "Alacarakmo Skin Art",
+        "category_id": 2,
+        "average_price": 8899,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667036,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 148,
+        "name": "Eleu Thermals",
+        "category_id": 2,
+        "average_price": 8507,
+        "is_rare": 1,
+        "max_buy_price": 1331,
+        "max_sell_price": 1331,
+        "min_buy_price": 1331,
+        "min_sell_price": 1331,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667037,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 149,
+        "name": "Eshu Umbrellas",
+        "category_id": 2,
+        "average_price": 9343,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667038,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 150,
+        "name": "Karetii Couture",
+        "category_id": 2,
+        "average_price": 11582,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667039,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 151,
+        "name": "Njangari Saddles",
+        "category_id": 2,
+        "average_price": 8356,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667040,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 152,
+        "name": "Any Na Coffee",
+        "category_id": 4,
+        "average_price": 9160,
+        "is_rare": 1,
+        "max_buy_price": 2163,
+        "max_sell_price": 2163,
+        "min_buy_price": 2163,
+        "min_sell_price": 2163,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667041,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 153,
+        "name": "CD-75 Kitten Brand Coffee",
+        "category_id": 4,
+        "average_price": 9571,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667042,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 154,
+        "name": "Goman Yaupon Coffee",
+        "category_id": 4,
+        "average_price": 8921,
+        "is_rare": 1,
+        "max_buy_price": 1451,
+        "max_sell_price": 1451,
+        "min_buy_price": 1451,
+        "min_sell_price": 1451,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667043,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 155,
+        "name": "Volkhab Bee Drones",
+        "category_id": 6,
+        "average_price": 10198,
+        "is_rare": 1,
+        "max_buy_price": 4229,
+        "max_sell_price": 4229,
+        "min_buy_price": 4229,
+        "min_sell_price": 4229,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667044,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 156,
+        "name": "Kinago Violins",
+        "category_id": 2,
+        "average_price": 13030,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667045,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 157,
+        "name": "Nguna Modern Antiques",
+        "category_id": 2,
+        "average_price": 8545,
+        "is_rare": 1,
+        "max_buy_price": 1379,
+        "max_sell_price": 1379,
+        "min_buy_price": 1379,
+        "min_sell_price": 1379,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667046,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 158,
+        "name": "Rajukru Multi-Stoves",
+        "category_id": 2,
+        "average_price": 8378,
+        "is_rare": 1,
+        "max_buy_price": 1624,
+        "max_sell_price": 1624,
+        "min_buy_price": 1624,
+        "min_sell_price": 1624,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667047,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 159,
+        "name": "Tiolce Waste2Paste Units",
+        "category_id": 2,
+        "average_price": 8710,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667048,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 160,
+        "name": "Chi Eridani Marine Paste",
+        "category_id": 4,
+        "average_price": 8450,
+        "is_rare": 1,
+        "max_buy_price": 952,
+        "max_sell_price": 952,
+        "min_buy_price": 952,
+        "min_sell_price": 952,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667049,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 161,
+        "name": "Esuseku Caviar",
+        "category_id": 4,
+        "average_price": 9625,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667050,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 162,
+        "name": "Live Hecate Sea Worms",
+        "category_id": 4,
+        "average_price": 8737,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667051,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 163,
+        "name": "Helvetitj Pearls",
+        "category_id": 8,
+        "average_price": 10450,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667052,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 164,
+        "name": "HIP Proto-Squid",
+        "category_id": 4,
+        "average_price": 8947,
+        "is_rare": 1,
+        "max_buy_price": 1845,
+        "max_sell_price": 1845,
+        "min_buy_price": 1845,
+        "min_sell_price": 1845,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667053,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 165,
+        "name": "Coquim Spongiform Victuals",
+        "category_id": 4,
+        "average_price": 8077,
+        "is_rare": 1,
+        "max_buy_price": 2283,
+        "max_sell_price": 2283,
+        "min_buy_price": 2283,
+        "min_sell_price": 2283,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667054,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 166,
+        "name": "Eden Apples of Aerial",
+        "category_id": 4,
+        "average_price": 8331,
+        "is_rare": 1,
+        "max_buy_price": 1541,
+        "max_sell_price": 1541,
+        "min_buy_price": 1541,
+        "min_sell_price": 1541,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667055,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 167,
+        "name": "Neritus Berries",
+        "category_id": 4,
+        "average_price": 8497,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667056,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 168,
+        "name": "Ochoeng Chillies",
+        "category_id": 4,
+        "average_price": 8601,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667057,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 169,
+        "name": "Deuringas Truffles",
+        "category_id": 4,
+        "average_price": 9232,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667058,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 170,
+        "name": "HR 7221 Wheat",
+        "category_id": 4,
+        "average_price": 8190,
+        "is_rare": 1,
+        "max_buy_price": 608,
+        "max_sell_price": 608,
+        "min_buy_price": 608,
+        "min_sell_price": 608,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667059,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 171,
+        "name": "Jaroua Rice",
+        "category_id": 4,
+        "average_price": 8169,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667060,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 172,
+        "name": "Belalans Ray Leather",
+        "category_id": 12,
+        "average_price": 8519,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667061,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 173,
+        "name": "Damna Carapaces",
+        "category_id": 12,
+        "average_price": 8120,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667062,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 174,
+        "name": "Rapa Bao Snake Skins",
+        "category_id": 12,
+        "average_price": 8285,
+        "is_rare": 1,
+        "max_buy_price": 550,
+        "max_sell_price": 550,
+        "min_buy_price": 550,
+        "min_sell_price": 550,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667063,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 175,
+        "name": "Vanayequi Ceratomorpha Fur",
+        "category_id": 12,
+        "average_price": 8331,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667064,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 176,
+        "name": "Bast Snake Gin",
+        "category_id": 3,
+        "average_price": 8659,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667065,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 177,
+        "name": "Thrutis Cream",
+        "category_id": 3,
+        "average_price": 8550,
+        "is_rare": 1,
+        "max_buy_price": 925,
+        "max_sell_price": 925,
+        "min_buy_price": 925,
+        "min_sell_price": 925,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667066,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 178,
+        "name": "Wulpa Hyperbore Systems",
+        "category_id": 6,
+        "average_price": 8726,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667067,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 179,
+        "name": "Aganippe Rush",
+        "category_id": 7,
+        "average_price": 14220,
+        "is_rare": 1,
+        "max_buy_price": 9356,
+        "max_sell_price": 4678,
+        "min_buy_price": 9356,
+        "min_sell_price": 4678,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667068,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 180,
+        "name": "Holva Duelling Blades",
+        "category_id": 14,
+        "average_price": 12493,
+        "is_rare": 1,
+        "max_buy_price": 7082,
+        "max_sell_price": 7082,
+        "min_buy_price": 7082,
+        "min_sell_price": 7082,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667070,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 181,
+        "name": "Gilya Signature Weapons",
+        "category_id": 14,
+        "average_price": 13038,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667072,
+        "category": {
+            "id": 14,
+            "name": "Weapons"
+        }
+    },
+    {
+        "id": 182,
+        "name": "Delta Phoenicis Palms",
+        "category_id": 1,
+        "average_price": 8188,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667073,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 183,
+        "name": "Toxandji Virocide",
+        "category_id": 1,
+        "average_price": 8275,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667074,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 184,
+        "name": "Xihe Biomorphic Companions",
+        "category_id": 11,
+        "average_price": 11058,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667075,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 185,
+        "name": "Sanuma Decorative Meat",
+        "category_id": 4,
+        "average_price": 8504,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667076,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 186,
+        "name": "Ethgreze Tea Buds",
+        "category_id": 4,
+        "average_price": 10197,
+        "is_rare": 1,
+        "max_buy_price": 3418,
+        "max_sell_price": 3418,
+        "min_buy_price": 3418,
+        "min_sell_price": 3418,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667077,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 187,
+        "name": "Ceremonial Heike Tea",
+        "category_id": 4,
+        "average_price": 9251,
+        "is_rare": 1,
+        "max_buy_price": 2078,
+        "max_sell_price": 2078,
+        "min_buy_price": 2078,
+        "min_sell_price": 2078,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667078,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 188,
+        "name": "Tanmark Tranquil Tea",
+        "category_id": 4,
+        "average_price": 9177,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667079,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 189,
+        "name": "Az Cancri Formula 42",
+        "category_id": 11,
+        "average_price": 12440,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667080,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 190,
+        "name": "Kamitra Cigars",
+        "category_id": 3,
+        "average_price": 12282,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667081,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 191,
+        "name": "Yaso Kondi Leaf",
+        "category_id": 3,
+        "average_price": 12171,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667083,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 192,
+        "name": "Chateau De Aegaeon",
+        "category_id": 3,
+        "average_price": 8791,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667084,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 193,
+        "name": "The Waters of Shintara",
+        "category_id": 7,
+        "average_price": 13711,
+        "is_rare": 1,
+        "max_buy_price": 7421,
+        "max_sell_price": 7421,
+        "min_buy_price": 7421,
+        "min_sell_price": 7421,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667085,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 194,
+        "name": "Ophiuch Exino Artefacts",
+        "category_id": 2,
+        "average_price": 10969,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667668,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 195,
+        "name": "Aepyornis Egg",
+        "category_id": 4,
+        "average_price": 9769,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667670,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 196,
+        "name": "Saxon Wine",
+        "category_id": 3,
+        "average_price": 8983,
+        "is_rare": 1,
+        "max_buy_price": 2117,
+        "max_sell_price": 2117,
+        "min_buy_price": 2117,
+        "min_sell_price": 2117,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667671,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 197,
+        "name": "Centauri Mega Gin",
+        "category_id": 3,
+        "average_price": 10217,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667672,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 198,
+        "name": "Anduliga Fire Works",
+        "category_id": 2,
+        "average_price": 8519,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667673,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 199,
+        "name": "Banki Amphibious Leather",
+        "category_id": 12,
+        "average_price": 8338,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667674,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 200,
+        "name": "Cherbones Blood Crystals",
+        "category_id": 8,
+        "average_price": 16714,
+        "is_rare": 1,
+        "max_buy_price": 12567,
+        "max_sell_price": 12567,
+        "min_buy_price": 12567,
+        "min_sell_price": 12567,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667675,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 201,
+        "name": "Geawen Dance Dust",
+        "category_id": 3,
+        "average_price": 8618,
+        "is_rare": 1,
+        "max_buy_price": 1022,
+        "max_sell_price": 1022,
+        "min_buy_price": 1022,
+        "min_sell_price": 1022,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667677,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 202,
+        "name": "Gerasian Gueuze Beer",
+        "category_id": 3,
+        "average_price": 8215,
+        "is_rare": 1,
+        "max_buy_price": 450,
+        "max_sell_price": 450,
+        "min_buy_price": 450,
+        "min_sell_price": 450,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667678,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 203,
+        "name": "Haiden Black Brew",
+        "category_id": 4,
+        "average_price": 8837,
+        "is_rare": 1,
+        "max_buy_price": 1483,
+        "max_sell_price": 1483,
+        "min_buy_price": 1483,
+        "min_sell_price": 1483,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667679,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 204,
+        "name": "Havasupai Dream Catcher",
+        "category_id": 2,
+        "average_price": 14639,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667680,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 205,
+        "name": "Burnham Bile Distillate",
+        "category_id": 3,
+        "average_price": 8466,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667681,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 206,
+        "name": "HIP Organophosphates",
+        "category_id": 1,
+        "average_price": 8169,
+        "is_rare": 1,
+        "max_buy_price": 717,
+        "max_sell_price": 717,
+        "min_buy_price": 717,
+        "min_sell_price": 717,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667682,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 207,
+        "name": "Jaradharre Puzzle Box",
+        "category_id": 2,
+        "average_price": 16816,
+        "is_rare": 1,
+        "max_buy_price": 12712,
+        "max_sell_price": 12712,
+        "min_buy_price": 12712,
+        "min_sell_price": 12712,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667683,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 208,
+        "name": "Koro Kung Pellets",
+        "category_id": 1,
+        "average_price": 8067,
+        "is_rare": 1,
+        "max_buy_price": 381,
+        "max_sell_price": 381,
+        "min_buy_price": 381,
+        "min_sell_price": 381,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667684,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 209,
+        "name": "Void Extract Coffee",
+        "category_id": 4,
+        "average_price": 9554,
+        "is_rare": 1,
+        "max_buy_price": 2675,
+        "max_sell_price": 2675,
+        "min_buy_price": 2675,
+        "min_sell_price": 2675,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667685,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 210,
+        "name": "Honesty Pills",
+        "category_id": 7,
+        "average_price": 8860,
+        "is_rare": 1,
+        "max_buy_price": 1510,
+        "max_sell_price": 1510,
+        "min_buy_price": 1510,
+        "min_sell_price": 1510,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667686,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 211,
+        "name": "Non Euclidian Exotanks",
+        "category_id": 6,
+        "average_price": 8526,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667687,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 212,
+        "name": "LTT Hyper Sweet",
+        "category_id": 4,
+        "average_price": 8054,
+        "is_rare": 1,
+        "max_buy_price": 1539,
+        "max_sell_price": 1539,
+        "min_buy_price": 1539,
+        "min_sell_price": 1539,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667688,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 213,
+        "name": "Mechucos High Tea",
+        "category_id": 4,
+        "average_price": 8846,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667689,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 214,
+        "name": "Medb Starlube",
+        "category_id": 1,
+        "average_price": 8191,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667690,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 215,
+        "name": "Mokojing Beast Feast",
+        "category_id": 4,
+        "average_price": 9788,
+        "is_rare": 1,
+        "max_buy_price": 2681,
+        "max_sell_price": 2681,
+        "min_buy_price": 2681,
+        "min_sell_price": 2681,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667691,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 216,
+        "name": "Mukusubii Chitin-os",
+        "category_id": 4,
+        "average_price": 8359,
+        "is_rare": 1,
+        "max_buy_price": 66,
+        "max_sell_price": 66,
+        "min_buy_price": 66,
+        "min_sell_price": 66,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667692,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 217,
+        "name": "Mulachi Giant Fungus",
+        "category_id": 4,
+        "average_price": 7957,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667693,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 218,
+        "name": "Ngadandari Fire Opals",
+        "category_id": 8,
+        "average_price": 19112,
+        "is_rare": 1,
+        "max_buy_price": 15905,
+        "max_sell_price": 15905,
+        "min_buy_price": 15905,
+        "min_sell_price": 15905,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667694,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 219,
+        "name": "Tiegfries Synth Silk",
+        "category_id": 12,
+        "average_price": 8478,
+        "is_rare": 1,
+        "max_buy_price": 1161,
+        "max_sell_price": 1161,
+        "min_buy_price": 1161,
+        "min_sell_price": 1161,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667695,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 220,
+        "name": "Uzumoku Low-G Wings",
+        "category_id": 2,
+        "average_price": 13845,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667696,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 221,
+        "name": "V Herculis Body Rub",
+        "category_id": 7,
+        "average_price": 8010,
+        "is_rare": 1,
+        "max_buy_price": 317,
+        "max_sell_price": 317,
+        "min_buy_price": 317,
+        "min_sell_price": 317,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667697,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 222,
+        "name": "Wheemete Wheat Cakes",
+        "category_id": 4,
+        "average_price": 8081,
+        "is_rare": 1,
+        "max_buy_price": 260,
+        "max_sell_price": 260,
+        "min_buy_price": 260,
+        "min_sell_price": 260,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667698,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 223,
+        "name": "Vega Slimweed",
+        "category_id": 7,
+        "average_price": 9588,
+        "is_rare": 1,
+        "max_buy_price": 2550,
+        "max_sell_price": 2550,
+        "min_buy_price": 2550,
+        "min_sell_price": 2550,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667699,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 224,
+        "name": "Altairian Skin",
+        "category_id": 2,
+        "average_price": 8432,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667700,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 225,
+        "name": "Pavonis Ear Grubs",
+        "category_id": 3,
+        "average_price": 8364,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667701,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 226,
+        "name": "Jotun Mookah",
+        "category_id": 12,
+        "average_price": 8780,
+        "is_rare": 1,
+        "max_buy_price": 1824,
+        "max_sell_price": 1824,
+        "min_buy_price": 1824,
+        "min_sell_price": 1824,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667702,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 227,
+        "name": "Giant Verrix",
+        "category_id": 6,
+        "average_price": 12496,
+        "is_rare": 1,
+        "max_buy_price": 6659,
+        "max_sell_price": 6659,
+        "min_buy_price": 6659,
+        "min_sell_price": 6659,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667703,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 228,
+        "name": "Indi Bourbon",
+        "category_id": 3,
+        "average_price": 8806,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667704,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 229,
+        "name": "Arouca Conventual Sweets",
+        "category_id": 4,
+        "average_price": 8737,
+        "is_rare": 1,
+        "max_buy_price": 1495,
+        "max_sell_price": 1495,
+        "min_buy_price": 1495,
+        "min_sell_price": 1495,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667705,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 230,
+        "name": "Tauri Chimes",
+        "category_id": 2,
+        "average_price": 8549,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667706,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 231,
+        "name": "Zeessze Ant Grub Glue",
+        "category_id": 2,
+        "average_price": 8161,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667707,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 232,
+        "name": "Pantaa Prayer Sticks",
+        "category_id": 7,
+        "average_price": 9177,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667708,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 233,
+        "name": "Fujin Tea",
+        "category_id": 4,
+        "average_price": 8597,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667709,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 234,
+        "name": "Chameleon Cloth",
+        "category_id": 12,
+        "average_price": 9071,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667710,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 235,
+        "name": "Orrerian Vicious Brew",
+        "category_id": 4,
+        "average_price": 8342,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667711,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 236,
+        "name": "Uszaian Tree Grub",
+        "category_id": 4,
+        "average_price": 8578,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667712,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 237,
+        "name": "Momus Bog Spaniel",
+        "category_id": 2,
+        "average_price": 9184,
+        "is_rare": 1,
+        "max_buy_price": 1975,
+        "max_sell_price": 1975,
+        "min_buy_price": 1975,
+        "min_sell_price": 1975,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667713,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 238,
+        "name": "Diso Ma Corn",
+        "category_id": 4,
+        "average_price": 8134,
+        "is_rare": 1,
+        "max_buy_price": 469,
+        "max_sell_price": 469,
+        "min_buy_price": 469,
+        "min_sell_price": 469,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667714,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 239,
+        "name": "Leestian Evil Juice",
+        "category_id": 3,
+        "average_price": 8220,
+        "is_rare": 1,
+        "max_buy_price": 800,
+        "max_sell_price": 800,
+        "min_buy_price": 800,
+        "min_sell_price": 800,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667715,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 240,
+        "name": "Azure Milk",
+        "category_id": 4,
+        "average_price": 10805,
+        "is_rare": 1,
+        "max_buy_price": 4536,
+        "max_sell_price": 4536,
+        "min_buy_price": 4536,
+        "min_sell_price": 4536,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667716,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 241,
+        "name": "Leathery Eggs",
+        "category_id": 2,
+        "average_price": 25067,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667717,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 242,
+        "name": "Alya Body Soap",
+        "category_id": 7,
+        "average_price": 8218,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667718,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 243,
+        "name": "Vidavantian Lace",
+        "category_id": 2,
+        "average_price": 12615,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667719,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 244,
+        "name": "Jaques Quinentian Still",
+        "category_id": 2,
+        "average_price": 13845,
+        "is_rare": 1,
+        "max_buy_price": 8562,
+        "max_sell_price": 8562,
+        "min_buy_price": 8562,
+        "min_sell_price": 8562,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128668017,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 245,
+        "name": "Soontill Relics",
+        "category_id": 2,
+        "average_price": 19885,
+        "is_rare": 1,
+        "max_buy_price": 17017,
+        "max_sell_price": 17017,
+        "min_buy_price": 17017,
+        "min_sell_price": 17017,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128668018,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 246,
+        "name": "Thargoid Sensor",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 2889070,
+        "max_sell_price": 2889070,
+        "min_buy_price": 2889070,
+        "min_sell_price": 14446,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 1356844,
+        "is_non_marketable": 0,
+        "ed_id": 128668547,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 247,
+        "name": "Hafnium 178",
+        "category_id": 8,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 138211,
+        "min_buy_price": null,
+        "min_sell_price": 20611,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 106686,
+        "is_non_marketable": 0,
+        "ed_id": 128668549,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 248,
+        "name": "Military Intelligence",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 552960,
+        "max_sell_price": 63546,
+        "min_buy_price": 552960,
+        "min_sell_price": 41746,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 63546,
+        "is_non_marketable": 0,
+        "ed_id": 128668552,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 249,
+        "name": "The Hutton Mug",
+        "category_id": 2,
+        "average_price": 7986,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128672121,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 250,
+        "name": "Sothis Crystalline Gold",
+        "category_id": 8,
+        "average_price": 19112,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128672122,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 251,
+        "name": "Wreckage Components",
+        "category_id": 16,
+        "average_price": 10161,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 101610,
+        "min_buy_price": null,
+        "min_sell_price": 1006,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 9261,
+        "is_non_marketable": 0,
+        "ed_id": 128672123,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 252,
+        "name": "Encrypted Data Storage",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 8060,
+        "min_buy_price": null,
+        "min_sell_price": 84,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 2313,
+        "is_non_marketable": 0,
+        "ed_id": 128672124,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 253,
+        "name": "Personal Effects",
+        "category_id": 16,
+        "average_price": 11913,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 25013,
+        "min_buy_price": null,
+        "min_sell_price": 1193,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 9729,
+        "is_non_marketable": 0,
+        "ed_id": 128672126,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 254,
+        "name": "Commercial Samples",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 3610,
+        "min_buy_price": null,
+        "min_sell_price": 37,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 880,
+        "is_non_marketable": 0,
+        "ed_id": 128672127,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 255,
+        "name": "Tactical Data",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 4570,
+        "max_sell_price": 4570,
+        "min_buy_price": 4570,
+        "min_sell_price": 47,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 1658,
+        "is_non_marketable": 0,
+        "ed_id": 128672128,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 256,
+        "name": "Assault Plans",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 4460,
+        "max_sell_price": 1831,
+        "min_buy_price": 4460,
+        "min_sell_price": 45,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 1469,
+        "is_non_marketable": 0,
+        "ed_id": 128672129,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 257,
+        "name": "Encrypted Correspondence",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 3720,
+        "min_buy_price": null,
+        "min_sell_price": 19,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 1470,
+        "is_non_marketable": 0,
+        "ed_id": 128672130,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 258,
+        "name": "Diplomatic Bag",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 5720,
+        "min_buy_price": null,
+        "min_sell_price": 58,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 1438,
+        "is_non_marketable": 0,
+        "ed_id": 128672131,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 259,
+        "name": "Scientific Research",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 6350,
+        "min_buy_price": null,
+        "min_sell_price": 65,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 4279,
+        "is_non_marketable": 0,
+        "ed_id": 128672132,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 260,
+        "name": "Scientific Samples",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 7720,
+        "min_buy_price": null,
+        "min_sell_price": 79,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 3135,
+        "is_non_marketable": 0,
+        "ed_id": 128672133,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 261,
+        "name": "Political Prisoners",
+        "category_id": 16,
+        "average_price": 6242,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 18330,
+        "min_buy_price": null,
+        "min_sell_price": 3026,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 7204,
+        "is_non_marketable": 0,
+        "ed_id": 128672134,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 262,
+        "name": "Hostages",
+        "category_id": 16,
+        "average_price": 23475,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 75195,
+        "min_buy_price": null,
+        "min_sell_price": 19837,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 35040,
+        "is_non_marketable": 0,
+        "ed_id": 128672135,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 263,
+        "name": "Geological Samples",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 4460,
+        "min_buy_price": null,
+        "min_sell_price": 45,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 1808,
+        "is_non_marketable": 0,
+        "ed_id": 128672315,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 264,
+        "name": "Master Chefs",
+        "category_id": 10,
+        "average_price": 20590,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128672316,
+        "category": {
+            "id": 10,
+            "name": "Slavery"
+        }
+    },
+    {
+        "id": 265,
+        "name": "Crystalline Spheres",
+        "category_id": 16,
+        "average_price": 12216,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128672432,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 266,
+        "name": "Taaffeite",
+        "category_id": 9,
+        "average_price": 20674,
+        "is_rare": 0,
+        "max_buy_price": 20574,
+        "max_sell_price": 206740,
+        "min_buy_price": 12474,
+        "min_sell_price": 2164,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 45894,
+        "is_non_marketable": 0,
+        "ed_id": 128672775,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 267,
+        "name": "Jadeite",
+        "category_id": 9,
+        "average_price": 13450,
+        "is_rare": 0,
+        "max_buy_price": 13350,
+        "max_sell_price": 30600,
+        "min_buy_price": 8150,
+        "min_sell_price": 9510,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 28675,
+        "is_non_marketable": 0,
+        "ed_id": 128672776,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 268,
+        "name": "Unstable Data Core",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 24270,
+        "min_buy_price": null,
+        "min_sell_price": 257,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 5741,
+        "is_non_marketable": 0,
+        "ed_id": 128672810,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 269,
+        "name": "Onionhead Alpha Strain",
+        "category_id": 3,
+        "average_price": 8437,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128672812,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 271,
+        "name": "Water",
+        "category_id": 1,
+        "average_price": 155,
+        "is_rare": 0,
+        "max_buy_price": 1550,
+        "max_sell_price": 4992,
+        "min_buy_price": 10,
+        "min_sell_price": 2,
+        "buy_price_lower_average": 18,
+        "sell_price_upper_average": 745,
+        "is_non_marketable": 0,
+        "ed_id": 128049166,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 272,
+        "name": "Onionhead Beta Strain",
+        "category_id": 3,
+        "average_price": 8437,
+        "is_rare": 1,
+        "max_buy_price": 1337,
+        "max_sell_price": 1337,
+        "min_buy_price": 1337,
+        "min_sell_price": 1337,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128673069,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 273,
+        "name": "Praseodymium",
+        "category_id": 8,
+        "average_price": 8604,
+        "is_rare": 0,
+        "max_buy_price": 86040,
+        "max_sell_price": 33624,
+        "min_buy_price": 8551,
+        "min_sell_price": 431,
+        "buy_price_lower_average": 8551,
+        "sell_price_upper_average": 9155,
+        "is_non_marketable": 0,
+        "ed_id": 128673845,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 274,
+        "name": "Bromellite",
+        "category_id": 9,
+        "average_price": 8531,
+        "is_rare": 0,
+        "max_buy_price": 85310,
+        "max_sell_price": 85310,
+        "min_buy_price": 427,
+        "min_sell_price": 427,
+        "buy_price_lower_average": 427,
+        "sell_price_upper_average": 14242,
+        "is_non_marketable": 0,
+        "ed_id": 128673846,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 275,
+        "name": "Samarium",
+        "category_id": 8,
+        "average_price": 8090,
+        "is_rare": 0,
+        "max_buy_price": 80900,
+        "max_sell_price": 30410,
+        "min_buy_price": 4890,
+        "min_sell_price": 405,
+        "buy_price_lower_average": 4890,
+        "sell_price_upper_average": 21538,
+        "is_non_marketable": 0,
+        "ed_id": 128673847,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 276,
+        "name": "Low Temperature Diamonds",
+        "category_id": 9,
+        "average_price": 57443,
+        "is_rare": 0,
+        "max_buy_price": 574430,
+        "max_sell_price": 1504176,
+        "min_buy_price": 2873,
+        "min_sell_price": 2873,
+        "buy_price_lower_average": 2873,
+        "sell_price_upper_average": 662782,
+        "is_non_marketable": 0,
+        "ed_id": 128673848,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 277,
+        "name": "Hydrogen Peroxide",
+        "category_id": 1,
+        "average_price": 917,
+        "is_rare": 0,
+        "max_buy_price": 4597,
+        "max_sell_price": 4500,
+        "min_buy_price": 46,
+        "min_sell_price": 46,
+        "buy_price_lower_average": 256,
+        "sell_price_upper_average": 1254,
+        "is_non_marketable": 0,
+        "ed_id": 128673850,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 278,
+        "name": "Liquid oxygen",
+        "category_id": 1,
+        "average_price": 252,
+        "is_rare": 0,
+        "max_buy_price": 2520,
+        "max_sell_price": 1440,
+        "min_buy_price": 13,
+        "min_sell_price": 13,
+        "buy_price_lower_average": 116,
+        "sell_price_upper_average": 787,
+        "is_non_marketable": 0,
+        "ed_id": 128673851,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 279,
+        "name": "Methanol Monohydrate Crystals",
+        "category_id": 9,
+        "average_price": 2284,
+        "is_rare": 0,
+        "max_buy_price": 7444,
+        "max_sell_price": 22840,
+        "min_buy_price": 1005,
+        "min_sell_price": 115,
+        "buy_price_lower_average": 1005,
+        "sell_price_upper_average": 3970,
+        "is_non_marketable": 0,
+        "ed_id": 128673852,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 280,
+        "name": "Lithium Hydroxide",
+        "category_id": 9,
+        "average_price": 5644,
+        "is_rare": 0,
+        "max_buy_price": 10004,
+        "max_sell_price": 50000,
+        "min_buy_price": 283,
+        "min_sell_price": 283,
+        "buy_price_lower_average": 283,
+        "sell_price_upper_average": 5939,
+        "is_non_marketable": 0,
+        "ed_id": 128673853,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 281,
+        "name": "Methane Clathrate",
+        "category_id": 9,
+        "average_price": 629,
+        "is_rare": 0,
+        "max_buy_price": 3810,
+        "max_sell_price": 5000,
+        "min_buy_price": 32,
+        "min_sell_price": 32,
+        "buy_price_lower_average": 32,
+        "sell_price_upper_average": 996,
+        "is_non_marketable": 0,
+        "ed_id": 128673854,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 282,
+        "name": "Insulating Membrane",
+        "category_id": 5,
+        "average_price": 10861,
+        "is_rare": 0,
+        "max_buy_price": 24511,
+        "max_sell_price": 54361,
+        "min_buy_price": 5501,
+        "min_sell_price": 544,
+        "buy_price_lower_average": 9612,
+        "sell_price_upper_average": 12023,
+        "is_non_marketable": 0,
+        "ed_id": 128673855,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 283,
+        "name": "CMM Composite",
+        "category_id": 5,
+        "average_price": 5976,
+        "is_rare": 0,
+        "max_buy_price": 26296,
+        "max_sell_price": 59760,
+        "min_buy_price": 4867,
+        "min_sell_price": 299,
+        "buy_price_lower_average": 5175,
+        "sell_price_upper_average": 7230,
+        "is_non_marketable": 0,
+        "ed_id": 128673856,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 284,
+        "name": "Micro-weave Cooling Hoses",
+        "category_id": 5,
+        "average_price": 1658,
+        "is_rare": 0,
+        "max_buy_price": 16580,
+        "max_sell_price": 16580,
+        "min_buy_price": 2498,
+        "min_sell_price": 83,
+        "buy_price_lower_average": 2498,
+        "sell_price_upper_average": 2156,
+        "is_non_marketable": 0,
+        "ed_id": 128673857,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 285,
+        "name": "Neofabric Insulation",
+        "category_id": 5,
+        "average_price": 5939,
+        "is_rare": 0,
+        "max_buy_price": 59350,
+        "max_sell_price": 59390,
+        "min_buy_price": 5179,
+        "min_sell_price": 297,
+        "buy_price_lower_average": 5179,
+        "sell_price_upper_average": 7171,
+        "is_non_marketable": 0,
+        "ed_id": 128673858,
+        "category": {
+            "id": 5,
+            "name": "Industrial Materials"
+        }
+    },
+    {
+        "id": 286,
+        "name": "Articulation Motors",
+        "category_id": 6,
+        "average_price": 7552,
+        "is_rare": 0,
+        "max_buy_price": 75450,
+        "max_sell_price": 75520,
+        "min_buy_price": 8342,
+        "min_sell_price": 378,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 12544,
+        "is_non_marketable": 0,
+        "ed_id": 128673859,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 287,
+        "name": "HN Shock Mount",
+        "category_id": 6,
+        "average_price": 1745,
+        "is_rare": 0,
+        "max_buy_price": 17450,
+        "max_sell_price": 17450,
+        "min_buy_price": 1295,
+        "min_sell_price": 88,
+        "buy_price_lower_average": 1397,
+        "sell_price_upper_average": 2479,
+        "is_non_marketable": 0,
+        "ed_id": 128673860,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 288,
+        "name": "Emergency Power Cells",
+        "category_id": 6,
+        "average_price": 2221,
+        "is_rare": 0,
+        "max_buy_price": 4461,
+        "max_sell_price": 6626,
+        "min_buy_price": 1785,
+        "min_sell_price": 1722,
+        "buy_price_lower_average": 1785,
+        "sell_price_upper_average": 3089,
+        "is_non_marketable": 0,
+        "ed_id": 128673861,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 289,
+        "name": "Power Converter",
+        "category_id": 6,
+        "average_price": 1254,
+        "is_rare": 0,
+        "max_buy_price": 3994,
+        "max_sell_price": 12540,
+        "min_buy_price": 952,
+        "min_sell_price": 63,
+        "buy_price_lower_average": 965,
+        "sell_price_upper_average": 2139,
+        "is_non_marketable": 0,
+        "ed_id": 128673862,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 290,
+        "name": "Energy Grid Assembly",
+        "category_id": 6,
+        "average_price": 2518,
+        "is_rare": 0,
+        "max_buy_price": 5418,
+        "max_sell_price": 25180,
+        "min_buy_price": 126,
+        "min_sell_price": 126,
+        "buy_price_lower_average": 126,
+        "sell_price_upper_average": 3522,
+        "is_non_marketable": 0,
+        "ed_id": 128673863,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 291,
+        "name": "Power Transfer Bus",
+        "category_id": 6,
+        "average_price": 2065,
+        "is_rare": 0,
+        "max_buy_price": 20650,
+        "max_sell_price": 20650,
+        "min_buy_price": 1647,
+        "min_sell_price": 104,
+        "buy_price_lower_average": 1647,
+        "sell_price_upper_average": 7151,
+        "is_non_marketable": 0,
+        "ed_id": 128673864,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 292,
+        "name": "Radiation Baffle",
+        "category_id": 6,
+        "average_price": 1648,
+        "is_rare": 0,
+        "max_buy_price": 2478,
+        "max_sell_price": 16480,
+        "min_buy_price": 1282,
+        "min_sell_price": 83,
+        "buy_price_lower_average": 1282,
+        "sell_price_upper_average": 2522,
+        "is_non_marketable": 0,
+        "ed_id": 128673865,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 293,
+        "name": "Exhaust Manifold",
+        "category_id": 6,
+        "average_price": 1860,
+        "is_rare": 0,
+        "max_buy_price": 2500,
+        "max_sell_price": 2511,
+        "min_buy_price": 1377,
+        "min_sell_price": 1336,
+        "buy_price_lower_average": 1377,
+        "sell_price_upper_average": 2441,
+        "is_non_marketable": 0,
+        "ed_id": 128673866,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 294,
+        "name": "Reinforced Mounting Plate",
+        "category_id": 6,
+        "average_price": 2299,
+        "is_rare": 0,
+        "max_buy_price": 5769,
+        "max_sell_price": 22990,
+        "min_buy_price": 1843,
+        "min_sell_price": 115,
+        "buy_price_lower_average": 1846,
+        "sell_price_upper_average": 5219,
+        "is_non_marketable": 0,
+        "ed_id": 128673867,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 295,
+        "name": "Heatsink Interlink",
+        "category_id": 6,
+        "average_price": 1940,
+        "is_rare": 0,
+        "max_buy_price": 8540,
+        "max_sell_price": 19400,
+        "min_buy_price": 1547,
+        "min_sell_price": 97,
+        "buy_price_lower_average": 1571,
+        "sell_price_upper_average": 3089,
+        "is_non_marketable": 0,
+        "ed_id": 128673868,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 296,
+        "name": "Magnetic Emitter Coil",
+        "category_id": 6,
+        "average_price": 1174,
+        "is_rare": 0,
+        "max_buy_price": 5074,
+        "max_sell_price": 11740,
+        "min_buy_price": 897,
+        "min_sell_price": 59,
+        "buy_price_lower_average": 897,
+        "sell_price_upper_average": 2172,
+        "is_non_marketable": 0,
+        "ed_id": 128673869,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 297,
+        "name": "Modular Terminals",
+        "category_id": 6,
+        "average_price": 2282,
+        "is_rare": 0,
+        "max_buy_price": 5005,
+        "max_sell_price": 22820,
+        "min_buy_price": 1142,
+        "min_sell_price": 115,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 4609,
+        "is_non_marketable": 0,
+        "ed_id": 128673870,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 298,
+        "name": "Nanobreakers",
+        "category_id": 11,
+        "average_price": 2172,
+        "is_rare": 0,
+        "max_buy_price": 21650,
+        "max_sell_price": 5002,
+        "min_buy_price": 2162,
+        "min_sell_price": 109,
+        "buy_price_lower_average": 2162,
+        "sell_price_upper_average": 2465,
+        "is_non_marketable": 0,
+        "ed_id": 128673871,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 299,
+        "name": "Telemetry Suite",
+        "category_id": 11,
+        "average_price": 3071,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 5001,
+        "min_buy_price": null,
+        "min_sell_price": 314,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 3325,
+        "is_non_marketable": 0,
+        "ed_id": 128673872,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 300,
+        "name": "Micro Controllers",
+        "category_id": 11,
+        "average_price": 5539,
+        "is_rare": 0,
+        "max_buy_price": 11099,
+        "max_sell_price": 55390,
+        "min_buy_price": 277,
+        "min_sell_price": 277,
+        "buy_price_lower_average": 4632,
+        "sell_price_upper_average": 6531,
+        "is_non_marketable": 0,
+        "ed_id": 128673873,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 301,
+        "name": "Ion Distributor",
+        "category_id": 6,
+        "average_price": 2242,
+        "is_rare": 0,
+        "max_buy_price": 3372,
+        "max_sell_price": 22420,
+        "min_buy_price": 1753,
+        "min_sell_price": 113,
+        "buy_price_lower_average": 1763,
+        "sell_price_upper_average": 3085,
+        "is_non_marketable": 0,
+        "ed_id": 128673874,
+        "category": {
+            "id": 6,
+            "name": "Machinery"
+        }
+    },
+    {
+        "id": 302,
+        "name": "Hardware Diagnostic Sensor",
+        "category_id": 11,
+        "average_price": 6761,
+        "is_rare": 0,
+        "max_buy_price": 33841,
+        "max_sell_price": 67610,
+        "min_buy_price": 5836,
+        "min_sell_price": 339,
+        "buy_price_lower_average": 5836,
+        "sell_price_upper_average": 8350,
+        "is_non_marketable": 0,
+        "ed_id": 128673875,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 303,
+        "name": "Conductive Fabrics",
+        "category_id": 12,
+        "average_price": 496,
+        "is_rare": 0,
+        "max_buy_price": 3168,
+        "max_sell_price": 5027,
+        "min_buy_price": 289,
+        "min_sell_price": 270,
+        "buy_price_lower_average": 319,
+        "sell_price_upper_average": 2616,
+        "is_non_marketable": 0,
+        "ed_id": 128682044,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 304,
+        "name": "Military Grade Fabrics",
+        "category_id": 12,
+        "average_price": 756,
+        "is_rare": 0,
+        "max_buy_price": 9941,
+        "max_sell_price": 14330,
+        "min_buy_price": 542,
+        "min_sell_price": 38,
+        "buy_price_lower_average": 582,
+        "sell_price_upper_average": 4839,
+        "is_non_marketable": 0,
+        "ed_id": 128682045,
+        "category": {
+            "id": 12,
+            "name": "Textiles"
+        }
+    },
+    {
+        "id": 305,
+        "name": "Advanced Medicines",
+        "category_id": 7,
+        "average_price": 1233,
+        "is_rare": 0,
+        "max_buy_price": 3703,
+        "max_sell_price": 12330,
+        "min_buy_price": 818,
+        "min_sell_price": 62,
+        "buy_price_lower_average": 909,
+        "sell_price_upper_average": 1954,
+        "is_non_marketable": 0,
+        "ed_id": 128682046,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 306,
+        "name": "Medical Diagnostic Equipment",
+        "category_id": 11,
+        "average_price": 2890,
+        "is_rare": 0,
+        "max_buy_price": 6058,
+        "max_sell_price": 7510,
+        "min_buy_price": 2207,
+        "min_sell_price": 295,
+        "buy_price_lower_average": 2326,
+        "sell_price_upper_average": 3761,
+        "is_non_marketable": 0,
+        "ed_id": 128682047,
+        "category": {
+            "id": 11,
+            "name": "Technology"
+        }
+    },
+    {
+        "id": 307,
+        "name": "Survival Equipment",
+        "category_id": 2,
+        "average_price": 501,
+        "is_rare": 0,
+        "max_buy_price": 5010,
+        "max_sell_price": 5580,
+        "min_buy_price": 253,
+        "min_sell_price": 26,
+        "buy_price_lower_average": 375,
+        "sell_price_upper_average": 1906,
+        "is_non_marketable": 0,
+        "ed_id": 128682048,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 308,
+        "name": "Data Core",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 28720,
+        "min_buy_price": null,
+        "min_sell_price": 304,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 8934,
+        "is_non_marketable": 0,
+        "ed_id": 128682049,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 309,
+        "name": "Galactic Travel Guide",
+        "category_id": 16,
+        "average_price": 8627,
+        "is_rare": 1,
+        "max_buy_price": 8627,
+        "max_sell_price": 86270,
+        "min_buy_price": 8627,
+        "min_sell_price": 6187,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 86270,
+        "is_non_marketable": 0,
+        "ed_id": 128682050,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 310,
+        "name": "Mysterious Idol",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 151960,
+        "min_buy_price": null,
+        "min_sell_price": 1636,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 42077,
+        "is_non_marketable": 0,
+        "ed_id": 128682051,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 311,
+        "name": "Prohibited Research Materials",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 464640,
+        "min_buy_price": null,
+        "min_sell_price": 23014,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 464640,
+        "is_non_marketable": 0,
+        "ed_id": 128682052,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 312,
+        "name": "Antimatter Containment Unit",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 265160,
+        "min_buy_price": null,
+        "min_sell_price": 13166,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 265160,
+        "is_non_marketable": 0,
+        "ed_id": 128682053,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 313,
+        "name": "Space Pioneer Relics",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 73420,
+        "min_buy_price": null,
+        "min_sell_price": 758,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 20570,
+        "is_non_marketable": 0,
+        "ed_id": 128682054,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 314,
+        "name": "Fossil Remnants",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 99270,
+        "min_buy_price": null,
+        "min_sell_price": 1017,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 20107,
+        "is_non_marketable": 0,
+        "ed_id": 128682055,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 315,
+        "name": "Thargoid Probe",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 1638736,
+        "max_sell_price": 4091860,
+        "min_buy_price": 1638736,
+        "min_sell_price": 20460,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 4091860,
+        "is_non_marketable": 0,
+        "ed_id": 128673876,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 316,
+        "name": "Precious Gems",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 200501,
+        "max_sell_price": 1096410,
+        "min_buy_price": 200501,
+        "min_sell_price": 5483,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 223049,
+        "is_non_marketable": 0,
+        "ed_id": 128672160,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 317,
+        "name": "Thargoid Link",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 350900,
+        "min_buy_price": null,
+        "min_sell_price": 1755,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 249222,
+        "is_non_marketable": 0,
+        "ed_id": 128740752,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 318,
+        "name": "Thargoid Biological Matter",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 277570,
+        "min_buy_price": null,
+        "min_sell_price": 1388,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 188373,
+        "is_non_marketable": 0,
+        "ed_id": 128737288,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 319,
+        "name": "Thargoid Resin",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 203200,
+        "min_buy_price": null,
+        "min_sell_price": 6670,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 119730,
+        "is_non_marketable": 0,
+        "ed_id": 128737287,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 320,
+        "name": "Thargoid Technology Samples",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 245680,
+        "min_buy_price": null,
+        "min_sell_price": 1229,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 179299,
+        "is_non_marketable": 0,
+        "ed_id": 128737289,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 321,
+        "name": "Guardian Relic",
+        "category_id": 16,
+        "average_price": 11520,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 115200,
+        "min_buy_price": null,
+        "min_sell_price": 576,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 53707,
+        "is_non_marketable": 0,
+        "ed_id": 128732183,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 322,
+        "name": "Guardian Orb",
+        "category_id": 16,
+        "average_price": 7351,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 73510,
+        "min_buy_price": null,
+        "min_sell_price": 368,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 29405,
+        "is_non_marketable": 0,
+        "ed_id": 128732184,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 323,
+        "name": "Guardian Casket",
+        "category_id": 16,
+        "average_price": 6473,
+        "is_rare": 0,
+        "max_buy_price": 6473,
+        "max_sell_price": 64730,
+        "min_buy_price": 6473,
+        "min_sell_price": 324,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 23610,
+        "is_non_marketable": 0,
+        "ed_id": 128732185,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 324,
+        "name": "Guardian Tablet",
+        "category_id": 16,
+        "average_price": 7351,
+        "is_rare": 0,
+        "max_buy_price": 7351,
+        "max_sell_price": 73510,
+        "min_buy_price": 7351,
+        "min_sell_price": 368,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 29005,
+        "is_non_marketable": 0,
+        "ed_id": 128732186,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 325,
+        "name": "Guardian Urn",
+        "category_id": 16,
+        "average_price": 4723,
+        "is_rare": 0,
+        "max_buy_price": 4723,
+        "max_sell_price": 47230,
+        "min_buy_price": 4723,
+        "min_sell_price": 237,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 18830,
+        "is_non_marketable": 0,
+        "ed_id": 128732187,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 326,
+        "name": "Guardian Totem",
+        "category_id": 16,
+        "average_price": 9496,
+        "is_rare": 0,
+        "max_buy_price": 9496,
+        "max_sell_price": 94960,
+        "min_buy_price": 9496,
+        "min_sell_price": 475,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 34423,
+        "is_non_marketable": 0,
+        "ed_id": 128732188,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 327,
+        "name": "Small Survey Data Cache",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 22345,
+        "min_buy_price": null,
+        "min_sell_price": 737,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 16731,
+        "is_non_marketable": 0,
+        "ed_id": 128672137,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 328,
+        "name": "Large Survey Data Cache",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 500710,
+        "min_buy_price": null,
+        "min_sell_price": 7871,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 257056,
+        "is_non_marketable": 0,
+        "ed_id": 128672136,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 329,
+        "name": "Damaged Escape Pod",
+        "category_id": 16,
+        "average_price": 11694,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 116940,
+        "min_buy_price": null,
+        "min_sell_price": 585,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 17482,
+        "is_non_marketable": 0,
+        "ed_id": 128672811,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 330,
+        "name": "Earth Relics",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 105500,
+        "min_buy_price": null,
+        "min_sell_price": 1150,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 34458,
+        "is_non_marketable": 0,
+        "ed_id": 128672161,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 331,
+        "name": "Thargoid Scout Tissue Sample",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 152150,
+        "min_buy_price": null,
+        "min_sell_price": 6965,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 72118,
+        "is_non_marketable": 0,
+        "ed_id": 128824468,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 332,
+        "name": "Ancient Key",
+        "category_id": 16,
+        "average_price": 23985,
+        "is_rare": 0,
+        "max_buy_price": 25085,
+        "max_sell_price": 239850,
+        "min_buy_price": 1200,
+        "min_sell_price": 2435,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 131627,
+        "is_non_marketable": 0,
+        "ed_id": 128888499,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 333,
+        "name": "Antique Jewellery",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 1360320,
+        "min_buy_price": null,
+        "min_sell_price": 10232,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 287316,
+        "is_non_marketable": 0,
+        "ed_id": 128672159,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 334,
+        "name": "Gene Bank",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 119120,
+        "min_buy_price": null,
+        "min_sell_price": 1196,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 23604,
+        "is_non_marketable": 0,
+        "ed_id": 128672162,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 335,
+        "name": "Time Capsule",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 40550,
+        "min_buy_price": null,
+        "min_sell_price": 415,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 8892,
+        "is_non_marketable": 0,
+        "ed_id": 128672163,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 336,
+        "name": "Thargoid Heart",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 339880,
+        "max_sell_price": 339880,
+        "min_buy_price": 1700,
+        "min_sell_price": 17138,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 339880,
+        "is_non_marketable": 0,
+        "ed_id": 128793127,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 337,
+        "name": "Thargoid Cyclops Tissue Sample",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 181280,
+        "max_sell_price": 181280,
+        "min_buy_price": 181280,
+        "min_sell_price": 9078,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 115711,
+        "is_non_marketable": 0,
+        "ed_id": 128793128,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 338,
+        "name": "Thargoid Basilisk Tissue Sample",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 203940,
+        "max_sell_price": 203940,
+        "min_buy_price": 203940,
+        "min_sell_price": 8844,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 104246,
+        "is_non_marketable": 0,
+        "ed_id": 128793129,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 339,
+        "name": "Thargoid Medusa Tissue Sample",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 226590,
+        "max_sell_price": 226590,
+        "min_buy_price": 226590,
+        "min_sell_price": 11109,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 133857,
+        "is_non_marketable": 0,
+        "ed_id": 128793130,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 340,
+        "name": "Thargoid Hydra Tissue Sample",
+        "category_id": 16,
+        "average_price": 0,
+        "is_rare": 0,
+        "max_buy_price": 1059860,
+        "max_sell_price": 318386,
+        "min_buy_price": 1059860,
+        "min_sell_price": 52836,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 253523,
+        "is_non_marketable": 0,
+        "ed_id": 128902652,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 341,
+        "name": "Nanomedicines",
+        "category_id": 7,
+        "average_price": 9859,
+        "is_rare": 1,
+        "max_buy_price": 2782,
+        "max_sell_price": 2782,
+        "min_buy_price": 2782,
+        "min_sell_price": 2782,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128913661,
+        "category": {
+            "id": 7,
+            "name": "Medicines"
+        }
+    },
+    {
+        "id": 342,
+        "name": "Duradrives",
+        "category_id": 2,
+        "average_price": 19356,
+        "is_rare": 1,
+        "max_buy_price": 16250,
+        "max_sell_price": 16250,
+        "min_buy_price": 16250,
+        "min_sell_price": 16250,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128922524,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 343,
+        "name": "Rhodplumsite",
+        "category_id": 9,
+        "average_price": 157096,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 356706,
+        "min_buy_price": null,
+        "min_sell_price": 4230,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 279988,
+        "is_non_marketable": 0,
+        "ed_id": 128924325,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 344,
+        "name": "Serendibite",
+        "category_id": 9,
+        "average_price": 140728,
+        "is_rare": 0,
+        "max_buy_price": 387108,
+        "max_sell_price": 775515,
+        "min_buy_price": 150328,
+        "min_sell_price": 4010,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 381038,
+        "is_non_marketable": 0,
+        "ed_id": 128924326,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 345,
+        "name": "Monazite",
+        "category_id": 9,
+        "average_price": 179623,
+        "is_rare": 0,
+        "max_buy_price": 575113,
+        "max_sell_price": 408023,
+        "min_buy_price": 575113,
+        "min_sell_price": 4833,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 293827,
+        "is_non_marketable": 0,
+        "ed_id": 128924327,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 346,
+        "name": "Musgravite",
+        "category_id": 9,
+        "average_price": 163135,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 804869,
+        "min_buy_price": null,
+        "min_sell_price": 4621,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 345757,
+        "is_non_marketable": 0,
+        "ed_id": 128924328,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 347,
+        "name": "Benitoite",
+        "category_id": 9,
+        "average_price": 120002,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 958791,
+        "min_buy_price": null,
+        "min_sell_price": 3455,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 375829,
+        "is_non_marketable": 0,
+        "ed_id": 128924329,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 348,
+        "name": "Grandidierite",
+        "category_id": 9,
+        "average_price": 160876,
+        "is_rare": 0,
+        "max_buy_price": 1608760,
+        "max_sell_price": 775655,
+        "min_buy_price": 300406,
+        "min_sell_price": 4580,
+        "buy_price_lower_average": 300406,
+        "sell_price_upper_average": 386881,
+        "is_non_marketable": 0,
+        "ed_id": 128924330,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 349,
+        "name": "Alexandrite",
+        "category_id": 9,
+        "average_price": 182743,
+        "is_rare": 0,
+        "max_buy_price": 1827430,
+        "max_sell_price": 1827430,
+        "min_buy_price": 124993,
+        "min_sell_price": 5093,
+        "buy_price_lower_average": 124993,
+        "sell_price_upper_average": 332135,
+        "is_non_marketable": 0,
+        "ed_id": 128924331,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 350,
+        "name": "Void Opals",
+        "category_id": 9,
+        "average_price": 107486,
+        "is_rare": 0,
+        "max_buy_price": 900436,
+        "max_sell_price": 1385516,
+        "min_buy_price": 5375,
+        "min_sell_price": 3148,
+        "buy_price_lower_average": 5375,
+        "sell_price_upper_average": 446154,
+        "is_non_marketable": 0,
+        "ed_id": 128924332,
+        "category": {
+            "id": 9,
+            "name": "Minerals"
+        }
+    },
+    {
+        "id": 351,
+        "name": "Baked Greebles",
+        "category_id": 4,
+        "average_price": 8211,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128667669,
+        "category": {
+            "id": 4,
+            "name": "Foods"
+        }
+    },
+    {
+        "id": 352,
+        "name": "Ultra-Compact Processor Prototypes",
+        "category_id": 2,
+        "average_price": 21542,
+        "is_rare": 1,
+        "max_buy_price": 19312,
+        "max_sell_price": 19312,
+        "min_buy_price": 19312,
+        "min_sell_price": 19312,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128671119,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 353,
+        "name": "Personal Gifts",
+        "category_id": 16,
+        "average_price": 16535,
+        "is_rare": 1,
+        "max_buy_price": 12312,
+        "max_sell_price": 12312,
+        "min_buy_price": 12312,
+        "min_sell_price": 12312,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128672431,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 354,
+        "name": "Crom Silver Fesh",
+        "category_id": 3,
+        "average_price": 8399,
+        "is_rare": 1,
+        "max_buy_price": 1026,
+        "max_sell_price": 1026,
+        "min_buy_price": 1026,
+        "min_sell_price": 1026,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128727921,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 355,
+        "name": "Shan's Charis Orchid",
+        "category_id": 2,
+        "average_price": 9043,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128732551,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 356,
+        "name": "Buckyball Beer Mats",
+        "category_id": 2,
+        "average_price": 7957,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128748428,
+        "category": {
+            "id": 2,
+            "name": "Consumer Items"
+        }
+    },
+    {
+        "id": 357,
+        "name": "Harma Silver Sea Rum",
+        "category_id": 3,
+        "average_price": 9762,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128793113,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 358,
+        "name": "Platinum Alloy",
+        "category_id": 8,
+        "average_price": 18333,
+        "is_rare": 1,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128793114,
+        "category": {
+            "id": 8,
+            "name": "Metals"
+        }
+    },
+    {
+        "id": 359,
+        "name": "Rockforth Fertiliser",
+        "category_id": 1,
+        "average_price": 8,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": null,
+        "min_buy_price": null,
+        "min_sell_price": null,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128924333,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 360,
+        "name": "Agronomic Treatment",
+        "category_id": 1,
+        "average_price": 3464,
+        "is_rare": 0,
+        "max_buy_price": 34640,
+        "max_sell_price": 35779,
+        "min_buy_price": 174,
+        "min_sell_price": 174,
+        "buy_price_lower_average": 2452,
+        "sell_price_upper_average": 9167,
+        "is_non_marketable": 0,
+        "ed_id": 128924334,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 361,
+        "name": "Apa Vietii",
+        "category_id": 3,
+        "average_price": 10362,
+        "is_rare": 1,
+        "max_buy_price": 3495,
+        "max_sell_price": 3495,
+        "min_buy_price": 3495,
+        "min_sell_price": 3495,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 0,
+        "is_non_marketable": 0,
+        "ed_id": 128958679,
+        "category": {
+            "id": 3,
+            "name": "Legal Drugs"
+        }
+    },
+    {
+        "id": 362,
+        "name": "Tritium",
+        "category_id": 1,
+        "average_price": 41684,
+        "is_rare": 0,
+        "max_buy_price": 416840,
+        "max_sell_price": 416840,
+        "min_buy_price": 2085,
+        "min_sell_price": 2085,
+        "buy_price_lower_average": 37149,
+        "sell_price_upper_average": 55394,
+        "is_non_marketable": 0,
+        "ed_id": 128961249,
+        "category": {
+            "id": 1,
+            "name": "Chemicals"
+        }
+    },
+    {
+        "id": 363,
+        "name": "Mollusc Fluid",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 56160,
+        "min_buy_price": null,
+        "min_sell_price": 581,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 56160,
+        "is_non_marketable": 0,
+        "ed_id": 128922517,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 364,
+        "name": "Mollusc Soft Tissue",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 165890,
+        "min_buy_price": null,
+        "min_sell_price": 1699,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 165890,
+        "is_non_marketable": 0,
+        "ed_id": 128922518,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 365,
+        "name": "Mollusc Brain Tissue",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 319860,
+        "min_buy_price": null,
+        "min_sell_price": 3236,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 319860,
+        "is_non_marketable": 0,
+        "ed_id": 128922519,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 366,
+        "name": "Pod Core Tissue",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 43980,
+        "min_buy_price": null,
+        "min_sell_price": 440,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 43980,
+        "is_non_marketable": 0,
+        "ed_id": 128922520,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 367,
+        "name": "Pod Dead Tissue",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 127970,
+        "min_buy_price": null,
+        "min_sell_price": 1327,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 127970,
+        "is_non_marketable": 0,
+        "ed_id": 128922521,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 368,
+        "name": "Pod Surface Tissue",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 280300,
+        "min_buy_price": null,
+        "min_sell_price": 2980,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 280300,
+        "is_non_marketable": 0,
+        "ed_id": 128922522,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 369,
+        "name": "Anomaly Particles",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 445450,
+        "min_buy_price": null,
+        "min_sell_price": 4505,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 386181,
+        "is_non_marketable": 0,
+        "ed_id": 128922523,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 370,
+        "name": "Pod Tissue",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 119970,
+        "min_buy_price": null,
+        "min_sell_price": 1247,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 119970,
+        "is_non_marketable": 0,
+        "ed_id": 128922781,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 371,
+        "name": "Mollusc Membrane",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 177070,
+        "min_buy_price": null,
+        "min_sell_price": 1857,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 177070,
+        "is_non_marketable": 0,
+        "ed_id": 128922782,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 372,
+        "name": "Mollusc Mycelium",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 319860,
+        "min_buy_price": null,
+        "min_sell_price": 3266,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 280018,
+        "is_non_marketable": 0,
+        "ed_id": 128922783,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 373,
+        "name": "Mollusc Spores",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 56160,
+        "min_buy_price": null,
+        "min_sell_price": 581,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 56160,
+        "is_non_marketable": 0,
+        "ed_id": 128922784,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 374,
+        "name": "Pod Mesoglea",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 262430,
+        "min_buy_price": null,
+        "min_sell_price": 2693,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 262430,
+        "is_non_marketable": 0,
+        "ed_id": 128922785,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 375,
+        "name": "Pod Outer Tissue",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 67680,
+        "min_buy_price": null,
+        "min_sell_price": 689,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 67680,
+        "is_non_marketable": 0,
+        "ed_id": 128922786,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    },
+    {
+        "id": 376,
+        "name": "Pod Shell Tissue",
+        "category_id": 16,
+        "average_price": null,
+        "is_rare": 0,
+        "max_buy_price": null,
+        "max_sell_price": 508750,
+        "min_buy_price": null,
+        "min_sell_price": 5245,
+        "buy_price_lower_average": 0,
+        "sell_price_upper_average": 423975,
+        "is_non_marketable": 0,
+        "ed_id": 128922787,
+        "category": {
+            "id": 16,
+            "name": "Salvage"
+        }
+    }
+]

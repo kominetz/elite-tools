@@ -180,22 +180,26 @@ def load_rt_listings(force_refresh=False):
         loads listings from file. Otherwise scrapes a list of commodity pages, saves
         them to a cache file, and returns a data frame of the listings.
     '''
-    system_data_path = os.path.join(et_temp_path, 'scraped_listings.jsonl')
-    if os.path.exists(system_data_path) and not force_refresh and fresh_scrape(system_data_path):
-        print(f'# Found "{system_data_path}".')
+    rtl_path = rtl_cache(force_refresh)
+    rtl_data = pd.read_json(rtl_path, lines=True)
+    print(f"# Real-time listing records loaded: ", len(rtl_data))
+    return pd.DataFrame(rtl_data)
+
+
+def rtl_cache(force_refresh=False):
+    file_path = os.path.join(et_temp_path, 'scraped_listings.jsonl')
+    if os.path.exists(file_path) and not force_refresh and fresh_scrape(file_path):
+        print(f'# Found "{file_path}".')
     else:
-        print(f'# Scraping "{system_data_path}".')
+        print(f'# Scraping "{file_path}".')
         listings = []
         for commodity in commodity_pages:
             listings.extend(scrape_commodity(commodity))
-        with open(system_data_path, 'w') as rtl_file:
+        with open(file_path, 'w') as rtl_file:
             for l in listings:
                 json.dump(l, rtl_file)
                 rtl_file.write('\n')
-    
-    scrape_data = pd.read_json(system_data_path, lines=True)
-    print(f"# Real-time listing records loaded: ", len(scrape_data))
-    return pd.DataFrame(scrape_data)
+    return file_path
 
 
 def load_commodity_listings(force_refresh=False):
@@ -241,22 +245,29 @@ def scrape_commodity(commodity):
     return listings
 
 
-def load_feed(feed, force_refresh=False):
+def load_feed(feed: Feeds, force_refresh=False):
     ''' Given an EDDB JSON data feed, download it and return it as a DataFrame.
         Looks for a previously-downloaded file and uses it if it's newer than the 
         last tick or downloads regardless if force_refresh is True.
     '''
-    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
-    system_data_path = os.path.join(et_temp_path, cache_filename)
-    if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
-        print(f'# Found "{system_data_path}".')
-    else:
-        print(f'# Downloading "{system_data_path}".')
-        urlretrieve(feed.value, system_data_path)
+    feed_path = feed_cache(feed, force_refresh)
 
-    feed_data = pd.read_json(system_data_path, lines=(feed != Feeds.COMMODITIES))
+    feed_data = pd.read_json(feed_path, lines=(feed != Feeds.COMMODITIES))
     print(f"# {feed} records loaded: ", len(feed_data))
     return feed_data
+
+
+def feed_cache(feed: Feeds, force_refresh=False):
+    ''' Given an EDDB feed, download it if necessary and return the file location.
+    '''
+    cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
+    file_path = os.path.join(et_temp_path, cache_filename)
+    if os.path.exists(file_path) and not force_refresh and fresh_feed(file_path):
+        print(f'# Found "{file_path}".')
+    else:
+        print(f'# Downloading "{file_path}".')
+        urlretrieve(feed.value, file_path)
+    return file_path    
 
 
 ### UTILITY
