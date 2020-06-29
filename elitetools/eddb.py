@@ -67,7 +67,6 @@ icy_core_minerals = [
 core_only_minerals = [
     'Alexandrite',
     'Benitoite',
-    'Bromellite',
     'Grandidierite',
     'Monazite',
     'Musgravite',
