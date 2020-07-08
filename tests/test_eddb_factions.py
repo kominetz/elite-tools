@@ -3,7 +3,7 @@ import pytest
 from elitetools.eddb import (faction_home_system, filter_player_factions,
                              find_faction_by_name, load_feeds,
                              minor_faction_ids, minor_faction_names,
-                             player_faction_controlled, present_faction_state,
+                             filter_pmf_controlled, present_faction_state,
                              system_has_faction)
 
 
@@ -23,7 +23,7 @@ class TestFactionHomeSystem:
 class TestPlayFactionControlled:
     def test(self):
         # Subject to change via BGS
-        assert "The Order of Mobius" in player_faction_controlled(
+        assert "The Order of Mobius" in filter_pmf_controlled(
             ["Azrael", "Sol"])
 
 

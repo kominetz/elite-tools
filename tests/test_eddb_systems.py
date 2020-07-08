@@ -76,3 +76,10 @@ class TestQuerySystemsByFaction:
         assert len(faction_systems) > 0
         # A faction is always in its home system.
         assert "Azrael" in faction_systems
+
+
+class TestProcessSystems:
+    def test(self):
+        assert eddb.populated_systems.at['azrael', 'pmf_controlled']
+        assert not eddb.populated_systems.at['sol', 'pmf_controlled']
+        assert eddb.populated_systems.at['azrael', 'pmf_count'] == 1

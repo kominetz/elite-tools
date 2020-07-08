@@ -4,3 +4,6 @@
 {"id":56846,"name":"Azrael Patron's Principles","updated_at":1545483317,"government_id":144,"government":"Patronage","allegiance_id":2,"allegiance":"Empire","home_system_id":1590,"is_player_faction":false}
 {"id":74829,"name":"Labour of Azrael","updated_at":1546693277,"government_id":96,"government":"Democracy","allegiance_id":4,"allegiance":"Independent","home_system_id":1590,"is_player_faction":false}
 {"id":592,"name":"Mother Gaia","updated_at":1546672209,"government_id":96,"government":"Democracy","allegiance_id":3,"allegiance":"Federation","home_system_id":17072,"is_player_faction":false}
+{"id":76748,"name":"Pilots' Federation Local Branch","updated_at":1555190634,"government_id":96,"government":"Democracy","allegiance_id":7,"allegiance":"Pilots Federation","home_system_id":null,"is_player_faction":false}
+{"id":1082,"name":"Alioth Independents","updated_at":1550051345,"government_id":96,"government":"Democracy","allegiance_id":1,"allegiance":"Alliance","home_system_id":718,"is_player_faction":false}
+{"id":12212,"name":"Achenar Empire League","updated_at":1546705325,"government_id":144,"government":"Patronage","allegiance_id":2,"allegiance":"Empire","home_system_id":432,"is_player_faction":false}

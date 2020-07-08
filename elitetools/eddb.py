@@ -137,6 +137,7 @@ commodity_details: pd.DataFrame = None
 commodity_listings_eod: pd.DataFrame = None
 commodity_listings_rt: pd.DataFrame = None
 faction_details: pd.DataFrame = None
+pmf_ids = set()
 populated_systems: pd.DataFrame = None
 station_details: pd.DataFrame = None
 
@@ -145,16 +146,22 @@ def load_feeds(force_refresh=False):
     ''' Load all feeds from EDDB. Refresh standard feeds and scrapes if stored files
         are older than the refresh policies or if force refresh is specified.
     '''
-    global commodity_details, commodity_listings_eod, commodity_listings_rt, faction_details, populated_systems, station_details
+    global commodity_details, commodity_listings_eod, commodity_listings_rt, faction_details, pmf_ids, populated_systems, station_details
 
     commodity_details = load_feed(Feeds.COMMODITIES, force_refresh)
     commodity_listings_eod = load_commodity_listings()
+    commodity_listings_rt = load_rt_listings()
+
     faction_details = load_feed(Feeds.FACTIONS, force_refresh)
     faction_details = faction_details.assign(name_index = faction_details['name'].str.lower()).set_index('name_index')
+    pmf_ids = set(faction_details[faction_details['is_player_faction']]['id'].values)
+
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
-    populated_systems = populated_systems[populated_systems['population'] > 0].assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
+    populated_systems = populated_systems[populated_systems['population'] > 0] \
+        .assign(name_index = lambda s: s['name'].str.lower()) \
+        .set_index('name_index')
+
     station_details = load_feed(Feeds.STATIONS, force_refresh)
-    commodity_listings_rt = load_rt_listings()
 
 
 def fresh_feed(filepath):
@@ -392,6 +399,14 @@ def system_has_faction(system, faction):
     return f['id'] in [mpf['minor_faction_id'] for mpf in s['minor_faction_presences']]
 
 
+def regional_influence_report(target_systems):
+    gir = target_systems.assign(pmf_system_control = None, pmf_system_presences = set(), pmf_expansion_risk = 0, pmf_region_interia = 0)
+    for target_system in gir:
+        if target_system['pmf_system_control' is None]:
+            target_system['pmf_system_control'] = is_pmf_controlled(target_system)
+    return gir
+
+
 ### REPORTS ###
 
 # Given a list of systems, create a displayble dataframe of general information about each system.
@@ -438,10 +453,15 @@ def find_faction_by_name(faction_name):
     return faction_details.loc[faction_name.lower()]
 
 
-def player_faction_controlled(systems):
+def filter_pmf_controlled(systems):
     ''' Given a list of systems, returns only any controlling player factions of those systems.
     '''
     return filter_player_factions(set([find_system_by_name(s)['controlling_minor_faction'] for s in systems]))
+
+
+def is_pmf_controlled(system):
+    s = find_system_by_name(system) if isinstance(system, str) else system
+    return find_faction_by_name(s['controlling_minor_faction'])['is_player_faction']
 
 
 def filter_player_factions(factions):
@@ -455,6 +475,13 @@ def faction_presences(system):
     '''
     s = find_system_by_name(system) if isinstance(system, str) else system
     return pd.DataFrame(s['minor_faction_presences']).merge(faction_details, how='left', left_on='minor_faction_id', right_on='id')
+
+
+def pmf_faction_presences(system):
+    ''' Given a system name or object, returns the player minor faction presence information (merged with faction_details)
+    '''
+    fp = faction_presences(system)
+    return fp[fp['is_player_faction']]
 
 
 def minor_faction_ids(system):
