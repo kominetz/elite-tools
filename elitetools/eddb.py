@@ -1,5 +1,6 @@
 import itertools
 import json
+import logging
 import math
 import os
 import os.path
@@ -181,16 +182,16 @@ def load_rt_listings(force_refresh=False):
     '''
     rtl_path = rtl_cache(force_refresh)
     rtl_data = pd.read_json(rtl_path, lines=True)
-    print(f"# Real-time listing records loaded: ", len(rtl_data))
+    logging.info(f"# Real-time listing records loaded: ", len(rtl_data))
     return pd.DataFrame(rtl_data)
 
 
 def rtl_cache(force_refresh=False):
     file_path = os.path.join(et_temp_path, 'scraped_listings.jsonl')
     if os.path.exists(file_path) and not force_refresh and fresh_scrape(file_path):
-        print(f'# Found "{file_path}".')
+        logging.debug(f'# Found "{file_path}".')
     else:
-        print(f'# Scraping "{file_path}".')
+        logging.debug(f'# Scraping "{file_path}".')
         listings = []
         for commodity in commodity_pages:
             listings.extend(scrape_commodity(commodity))
@@ -209,12 +210,12 @@ def load_commodity_listings(force_refresh=False):
     cache_filename = urlparse(Feeds.PRICES.value).path[1:].replace("/", "-")
     system_data_path = os.path.join(et_temp_path, cache_filename)
     if os.path.exists(system_data_path) and not force_refresh and fresh_feed(system_data_path):
-        print(f'# Found "{system_data_path}".')
+        logging.debug(f'# Found "{system_data_path}".')
     else:
-        print(f'# Downloading "{system_data_path}".')
+        logging.debug(f'# Downloading "{system_data_path}".')
         urlretrieve(Feeds.PRICES.value, system_data_path)
     feed_data = pd.read_csv(system_data_path)
-    print(f"# {Feeds.PRICES} records loaded: ", len(feed_data))
+    logging.info(f"# {Feeds.PRICES} records loaded: ", len(feed_data))
     return feed_data
 
 
@@ -240,7 +241,7 @@ def scrape_commodity(commodity):
             'landing_pad': fields[5].find('span').get_text(),
             'freshness': time_fields[1].get_text(),
         })
-    print("# %s: %d listings scraped." % (commodity['name'], len(listings)))
+    logging.info("# %s: %d listings scraped." % (commodity['name'], len(listings)))
     return listings
 
 
@@ -252,7 +253,7 @@ def load_feed(feed: Feeds, force_refresh=False):
     feed_path = feed_cache(feed, force_refresh)
 
     feed_data = pd.read_json(feed_path, lines=(feed != Feeds.COMMODITIES))
-    print(f"# {feed} records loaded: ", len(feed_data))
+    logging.info(f"# {feed} records loaded: ", len(feed_data))
     return feed_data
 
 
@@ -262,9 +263,9 @@ def feed_cache(feed: Feeds, force_refresh=False):
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     file_path = os.path.join(et_temp_path, cache_filename)
     if os.path.exists(file_path) and not force_refresh and fresh_feed(file_path):
-        print(f'# Found "{file_path}".')
+        logging.debug(f'# Found "{file_path}".')
     else:
-        print(f'# Downloading "{file_path}".')
+        logging.debug(f'# Downloading "{file_path}".')
         urlretrieve(feed.value, file_path)
     return file_path    
 
@@ -280,14 +281,13 @@ def distance(origin, destination):
 
 
 # Given an ordered list of systems (aka route), calculate the cumulative distance following the route.
-def route_len(route, print_route=False):
+def route_len(route):
     length = 0
     last_system = route[0]
     for next_system in route:
         dist = distance(last_system, next_system)
         length += dist
-        if print_route:
-            print("%-24s %5d ly  %4d ly" % (next_system, dist, length))
+        logging.debug("%-24s %5d ly  %4d ly" % (next_system, dist, length))
         last_system = next_system
     return length
 
@@ -333,7 +333,7 @@ def route_to_dataframe(route):
 
 
 # Brute-force calculation of shortest route among waypoints with origin prepended and destination appended if either are provided
-def best_route(waypoints, origin, destination, print_choices=False):
+def best_route(waypoints, origin, destination):
     shortest_route = []
     shortest_length = -1
     routes = itertools.permutations(waypoints)
@@ -347,10 +347,9 @@ def best_route(waypoints, origin, destination, print_choices=False):
         if shortest_length < 0 or length < shortest_length:
             shortest_route = route
             shortest_length = length
-            if print_choices:
-                print("Picked:  %5d ly: %s" % (shortest_length, shortest_route))
-        elif print_choices:
-            print("Skipped: %5d ly: %s" % (length, route))
+            logging.debug("Picked:  %5d ly: %s" % (shortest_length, shortest_route))
+        else:
+            logging.debug("Skipped: %5d ly: %s" % (length, route))
     return shortest_route
 
 
@@ -515,3 +514,38 @@ def best_rt_listings(origin='Sol', radius=1000, top_count=5, by_commodity=[], mi
         .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
 
     return nearby_rt_listings
+
+
+def commodity_sources_nearby(origin_name, commodity_names, minimum_supply=100, top_count=5):
+    ''' Given a starting point and a list of commodities, find the five closet sources for each commodity,
+        then group them by system and station.
+    '''
+    origin = find_system_by_name(origin_name)
+    commodities = commodity_details[commodity_details['name'].isin(commodity_names)][['id', 'name']] \
+        .rename(columns={'name': 'commodity', 'id': 'commodity_id'})
+
+    listings = commodity_listings_eod.merge(commodities, on='commodity_id') \
+        [['station_id', 'commodity', 'supply', 'buy_price']] \
+        .query(f'supply > {minimum_supply}') \
+        .drop_duplicates()
+
+    listings_with_locations = listings.merge(station_details[['id', 'name', 'system_id', 'max_landing_pad_size', 'distance_to_star']] \
+        .rename(columns={'id': 'station_id', 'name': 'station', 'max_landing_pad_size': 'Pad Size', 'distance_to_star': 'Sublight'}), on='station_id') \
+        .merge(populated_systems[['id', 'name', 'x', 'y', 'z']] \
+        .rename(columns={'id': 'system_id', 'name': 'system'}), on='system_id') \
+        .drop(columns=['station_id', 'system_id'])
+
+    dist_listings = listings_with_locations.assign(distance = lambda x: distance(origin, x))
+
+    listings_ranked = dist_listings.assign(rnk = dist_listings.groupby('commodity')['distance'] \
+            .rank(method='first', ascending=True)) \
+            .query(f'rnk <= {top_count}') \
+            .sort_values(by=['distance', 'commodity', 'station'], ascending=[True, True, True]) \
+            .drop_duplicates() \
+            .reset_index() \
+            .drop(columns=['x', 'y', 'z', 'index', 'rnk'])
+
+    listings_grouped = listings_ranked.sort_values(by=['distance', 'system', 'Sublight', 'station', 'commodity']) \
+        .set_index(['system', 'station', 'commodity'])
+
+    return listings_grouped
