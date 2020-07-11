@@ -231,7 +231,7 @@ def scrape_commodity(commodity):
                 page = BeautifulSoup(p, 'html.parser')
         except Exception as e:
             logging.debug(e)
-            logging.warning("Retrying {commodity} page after {retry_period} sec.")
+            logging.warning(f"Retrying {commodity} page after {retry_period} sec.")
             sleep(retry_period)
 
     if page is None:
