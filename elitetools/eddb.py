@@ -7,6 +7,7 @@ import os.path
 import tempfile
 from datetime import datetime, timedelta, timezone
 from enum import Enum
+from time import sleep
 from urllib.parse import urlparse
 from urllib.request import urlopen, urlretrieve
 
@@ -223,8 +224,19 @@ def scrape_commodity(commodity):
     ''' Given a commodity's name and EDDB URL, extract best sell price listings and return as a list of dicts.
     '''
     listings = []
-    with urlopen(commodity['url']) as p:
-        page = BeautifulSoup(p, 'html.parser')
+    page = None
+    for retry_period in [1, 5, 10]:
+        try:
+            with urlopen(commodity['url']) as p:
+                page = BeautifulSoup(p, 'html.parser')
+        except Exception as e:
+            logging.debug(e)
+            logging.warning("Retrying {commodity} page after {retry_period} sec.")
+            sleep(retry_period)
+
+    if page is None:
+        raise Exception(f"Cannot load page for commodity {commodity}.")           
+
     max_sell = page.find(id='table-stations-max-sell')
     for row in max_sell.find_all('tr'):
         fields = row.find_all('td')
