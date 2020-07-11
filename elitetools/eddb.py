@@ -231,11 +231,11 @@ def scrape_commodity(commodity):
                 page = BeautifulSoup(p, 'html.parser')
         except Exception as e:
             logging.debug(e)
-            logging.warning(f"Retrying {commodity} page after {retry_period} sec.")
+            logging.warning(f"Retrying {commodity['name']} page after {retry_period} sec.")
             sleep(retry_period)
 
     if page is None:
-        raise Exception(f"Cannot load page for commodity {commodity}.")           
+        raise Exception(f"Cannot load page for commodity {commodity['name']}.")           
 
     max_sell = page.find(id='table-stations-max-sell')
     for row in max_sell.find_all('tr'):
