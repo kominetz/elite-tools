@@ -229,6 +229,7 @@ def scrape_commodity(commodity):
         try:
             with urlopen(commodity['url']) as p:
                 page = BeautifulSoup(p, 'html.parser')
+                break
         except Exception as e:
             logging.debug(e)
             logging.warning(f"Retrying {commodity['name']} page after {retry_period} sec.")
