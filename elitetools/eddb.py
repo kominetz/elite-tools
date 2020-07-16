@@ -508,7 +508,7 @@ def best_rt_listings(origin='Sol', radius=1000, top_count=5, by_commodity=[], mi
     ''' Find best real-time commodity listings.
     '''
     target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(by_commodity)]
-    nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else nearby_rt_listings['system_name'].values
+    nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else target_rt_listings['system_name'].values
     nearby_systems = pd.DataFrame({
         'system_name': nearby_system_names,
         'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
