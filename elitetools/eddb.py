@@ -543,9 +543,9 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
     commodity_factor = pd.DataFrame(core_minerals, columns=['commodity_name']).assign(factor = 1.0).assign(capacity= ASPX_CARGO_CAPACITY * DEMAND_THRESHOLD).set_index('commodity_name')    
     commodity_factor.at['Low Temperature Diamonds', 'factor'] = math.sqrt(ASPX_CARGO_CAPACITY * LTD2_MINING_RATE / BASE_FACTOR)
     commodity_factor.at['Painite', 'factor'] = math.sqrt(PYTHON_CARGO_CAPACITY * P2_MINING_RATE / BASE_FACTOR)
-    commodity_factor.at['Painite', 'capacity'] = PYTHON_CARGO_CAPACITY * DEMAND_THRESHOLD
+    commodity_factor.at['Painite', 'capacity'] = PYTHON_CARGO_CAPACITY
     commodity_factor.at['Platinum', 'factor'] = math.sqrt(PYTHON_CARGO_CAPACITY * P2_MINING_RATE / BASE_FACTOR)
-    commodity_factor.at['Platinum', 'capacity'] = PYTHON_CARGO_CAPACITY * DEMAND_THRESHOLD
+    commodity_factor.at['Platinum', 'capacity'] = PYTHON_CARGO_CAPACITY
 
     target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(core_minerals)]
     nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else target_rt_listings['system_name'].values
@@ -557,8 +557,9 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
 
     scored_listings = nearby_rt_listings \
         .merge(commodity_factor, on='commodity_name') \
-        .query('demand >= capacity') \
+        .query(f'demand >= capacity * {DEMAND_THRESHOLD}') \
         .assign(Score = lambda l: l['sell_price'] * l['factor'] / 1000000) \
+        .assign(Amount=lambda l: l['sell_price'] * l['capacity']) \
         .query(f'Score >= {min_score}') \
         .sort_values('Score', ascending=False)
 
@@ -568,7 +569,7 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
         .query(f'rnk <= {commodity_count}') \
         .drop_duplicates() \
         .reset_index() \
-        [:top_count][['commodity_name', 'sell_price', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score']] \
+        [:top_count][['commodity_name', 'sell_price', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score', 'Amount']] \
         .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
 
     return ranked_listings
