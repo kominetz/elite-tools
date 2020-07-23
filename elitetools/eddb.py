@@ -504,7 +504,7 @@ def faction_home_system(faction):
 #
 ##
 
-def best_rt_listings(origin='Sol', radius=1000, top_count=5, by_commodity=[], min_demand=500):
+def best_rt_listings(origin='Sol', radius=1000, top_count=10, by_commodity=[], min_demand=200):
     ''' Find best real-time commodity listings.
     '''
     target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(by_commodity)]
@@ -534,17 +534,18 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
 
     PYTHON_CARGO_CAPACITY = 198
     ASPX_CARGO_CAPACITY = 102
-    P2_MINING_RATE = 250
-    LTD2_MINING_RATE = 150
-    CORE_MINING_RATE = 125
+    PAIN2_MINING_RATE = 175
+    PLAT2_MINING_RATE = PAIN2_MINING_RATE  # Barring any evidence to the contrary
+    LTD2_MINING_RATE = 110
+    CORE2_MINING_RATE = 100
     DEMAND_THRESHOLD = 4
-    BASE_FACTOR = ASPX_CARGO_CAPACITY * CORE_MINING_RATE
+    BASE_FACTOR = ASPX_CARGO_CAPACITY * CORE2_MINING_RATE
 
-    commodity_factor = pd.DataFrame(core_minerals, columns=['commodity_name']).assign(factor = 1.0).assign(capacity= ASPX_CARGO_CAPACITY * DEMAND_THRESHOLD).set_index('commodity_name')    
+    commodity_factor = pd.DataFrame(core_minerals, columns=['commodity_name']).assign(factor = 1.0).assign(capacity= ASPX_CARGO_CAPACITY).set_index('commodity_name')    
     commodity_factor.at['Low Temperature Diamonds', 'factor'] = math.sqrt(ASPX_CARGO_CAPACITY * LTD2_MINING_RATE / BASE_FACTOR)
-    commodity_factor.at['Painite', 'factor'] = math.sqrt(PYTHON_CARGO_CAPACITY * P2_MINING_RATE / BASE_FACTOR)
+    commodity_factor.at['Painite', 'factor'] = math.sqrt(PYTHON_CARGO_CAPACITY * PAIN2_MINING_RATE / BASE_FACTOR)
     commodity_factor.at['Painite', 'capacity'] = PYTHON_CARGO_CAPACITY
-    commodity_factor.at['Platinum', 'factor'] = math.sqrt(PYTHON_CARGO_CAPACITY * P2_MINING_RATE / BASE_FACTOR)
+    commodity_factor.at['Platinum', 'factor'] = math.sqrt(PYTHON_CARGO_CAPACITY * PLAT2_MINING_RATE / BASE_FACTOR)
     commodity_factor.at['Platinum', 'capacity'] = PYTHON_CARGO_CAPACITY
 
     target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(core_minerals)]
@@ -558,8 +559,8 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
     scored_listings = nearby_rt_listings \
         .merge(commodity_factor, on='commodity_name') \
         .query(f'demand >= capacity * {DEMAND_THRESHOLD}') \
-        .assign(Score = lambda l: l['sell_price'] * l['factor'] / 1000000) \
-        .assign(Amount=lambda l: l['sell_price'] * l['capacity']) \
+        .assign(Score = lambda l: round(l['sell_price'] * l['factor'] / 1000000, 3)) \
+        .assign(Amount = lambda l: round(l['sell_price'] * l['capacity'] / 1000000, 1)) \
         .query(f'Score >= {min_score}') \
         .sort_values('Score', ascending=False)
 
