@@ -53,7 +53,7 @@ core_minerals = [
     'Monazite',
     'Musgravite',
     'Painite',
-    'Platinum'
+    'Platinum',
     'Rhodplumsite',
     'Serendibite',
     'Void Opals',
@@ -529,15 +529,15 @@ def best_rt_listings(origin='Sol', radius=1000, top_count=10, by_commodity=[], m
     return nearby_rt_listings
 
 
-def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_score=0.8):
+def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_score=1.0):
     global core_minerals
 
-    PYTHON_CARGO_CAPACITY = 198
-    ASPX_CARGO_CAPACITY = 102
+    PYTHON_CARGO_CAPACITY = 192
+    ASPX_CARGO_CAPACITY = 96
     PAIN2_MINING_RATE = 175
     PLAT2_MINING_RATE = PAIN2_MINING_RATE  # Barring any evidence to the contrary
-    LTD2_MINING_RATE = 110
-    CORE2_MINING_RATE = 100
+    LTD2_MINING_RATE = 100
+    CORE2_MINING_RATE = 75
     DEMAND_THRESHOLD = 4
     BASE_FACTOR = ASPX_CARGO_CAPACITY * CORE2_MINING_RATE
 
