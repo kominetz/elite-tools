@@ -1,0 +1,126 @@
+Alexandrite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'core'
+  average: 217187
+  eddb_id: '349'
+Monazite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'core'
+  average: 200922
+  eddb_id: '345'
+Musgravite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'core'
+  average: 198521
+  eddb_id: '346'
+Grandidierite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'core'
+  average: 197198
+  eddb_id: '348'
+Rhodplumsite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'core'
+  average: 176788
+  eddb_id: '343'
+Serendibite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'core'
+  average: 172629
+  eddb_id: '344'
+Benitoite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'core'
+  average: 149321
+  eddb_id: '347'
+Void Opals:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'core'
+  average: 135214
+  eddb_id: '350'
+Low Temperature Diamonds:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'laser'
+  average: 106288
+  eddb_id: '276'
+Platinum:
+  type: 'metal'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'laser'
+  average: 58247
+  eddb_id: '46'
+Painite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'laser'
+  average: 52985
+  eddb_id: '83'
+Tritium:
+  type: 'chemical'
+  hotspot: 'TRUE'
+  buyable: 'TRUE'
+  extract: 'laser'
+  average: 51572
+  eddb_id: '362'
+Palladium:
+  type: 'metal'
+  hotspot: 'FALSE'
+  buyable: 'TRUE'
+  extract: 'laser'
+  average: 50587
+  eddb_id: '45'
+Gold:
+  type: 'metal'
+  hotspot: 'FALSE'
+  buyable: 'TRUE'
+  extract: 'laser'
+  average: 47487
+  eddb_id: '42'
+Osmium:
+  type: 'metal'
+  hotspot: 'FALSE'
+  buyable: 'FALSE'
+  extract: 'laser'
+  average: 45180
+  eddb_id: '97'
+Silver:
+  type: 'metal'
+  hotspot: 'FALSE'
+  buyable: 'TRUE'
+  extract: 'laser'
+  average: 37099
+  eddb_id: '47'
+Bromellite:
+  type: 'mineral'
+  hotspot: 'TRUE'
+  buyable: 'FALSE'
+  extract: 'laser'
+  average: 30422
+  eddb_id: '174'
+Samarium:
+  type: 'metal'
+  hotspot: 'FALSE'
+  buyable: 'FALSE'
+  extract: 'laser'
+  average: 25851
+  eddb_id: '275'

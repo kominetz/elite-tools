@@ -28,21 +28,33 @@ class Demand(Enum):
     MEDIUM = 2
     HIGH = 3
 
-commodity_pages = [
-    {'name': 'Alexandrite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/349'},
-    {'name': 'Benitoite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/347'},
-    {'name': 'Bromellite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/274'},
-    {'name': 'Grandidierite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/348'},
-    {'name': 'Low Temperature Diamonds', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/276'},
-    {'name': 'Monazite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/345'},
-    {'name': 'Musgravite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/346'},
-    {'name': 'Painite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/83'},
-    {'name': 'Platinum', 'type': 'Metal', 'url': 'https://eddb.io/commodity/46'},
-    {'name': 'Rhodplumsite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/343'},
-    {'name': 'Serendibite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/344'},
-    {'name': 'Tritium', 'type': 'Chemical', 'url': 'https://eddb.io/commodity/362'},
-    {'name': 'Void Opals', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/350'},
+MINING_RATE_CORE_HOTSPOT = 75
+MINING_RATE_LASER_LTD_HOTSPOT = 125
+MINING_RATE_LASER_NOTSPOT = 150
+MINING_RATE_LASER_HOTSPOT = 200
+
+minerals = [
+    {'name': 'Alexandrite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/349', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Benitoite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/347', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Bromellite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/274', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Gold', 'type': 'Metal', 'url': 'https://eddb.io/commodity/42', 'mining_rate': MINING_RATE_LASER_NOTSPOT},
+    {'name': 'Grandidierite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/348', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Low Temperature Diamonds', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/276', 'mining_rate': MINING_RATE_LASER_LTD_HOTSPOT},
+    {'name': 'Monazite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/345', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Musgravite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/346', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Osmium', 'type': 'Metal', 'url': 'https://eddb.io/commodity/97', 'mining_rate': MINING_RATE_LASER_NOTSPOT},
+    {'name': 'Painite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/83', 'mining_rate': MINING_RATE_LASER_HOTSPOT},
+    {'name': 'Palladium', 'type': 'Metal', 'url': 'https://eddb.io/commodity/45', 'mining_rate': MINING_RATE_LASER_NOTSPOT},
+    {'name': 'Platinum', 'type': 'Metal', 'url': 'https://eddb.io/commodity/46', 'mining_rate': MINING_RATE_LASER_HOTSPOT},
+    {'name': 'Rhodplumsite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/343', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Samarium', 'type': 'Metal', 'url': 'https://eddb.io/commodity/275', 'mining_rate': MINING_RATE_LASER_NOTSPOT},
+    {'name': 'Serendibite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/344', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Silver', 'type': 'Metal', 'url': 'https://eddb.io/commodity/47', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Tritium', 'type': 'Chemical', 'url': 'https://eddb.io/commodity/362', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
+    {'name': 'Void Opals', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/350', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
 ]
+
+minerals_df = pd.DataFrame(minerals)
 
 core_minerals = [
     'Alexandrite',
@@ -194,7 +206,7 @@ def rtl_cache(force_refresh=False):
     else:
         logging.debug(f'# Scraping "{file_path}".')
         listings = []
-        for commodity in commodity_pages:
+        for commodity in minerals:
             listings.extend(scrape_commodity(commodity))
         with open(file_path, 'w') as rtl_file:
             for l in listings:
@@ -250,6 +262,7 @@ def scrape_commodity(commodity):
             'station_name': fields[0].find('a').get_text(),
             'system_name': fields[1].find('a').get_text(),
             'sell_price': int(fields[2].find('span').get_text().replace(',', '')),
+            'over_average': int(fields[3].find('span').get_text().replace('%', ''))/100,
             'demand': int(fields[4].find('span').get_text().replace(',', '')),
             'landing_pad': fields[5].find('span').get_text(),
             'freshness': time_fields[1].get_text(),
@@ -523,32 +536,16 @@ def best_rt_listings(origin='Sol', radius=1000, top_count=10, by_commodity=[], m
         .sort_values('sell_price', ascending=False) \
         .drop_duplicates() \
         .reset_index() \
-        [['commodity_name', 'sell_price', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
-        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
+        [['commodity_name', 'sell_price', 'over_average', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
+        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'over_average': 'Sell/Avg', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
 
     return nearby_rt_listings
 
 
-def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_score=1.0):
+def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_score=0.0, min_demand=400):
     global core_minerals
 
-    PYTHON_CARGO_CAPACITY = 192
-    ASPX_CARGO_CAPACITY = 96
-    PAIN2_MINING_RATE = 175
-    PLAT2_MINING_RATE = PAIN2_MINING_RATE  # Barring any evidence to the contrary
-    LTD2_MINING_RATE = 100
-    CORE2_MINING_RATE = 75
-    DEMAND_THRESHOLD = 4
-    BASE_FACTOR = ASPX_CARGO_CAPACITY * CORE2_MINING_RATE
-
-    commodity_factor = pd.DataFrame(core_minerals, columns=['commodity_name']).assign(factor = 1.0).assign(capacity= ASPX_CARGO_CAPACITY).set_index('commodity_name')    
-    commodity_factor.at['Low Temperature Diamonds', 'factor'] = math.sqrt(ASPX_CARGO_CAPACITY * LTD2_MINING_RATE / BASE_FACTOR)
-    commodity_factor.at['Painite', 'factor'] = math.sqrt(PYTHON_CARGO_CAPACITY * PAIN2_MINING_RATE / BASE_FACTOR)
-    commodity_factor.at['Painite', 'capacity'] = PYTHON_CARGO_CAPACITY
-    commodity_factor.at['Platinum', 'factor'] = math.sqrt(PYTHON_CARGO_CAPACITY * PLAT2_MINING_RATE / BASE_FACTOR)
-    commodity_factor.at['Platinum', 'capacity'] = PYTHON_CARGO_CAPACITY
-
-    target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(core_minerals)]
+    target_rt_listings = commodity_listings_rt
     nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else target_rt_listings['system_name'].values
     nearby_systems = pd.DataFrame({
         'system_name': nearby_system_names,
@@ -557,10 +554,9 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
     nearby_rt_listings = target_rt_listings.merge(nearby_systems, on="system_name")
 
     scored_listings = nearby_rt_listings \
-        .merge(commodity_factor, on='commodity_name') \
-        .query(f'demand >= capacity * {DEMAND_THRESHOLD}') \
-        .assign(Score = lambda l: round(l['sell_price'] * l['factor'] / 1000000, 3)) \
-        .assign(Amount = lambda l: round(l['sell_price'] * l['capacity'] / 1000000, 1)) \
+        .query(f'demand >= {min_demand}') \
+        .merge(minerals_df[['name', 'mining_rate']], left_on='commodity_name', right_on='name') \
+        .assign(Score = lambda l: round(l['sell_price'] * l['mining_rate'] / 1000000)) \
         .query(f'Score >= {min_score}') \
         .sort_values('Score', ascending=False)
 
@@ -570,8 +566,8 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
         .query(f'rnk <= {commodity_count}') \
         .drop_duplicates() \
         .reset_index() \
-        [:top_count][['commodity_name', 'sell_price', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score', 'Amount']] \
-        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
+        [:top_count][['commodity_name', 'sell_price', 'over_average', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score']] \
+        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'over_average': 'Sell/Avg', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
 
     return ranked_listings
 
