@@ -138,6 +138,9 @@ engineer_systems = sorted([
     'Shenve',  # Colonia
 ])
 
+CORE_ENGINEERS = 'Alioth, Muang, Shenve, Sol, Leesti, Khun, Deciat, Kuwemaki, Giryak, Laksak, Eurybia, Shinrarta Dezhra, Sirius, Arque, Meene, Kuk, Wyrd, Beta-3 Tucani, Achenar, Wolf 397, Yoru'
+ALL_ENGINEERS = 'Alioth, Muang, Shenve, Sol, Leesti, Khun, Los, Deciat, Kuwemaki, Giryak, Laksak, Eurybia, Shinrarta Dezhra, Sirius, Tir, Luchtaine, Asura, Arque, Meene, Kuk, Wyrd, Beta-3 Tucani, Achenar, Wolf 397, Yoru'
+
 SYSTEM_INFLUENCE_RANGE = 20
 
 et_temp_path = os.path.join(tempfile.gettempdir(), 'elite-tools')
@@ -396,7 +399,7 @@ def query_systems_by_name(system_names):
 
 
 def query_nearby_systems(origin, radius):
-    ''' Given a system and a radius, find all systems within radius including the origin systems
+    ''' Given one or more origin systems and a radius, return system position objects within radius including the origin systems
     '''
     if type(origin) == list:
         return set([nearby_system for s in origin for nearby_system in query_nearby_systems(s, radius)])
@@ -604,3 +607,25 @@ def commodity_sources_nearby(origin_name, commodity_names, minimum_supply=100, t
         .set_index(['system', 'station', 'commodity'])
 
     return listings_grouped
+
+
+def filter_hge_states(states):
+    hge_states = ["Boom", "Civil Unrest", "Civil War", "Investment", "Outbreak", "War"]
+    return "/".join(sorted([x['name'] for x in states if x['name'] in hge_states]))
+
+def query_nearby_hge(origin="Sol", radius=25, min_pop=1, state_count=0):
+    nearby_system_names = query_nearby_systems(origin, radius)
+    nearby_systems = pd.DataFrame({
+        'name': nearby_system_names,
+        'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
+    }) \
+    .merge(populated_systems[['name', 'population', 'primary_economy', 'security', 'allegiance', 'states']], on='name')
+    nearby_systems = nearby_systems.assign(hge_states = [filter_hge_states(s) for s in nearby_systems.states])
+    nearby_systems.loc[(nearby_systems.allegiance == 'Federation') & (nearby_systems.hge_states == ''), 'hge_states'] = "Federation"
+    nearby_systems.loc[(nearby_systems.allegiance == 'Empire')     & (nearby_systems.hge_states == ''), 'hge_states'] = "Empire"
+    nearby_systems = nearby_systems.query(f'population >= {min_pop}')
+    if state_count > 0:
+        nearby_systems = nearby_systems.assign(rnk = nearby_systems.groupby('hge_states')['Distance'] \
+            .rank(method='first', ascending=True)) \
+            .query(f'rnk <= {state_count}')
+    return nearby_systems[nearby_systems.hge_states > ''][['Distance', 'name', 'population', 'primary_economy', 'security', 'hge_states']].sort_values('Distance').reset_index(drop=True)
