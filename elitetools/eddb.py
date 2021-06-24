@@ -404,7 +404,7 @@ def query_nearby_systems(origin, radius):
     if type(origin) == list:
         return set([nearby_system for s in origin for nearby_system in query_nearby_systems(s, radius)])
     else: 
-        return [s['name'] for s in populated_systems[['name', 'x', 'y', 'z']].to_dict(orient='record') if distance(origin, s) <= radius]
+        return [s['name'] for s in populated_systems[['name', 'x', 'y', 'z']].to_dict('records') if distance(origin, s) <= radius]
 
 
 def query_systems_by_faction(faction):
