@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 
 
 class Feeds(Enum):
-    POPULATED_SYSTEMS = 'http://eddb.io/archive/v6/systems_populated.jsonl'
+    POPULATED_SYSTEMS = 'https://eddb.io/archive/v6/systems_populated.jsonl'
     STATIONS = 'https://eddb.io/archive/v6/stations.jsonl'
     FACTIONS = 'https://eddb.io/archive/v6/factions.jsonl'
     COMMODITIES = 'https://eddb.io/archive/v6/commodities.json'
@@ -56,6 +56,16 @@ minerals = [
 
 minerals_df = pd.DataFrame(minerals)
 
+top_laser_minerals = [
+    'Platinum',
+    'Painite',
+    'Tritium',
+    'Palladium',
+    'Gold',
+    'Osmium',
+    'Silver',
+]
+
 core_minerals = [
     'Alexandrite',
     'Benitoite',
@@ -71,10 +81,15 @@ core_minerals = [
     'Void Opals',
 ]
 
-icy_core_minerals = [
+top_core_minerals = [
     'Alexandrite',
+    'Bromellite',
     'Grandidierite',
     'Low Temperature Diamonds',
+    'Monazite',
+    'Musgravite',
+    'Rhodplumsite',
+    'Serendibite',
     'Void Opals',
 ]
 
@@ -170,7 +185,7 @@ def load_feeds(force_refresh=False):
     populated_systems = load_feed(Feeds.POPULATED_SYSTEMS, force_refresh)
     populated_systems = populated_systems[populated_systems['population'] > 0].assign(name_index = populated_systems['name'].str.lower()).set_index('name_index')
     station_details = load_feed(Feeds.STATIONS, force_refresh)
-    commodity_listings_rt = load_rt_listings()
+    commodity_listings_rt = load_rt_listings(force_refresh)
 
 
 def fresh_feed(filepath):
@@ -265,7 +280,7 @@ def scrape_commodity(commodity):
             'station_name': fields[0].find('a').get_text(),
             'system_name': fields[1].find('a').get_text(),
             'sell_price': int(fields[2].find('span').get_text().replace(',', '')),
-            'over_average': int(fields[3].find('span').get_text().replace('%', ''))/100,
+            'performance': int(fields[3].find('span').get_text().replace('%', ''))/100,
             'demand': int(fields[4].find('span').get_text().replace(',', '')),
             'landing_pad': fields[5].find('span').get_text(),
             'freshness': time_fields[1].get_text(),
@@ -539,8 +554,8 @@ def best_rt_listings(origin='Sol', radius=1000, top_count=10, by_commodity=[], m
         .sort_values('sell_price', ascending=False) \
         .drop_duplicates() \
         .reset_index() \
-        [['commodity_name', 'sell_price', 'over_average', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
-        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'over_average': 'Sell/Avg', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
+        [['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
+        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
 
     return nearby_rt_listings
 
@@ -569,8 +584,8 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
         .query(f'rnk <= {commodity_count}') \
         .drop_duplicates() \
         .reset_index() \
-        [:top_count][['commodity_name', 'sell_price', 'over_average', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score']] \
-        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'over_average': 'Sell/Avg', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
+        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score']] \
+        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
 
     return ranked_listings
 
@@ -629,3 +644,30 @@ def query_nearby_hge(origin="Sol", radius=25, min_pop=1, state_count=0):
             .rank(method='first', ascending=True)) \
             .query(f'rnk <= {state_count}')
     return nearby_systems[nearby_systems.hge_states > ''][['Distance', 'name', 'population', 'primary_economy', 'security', 'hge_states']].sort_values('Distance').reset_index(drop=True)
+
+def best_perf_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_perf=0.0, min_demand=400):
+    # Best Ratio
+    global core_minerals
+
+    target_rt_listings = commodity_listings_rt
+    nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else target_rt_listings['system_name'].values
+    nearby_systems = pd.DataFrame({
+        'system_name': nearby_system_names,
+        'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
+    })
+    nearby_rt_listings = target_rt_listings.merge(nearby_systems, on="system_name")
+    scored_listings = nearby_rt_listings \
+        .query(f'demand >= {min_demand}') \
+        .query(f'performance >= {min_perf}') \
+        .sort_values('performance', ascending=False)
+
+    ranked_listings = scored_listings \
+        .assign(rnk = scored_listings.groupby('commodity_name')['performance'] \
+        .rank(method='first', ascending=False)) \
+        .query(f'rnk <= {commodity_count}') \
+        .drop_duplicates() \
+        .reset_index() \
+        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
+        .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
+
+    return ranked_listings
