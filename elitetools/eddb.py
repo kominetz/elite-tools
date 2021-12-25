@@ -13,7 +13,7 @@ from urllib.request import urlopen, urlretrieve
 
 import pandas as pd
 from bs4 import BeautifulSoup
-
+import ssl
 
 class Feeds(Enum):
     POPULATED_SYSTEMS = 'https://eddb.io/archive/v6/systems_populated.jsonl'
@@ -304,6 +304,7 @@ def load_feed(feed: Feeds, force_refresh=False):
 def feed_cache(feed: Feeds, force_refresh=False):
     ''' Given an EDDB feed, download it if necessary and return the file location.
     '''
+    ssl._create_default_https_context = ssl._create_unverified_context
     cache_filename = urlparse(feed.value).path[1:].replace("/", "-")
     file_path = os.path.join(et_temp_path, cache_filename)
     if os.path.exists(file_path) and not force_refresh and fresh_feed(file_path):
@@ -346,7 +347,7 @@ def center(systems):
         sum_y += s_obj['y']
         sum_z += s_obj['z']
     n = len(s_list)
-    return {'name': 'Average Position', 'x': sum_x / n, 'y': sum_y / n, 'z': sum_z / n, 'systems': systems}
+    return {'name': 'Average Position', 'x': sum_x / n, 'y': sum_y / n, 'z': sum_z / n}
 
 
 # Given one or more systems, finds the average position weighted by log10(population).
