@@ -536,7 +536,7 @@ def faction_home_system(faction):
 #
 ##
 
-def best_rt_listings(origin='Sol', radius=1000, top_count=10, by_commodity=[], min_demand=200):
+def top_price_listings(origin='Sol', radius=1000, top_count=10, by_commodity=[], min_demand=200):
     ''' Find best real-time commodity listings.
     '''
     target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(by_commodity)]
@@ -557,11 +557,10 @@ def best_rt_listings(origin='Sol', radius=1000, top_count=10, by_commodity=[], m
         .reset_index() \
         [['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
         .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
+    return nearby_rt_listings.style.format({'Perf':'{:+.2f}'})
 
-    return nearby_rt_listings
 
-
-def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_score=0.0, min_demand=400):
+def top_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_score=0.0, min_demand=400):
     global core_minerals
 
     target_rt_listings = commodity_listings_rt
@@ -587,8 +586,7 @@ def best_scoring_minerals(origin='Sol', radius=1000, top_count=10, commodity_cou
         .reset_index() \
         [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score']] \
         .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
-
-    return ranked_listings
+    return ranked_listings.style.format({'Perf':'{:+.2f}'})
 
 def commodity_sources_nearby(origin_name, commodity_names, minimum_supply=100, top_count=5):
     ''' Given a starting point and a list of commodities, find the five closet sources for each commodity,
@@ -646,7 +644,7 @@ def query_nearby_hge(origin="Sol", radius=25, min_pop=1, state_count=0):
             .query(f'rnk <= {state_count}')
     return nearby_systems[nearby_systems.hge_states > ''][['Distance', 'name', 'population', 'primary_economy', 'security', 'hge_states']].sort_values('Distance').reset_index(drop=True)
 
-def best_perf_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_perf=0.0, min_demand=400):
+def top_perf_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=5, min_perf=0.0, min_demand=400):
     # Best Ratio
     global core_minerals
 
@@ -670,5 +668,4 @@ def best_perf_minerals(origin='Sol', radius=1000, top_count=10, commodity_count=
         .reset_index() \
         [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
         .rename(columns={'commodity_name': 'Commodity', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'system_name': 'System', 'station_name': 'Station', 'landing_pad': 'Pad'})
-
-    return ranked_listings
+    return ranked_listings.style.format({'Perf':'{:+.2f}'})
