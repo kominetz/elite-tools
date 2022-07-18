@@ -534,7 +534,7 @@ def faction_home_system(faction):
 #
 # COMMODITIES AND LISTINGS
 #
-##g
+##
 
 def top_price_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_demand=512):
     ''' Find best real-time commodity listings.
