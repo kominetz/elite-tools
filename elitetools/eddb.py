@@ -56,16 +56,6 @@ minerals = [
 
 minerals_df = pd.DataFrame(minerals)
 
-top_laser_minerals = [
-    'Platinum',
-    'Painite',
-    'Tritium',
-    'Palladium',
-    'Gold',
-    'Osmium',
-    'Silver',
-]
-
 core_minerals = [
     'Alexandrite',
     'Benitoite',
@@ -81,18 +71,6 @@ core_minerals = [
     'Void Opals',
 ]
 
-top_core_minerals = [
-    'Alexandrite',
-    'Bromellite',
-    'Grandidierite',
-    'Low Temperature Diamonds',
-    'Monazite',
-    'Musgravite',
-    'Rhodplumsite',
-    'Serendibite',
-    'Void Opals',
-]
-
 core_only_minerals = [
     'Alexandrite',
     'Benitoite',
@@ -103,6 +81,29 @@ core_only_minerals = [
     'Serendibite',
     'Void Opals',
 ]
+
+top_core_minerals = [
+    'Alexandrite',
+    'Grandidierite',
+    'Low Temperature Diamonds',
+    'Monazite',
+    'Musgravite',
+    'Rhodplumsite',
+    'Serendibite',
+    'Void Opals',
+]
+
+top_laser_minerals = [
+    'Platinum',
+    'Painite',
+    'Tritium',
+    'Palladium',
+    'Gold',
+    'Osmium',
+    'Silver',
+]
+
+top_minerals = top_core_minerals + top_laser_minerals
 
 # TODO: Move out of main library.
 my_engineers = [
@@ -283,7 +284,8 @@ def scrape_commodity(commodity):
             'performance': int(fields[3].find('span').get_text().replace('%', ''))/100,
             'demand': int(fields[4].find('span').get_text().replace(',', '')),
             'landing_pad': fields[5].find('span').get_text(),
-            'freshness': time_fields[1].get_text(),
+            'as_of_days': float(time_fields[0].get_text().strip("\{\}")) / 86400.0,
+            'as_of_text': time_fields[1].get_text(),
         })
     logging.info("# %s: %d listings scraped." % (commodity['name'], len(listings)))
     return listings
@@ -536,9 +538,10 @@ def faction_home_system(faction):
 #
 ##
 
-def top_price_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_demand=512):
-    ''' Find best real-time commodity listings.
-    '''
+def top_price_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_demand=1000, as_of_days=2.0, large_pad_only=False):
+    """ Find top real-time commodity listings by price.
+    """
+    query_filter = f'demand >= {min_demand} and as_of_days <= {as_of_days} and landing_pad == "L"' if large_pad_only else f'demand >= {min_demand} and as_of_days <= {as_of_days}'
     target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(by_commodity)] if len(by_commodity) > 0 else commodity_listings_rt
     nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else target_rt_listings['system_name'].values
     nearby_systems = pd.DataFrame({
@@ -546,28 +549,25 @@ def top_price_mineral_listings(origin='Sol', radius=1000, top_count=10, commodit
         'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
     })
     nearby_rt_listings = target_rt_listings.merge(nearby_systems, on="system_name")
-
-    priced_rt_listings = nearby_rt_listings \
-        .query(f'demand > {min_demand}') \
-        .sort_values('sell_price', ascending=False)
-
-    ranked_rt_listings = priced_rt_listings \
+    filtered_listings = nearby_rt_listings.query(query_filter).sort_values('sell_price', ascending=False)
+    ranked_rt_listings = filtered_listings \
         .assign(rnk = nearby_rt_listings.groupby('commodity_name')['sell_price'] \
         .rank(method='first', ascending=False)) \
         .query(f'rnk <= {commodity_count}') \
         .drop_duplicates() \
         .reset_index() \
-        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
-        .rename(columns={'commodity_name': 'Commodity', 'system_name': 'System', 'station_name': 'Station', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'landing_pad': 'Pad'})
+        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'as_of_text', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
+        .rename(columns={'commodity_name': 'Commodity', 'system_name': 'System', 'station_name': 'Station', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'as_of_text': 'As Of', 'landing_pad': 'Pad'})
+
     return ranked_rt_listings \
         .style.format({'Perf':'{:+.2f}', 'Distance':'{:.1f} LY'}) \
         .set_properties(subset=['Commodity', 'System', 'Station'], **{'text-align': 'left'}) \
         .set_table_styles([dict(selector = 'th', props=[('text-align', 'left')])])
 
-def top_perf_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_perf=0.0, min_demand=512):
-    # Best Ratio
-    global core_minerals
-
+def top_perf_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_perf=0.0, min_demand=1000, as_of_days=2.0, large_pad_only=False):
+    """ Find top real-time commodity listings by price performance (galactic average benchmark).
+    """
+    query_filter = f'performance >= {min_perf} and demand >= {min_demand} and as_of_days <= {as_of_days} and landing_pad == "L"' if large_pad_only else f'performance >= {min_perf} and demand >= {min_demand} and as_of_days <= {as_of_days}'
     target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(by_commodity)] if len(by_commodity) > 0 else commodity_listings_rt
     nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else target_rt_listings['system_name'].values
     nearby_systems = pd.DataFrame({
@@ -575,50 +575,47 @@ def top_perf_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity
         'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
     })
     nearby_rt_listings = target_rt_listings.merge(nearby_systems, on="system_name")
-    scored_listings = nearby_rt_listings \
-        .query(f'demand >= {min_demand}') \
-        .query(f'performance >= {min_perf}') \
-        .sort_values('performance', ascending=False)
-
-    ranked_listings = scored_listings \
-        .assign(rnk = scored_listings.groupby('commodity_name')['performance'] \
+    filtered_listings = nearby_rt_listings.query(query_filter).sort_values('performance', ascending=False)
+    ranked_listings = filtered_listings \
+        .assign(rnk = filtered_listings.groupby('commodity_name')['performance'] \
         .rank(method='first', ascending=False)) \
         .query(f'rnk <= {commodity_count}') \
         .drop_duplicates() \
         .reset_index() \
-        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
-        .rename(columns={'commodity_name': 'Commodity', 'system_name': 'System', 'station_name': 'Station', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'landing_pad': 'Pad'})
+        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'as_of_text', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
+        .rename(columns={'commodity_name': 'Commodity', 'system_name': 'System', 'station_name': 'Station', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'as_of_text': 'As Of', 'landing_pad': 'Pad'})
+
     return ranked_listings \
         .style.format({'Perf':'{:+.2f}', 'Distance':'{:.1f} LY'}) \
         .set_properties(subset=['Commodity', 'System', 'Station'], **{'text-align': 'left'}) \
         .set_table_styles([dict(selector = 'th', props=[('text-align', 'left')])])
 
-def top_score_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_score=0.0, min_demand=512):
-    global core_minerals
-
+def top_score_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_score=0.0, min_demand=1000, as_of_days=2.0, large_pad_only=False):
+    """ Find top real-time commodity listings by score accounting for mining rates (core v. laser).
+    """
+    query_filter = f'landing_pad == "L" and demand >= {min_demand} and as_of_days <= {as_of_days}' if large_pad_only else f'demand >= {min_demand} and as_of_days <= {as_of_days}'
     target_rt_listings = commodity_listings_rt[commodity_listings_rt['commodity_name'].isin(by_commodity)] if len(by_commodity) > 0 else commodity_listings_rt
     nearby_system_names = query_nearby_systems(origin, radius) if radius > 0 else target_rt_listings['system_name'].values
     nearby_systems = pd.DataFrame({
         'system_name': nearby_system_names,
         'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
     })
-    nearby_rt_listings = target_rt_listings.merge(nearby_systems, on="system_name")
-
-    scored_listings = nearby_rt_listings \
-        .query(f'demand >= {min_demand}') \
+    nearby_listings = target_rt_listings.merge(nearby_systems, on="system_name")
+    filtered_listings = nearby_listings.query(query_filter)
+    scored_listings = filtered_listings \
         .merge(minerals_df[['name', 'mining_rate']], left_on='commodity_name', right_on='name') \
         .assign(Score = lambda l: round(l['sell_price'] * l['mining_rate'] / 1000000)) \
         .query(f'Score >= {min_score}') \
         .sort_values('Score', ascending=False)
-
     ranked_listings = scored_listings \
         .assign(rnk = scored_listings.groupby('commodity_name')['Score'] \
         .rank(method='first', ascending=False)) \
         .query(f'rnk <= {commodity_count}') \
         .drop_duplicates() \
         .reset_index() \
-        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'freshness', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score']] \
-        .rename(columns={'commodity_name': 'Commodity', 'system_name': 'System', 'station_name': 'Station', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'freshness': 'As Of', 'landing_pad': 'Pad'})
+        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'as_of_text', 'Distance', 'system_name', 'station_name', 'landing_pad', 'Score']] \
+        .rename(columns={'commodity_name': 'Commodity', 'system_name': 'System', 'station_name': 'Station', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'as_of_text': 'As Of', 'landing_pad': 'Pad'})
+
     return ranked_listings \
         .style.format({'Perf':'{:+.2f}', 'Distance':'{:.1f} LY', 'Score': '{:.1f}'}) \
         .set_properties(subset=['Commodity', 'System', 'Station'], **{'text-align': 'left'}) \
