@@ -188,6 +188,14 @@ def load_feeds(force_refresh=False):
     station_details = load_feed(Feeds.STATIONS, force_refresh)
     commodity_listings_rt = load_rt_listings(force_refresh)
 
+    # Calculate or update performance benchmark
+    perf_data = commodity_listings_rt[['commodity_name','performance']]
+    perf_bench = {}
+    for mineral_name in minerals_df['name'].to_list():
+        mineral_listings = perf_data.query(f"commodity_name == '{mineral_name}'")
+        perf_bench[mineral_name] = mineral_listings['performance'].mean()
+    minerals_df['benchmark'] = minerals_df['name'].map(perf_bench)
+
 
 def fresh_feed(filepath):
     ''' Given a filepath, report true if the file is newer than the estimated last tick.
@@ -564,6 +572,7 @@ def top_price_mineral_listings(origin='Sol', radius=1000, top_count=10, commodit
         .set_properties(subset=['Commodity', 'System', 'Station'], **{'text-align': 'left'}) \
         .set_table_styles([dict(selector = 'th', props=[('text-align', 'left')])])
 
+
 def top_perf_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_perf=0.0, min_demand=1000, as_of_days=2.0, large_pad_only=False):
     """ Find top real-time commodity listings by price performance (galactic average benchmark).
     """
@@ -574,21 +583,23 @@ def top_perf_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity
         'system_name': nearby_system_names,
         'Distance': [distance(origin, system_name) for system_name in nearby_system_names],
     })
-    nearby_rt_listings = target_rt_listings.merge(nearby_systems, on="system_name")
-    filtered_listings = nearby_rt_listings.query(query_filter).sort_values('performance', ascending=False)
+    nearby_rt_listings = target_rt_listings.merge(nearby_systems, on="system_name").merge(minerals_df[['name', 'benchmark']], left_on="commodity_name", right_on="name")
+    nearby_rt_listings['active'] = nearby_rt_listings['performance'] - nearby_rt_listings['benchmark']
+    filtered_listings = nearby_rt_listings.query(query_filter).sort_values('active', ascending=False)
     ranked_listings = filtered_listings \
-        .assign(rnk = filtered_listings.groupby('commodity_name')['performance'] \
+        .assign(rnk = filtered_listings.groupby('commodity_name')['active'] \
         .rank(method='first', ascending=False)) \
         .query(f'rnk <= {commodity_count}') \
         .drop_duplicates() \
         .reset_index() \
-        [:top_count][['commodity_name', 'sell_price', 'performance', 'demand', 'as_of_text', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
-        .rename(columns={'commodity_name': 'Commodity', 'system_name': 'System', 'station_name': 'Station', 'sell_price': 'Sell Price', 'performance': 'Perf', 'demand': 'Demand', 'as_of_text': 'As Of', 'landing_pad': 'Pad'})
+        [:top_count][['commodity_name', 'sell_price', 'active', 'performance', 'benchmark', 'demand', 'as_of_text', 'Distance', 'system_name', 'station_name', 'landing_pad']] \
+        .rename(columns={'commodity_name': 'Commodity', 'system_name': 'System', 'station_name': 'Station', 'sell_price': 'Sell Price', 'performance': 'Perf', 'active': 'Active', 'benchmark': 'Bench', 'demand': 'Demand', 'as_of_text': 'As Of', 'landing_pad': 'Pad'})
 
     return ranked_listings \
-        .style.format({'Perf':'{:+.2f}', 'Distance':'{:.1f} LY'}) \
+        .style.format({'Active':'{:+.2f}', 'Perf':'{:+.2f}', 'Bench':'{:+.2f}', 'Distance':'{:.1f} LY'}) \
         .set_properties(subset=['Commodity', 'System', 'Station'], **{'text-align': 'left'}) \
         .set_table_styles([dict(selector = 'th', props=[('text-align', 'left')])])
+
 
 def top_score_mineral_listings(origin='Sol', radius=1000, top_count=10, commodity_count=5, by_commodity=[], min_score=0.0, min_demand=1000, as_of_days=2.0, large_pad_only=False):
     """ Find top real-time commodity listings by score accounting for mining rates (core v. laser).
@@ -620,6 +631,7 @@ def top_score_mineral_listings(origin='Sol', radius=1000, top_count=10, commodit
         .style.format({'Perf':'{:+.2f}', 'Distance':'{:.1f} LY', 'Score': '{:.1f}'}) \
         .set_properties(subset=['Commodity', 'System', 'Station'], **{'text-align': 'left'}) \
         .set_table_styles([dict(selector = 'th', props=[('text-align', 'left')])])
+
 
 def commodity_sources_nearby(origin_name, commodity_names, minimum_supply=100, top_count=5):
     ''' Given a starting point and a list of commodities, find the five closet sources for each commodity,
