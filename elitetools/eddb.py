@@ -28,10 +28,10 @@ class Demand(Enum):
     MEDIUM = 2
     HIGH = 3
 
-MINING_RATE_CORE_HOTSPOT = 75
+MINING_RATE_CORE_HOTSPOT = 95          # 70/h primary, 49/hr secondary (half weight)
+MINING_RATE_LASER_NOTSPOT = 115
 MINING_RATE_LASER_LTD_HOTSPOT = 125
-MINING_RATE_LASER_NOTSPOT = 150
-MINING_RATE_LASER_HOTSPOT = 200
+MINING_RATE_LASER_HOTSPOT = 150        # 111/h primary, 81/hr secondary (half weight)
 
 minerals = [
     {'name': 'Alexandrite', 'type': 'Mineral', 'url': 'https://eddb.io/commodity/349', 'mining_rate': MINING_RATE_CORE_HOTSPOT},
