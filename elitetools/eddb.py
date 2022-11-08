@@ -259,7 +259,7 @@ def load_commodity_listings(force_refresh=False):
     return feed_data
 
 
-def scrape_commodity(commodity):
+def scrape_commodity(commodity, direction='sell'):
     ''' Given a commodity's name and EDDB URL, extract best sell price listings and return as a list of dicts.
     '''
     listings = []
@@ -277,26 +277,48 @@ def scrape_commodity(commodity):
     if page is None:
         raise Exception(f"Cannot load page for commodity {commodity['name']}.")           
 
-    max_sell = page.find(id='table-stations-max-sell')
-    for row in max_sell.find_all('tr'):
-        fields = row.find_all('td')
-        if len(fields) != 7:
-            continue  # discard header and malformed rows
-        time_fields = fields[6].find_all('span')
-        listings.append({
-            'commodity_name': commodity['name'],
-            'commodity_type': commodity['type'],
-            'station_name': fields[0].find('a').get_text(),
-            'system_name': fields[1].find('a').get_text(),
-            'sell_price': int(fields[2].find('span').get_text().replace(',', '')),
-            'performance': int(fields[3].find('span').get_text().replace('%', ''))/100,
-            'demand': int(fields[4].find('span').get_text().replace(',', '')),
-            'landing_pad': fields[5].find('span').get_text(),
-            'as_of_days': float(time_fields[0].get_text().strip("\{\}")) / 86400.0,
-            'as_of_text': time_fields[1].get_text(),
-        })
-    logging.info("# %s: %d listings scraped." % (commodity['name'], len(listings)))
+    if direction == 'sell':
+        max_sell = page.find(id='table-stations-max-sell')
+        for row in max_sell.find_all('tr'):
+            fields = row.find_all('td')
+            if len(fields) != 7:
+                continue  # discard header and malformed rows
+            time_fields = fields[6].find_all('span')
+            listings.append({
+                'commodity_name': commodity['name'],
+                'commodity_type': commodity['type'],
+                'station_name': fields[0].find('a').get_text(),
+                'system_name': fields[1].find('a').get_text(),
+                'sell_price': int(fields[2].find('span').get_text().replace(',', '')),
+                'performance': int(fields[3].find('span').get_text().replace('%', ''))/100,
+                'demand': int(fields[4].find('span').get_text().replace(',', '')),
+                'landing_pad': fields[5].find('span').get_text(),
+                'as_of_days': float(time_fields[0].get_text().strip("\{\}")) / 86400.0,
+                'as_of_text': time_fields[1].get_text(),
+            })
+        logging.info("# %s: %d sell listings scraped." % (commodity['name'], len(listings)))
+    else:
+        max_buy = page.find(id='table-stations-max-buy')
+        for row in max_buy.find_all('tr'):
+            fields = row.find_all('td')
+            if len(fields) != 7:
+                continue  # discard header and malformed rows
+            time_fields = fields[6].find_all('span')
+            listings.append({
+                'commodity_name': commodity['name'],
+                'commodity_type': commodity['type'],
+                'station_name': fields[0].find('a').get_text(),
+                'system_name': fields[1].find('a').get_text(),
+                'buy_price': int(fields[2].find('span').get_text().replace(',', '')),
+                'performance': int(fields[3].find('span').get_text().replace('%', ''))/100,
+                'supply': int(fields[4].find('span').get_text().replace(',', '')),
+                'landing_pad': fields[5].find('span').get_text(),
+                'as_of_days': float(time_fields[0].get_text().strip("\{\}")) / 86400.0,
+                'as_of_text': time_fields[1].get_text(),
+            })
+        logging.info("# %s: %d buy listings scraped." % (commodity['name'], len(listings)))
     return listings
+
 
 
 def load_feed(feed: Feeds, force_refresh=False):
@@ -460,7 +482,7 @@ def system_survey_report(systems, origin='Sol'):
 # Given a list of systems, create a displayble dataframe of faction-related information about each system.
 def system_faction_report(systems, faction="The Order of Mobius", origin='Azrael'):
     system_summaries = []
-    categories = ['Insurgency', 'Control', 'Presence', 'Player Control', 'Player Presence', 'NPC']
+    categories = ['Insurgency', 'Control', 'Presence', 'Player Control', 'Player Insurgency', 'Single Player Presence', 'Multiplayer Presence', 'NPC']
     for a_system in systems:
         s = find_system_by_name(a_system) if isinstance(a_system, str) else a_system
         d = distance(origin, a_system)
@@ -470,16 +492,16 @@ def system_faction_report(systems, faction="The Order of Mobius", origin='Azrael
         cf_state = present_faction_state(s, cf_name)
         cf_inf = cf_state['influence']
         cf_hap = cf_state['happiness_id']
-        if cf_name == "The Order of Mobius":
+        if cf_name == faction:
             fac_pri = 0 if len(pc_fac) > 1 else 1
         elif faction in pc_fac:
             fac_pri = 2
         elif cf_name in pc_fac:
-            fac_pri = 3
+            fac_pri = 3 if len(pc_fac) == 1 else 4
         elif len(pc_fac) > 0:
-            fac_pri = 4
+            fac_pri = 5 if len(pc_fac) == 1 else 6
         else:
-            fac_pri = 5
+            fac_pri = 7
         system_summaries.append(                  [fac_pri,    categories[fac_pri], s['name'], d,          s['population'], s['primary_economy'], ", ".join(states), cf_hap,      s['security'],    cf_name,               cf_inf,      s['government'], s['allegiance'], ", ".join(pc_fac)])
     return pd.DataFrame(system_summaries, columns=['Priority', 'Category',          'Name',    'Distance', 'Population',    'Primary Economy',    'States',          'Happiness', 'Security Level', 'Controlling Faction', 'Influence', 'Government',    'Allegiance',    'Player Factions Present'])
 
